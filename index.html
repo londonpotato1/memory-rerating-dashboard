@@ -6,147 +6,208 @@
 <title>SK하이닉스·삼성전자 매수 분석 — 목표가 & 진입 전략</title>
 <style>
   :root{
-    --bg:#0a0e16; --panel:#121826; --panel2:#1a2235; --line:#242d42;
-    --txt:#e8edf6; --mut:#93a0b8; --dim:#65718c;
-    --grn:#34d399; --grn-bg:rgba(52,211,153,.12);
-    --amb:#fbbf24; --amb-bg:rgba(251,191,36,.12);
-    --red:#f87171; --red-bg:rgba(248,113,113,.12);
-    --blu:#60a5fa; --pur:#a78bfa; --cyn:#22d3ee;
-    --r:14px;
+    --bg:#080a0d; --panel:#11151c; --panel2:#171d26; --panel3:#0f2522;
+    --line:#29313b; --line2:#365064;
+    --txt:#eef3f8; --mut:#a6b1c0; --dim:#7f8b9c;
+    --grn:#35d49b; --grn-bg:rgba(53,212,155,.12);
+    --amb:#f5bf3d; --amb-bg:rgba(245,191,61,.13);
+    --red:#f47b7b; --red-bg:rgba(244,123,123,.13);
+    --blu:#65b9f5; --blu-bg:rgba(101,185,245,.13);
+    --pur:#b49cff; --r:8px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
   body{
     background:var(--bg); color:var(--txt);
     font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
     line-height:1.65; -webkit-font-smoothing:antialiased;
-    background-image:radial-gradient(1200px 600px at 80% -10%,rgba(96,165,250,.08),transparent),radial-gradient(900px 500px at 0% 0%,rgba(167,139,250,.07),transparent);
+    background-image:
+      linear-gradient(180deg,rgba(101,185,245,.06),transparent 340px),
+      linear-gradient(90deg,rgba(53,212,155,.045),transparent 42%,rgba(245,191,61,.035));
   }
-  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 80px}
-  h1,h2,h3{line-height:1.3;letter-spacing:-.02em}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:30px 20px 84px}
+  h1,h2,h3{line-height:1.3;letter-spacing:0}
   .mono{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-  header{margin-bottom:30px}
-  .eyebrow{color:var(--blu);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
-  header h1{font-size:29px;margin:8px 0 10px;font-weight:800}
-  .sub{color:var(--mut);font-size:16px;max-width:800px}
-  .asof{margin-top:14px;display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap;
-    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12.5px;color:var(--mut)}
+  header{margin-bottom:28px}
+  .eyebrow{color:var(--blu);font-weight:800;font-size:13px;letter-spacing:0;text-transform:uppercase}
+  header h1{font-size:31px;margin:8px 0 10px;font-weight:900;overflow-wrap:break-word}
+  header h1 .h1-tail:before{content:" — "}
+  .sub{color:var(--mut);font-size:16px;max-width:880px}
+  .badges{margin-top:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .asof{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap;
+    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:12.5px;color:var(--mut)}
   .asof b{color:var(--txt)}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--grn);box-shadow:0 0 0 4px var(--grn-bg)}
 
+  main{display:block}
   section{margin-top:34px}
   .sectit{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
-  .sectit .num{color:var(--dim);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums}
-  .sectit h2{font-size:21px;font-weight:800}
-  .lead{color:var(--mut);font-size:15px;margin-bottom:16px;max-width:860px}
-  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+  .sectit .num{color:var(--dim);font-weight:900;font-size:14px;font-variant-numeric:tabular-nums}
+  .sectit h2{font-size:21px;font-weight:900}
+  .lead{color:var(--mut);font-size:15px;margin-bottom:16px;max-width:900px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+  .panel.tight{padding:14px}
 
-  .analogy{background:linear-gradient(180deg,rgba(96,165,250,.08),rgba(96,165,250,.02));
-    border:1px solid rgba(96,165,250,.28);border-radius:var(--r);padding:16px 18px;margin:14px 0}
-  .analogy .tag{font-size:12px;font-weight:800;color:var(--blu);letter-spacing:.04em;margin-bottom:6px}
-  .analogy p{font-size:14.5px;color:#cdd8ec}.analogy p+p{margin-top:8px}
+  .tldr{display:grid;grid-template-columns:132px 1fr;gap:16px;align-items:center;
+    background:linear-gradient(135deg,rgba(245,191,61,.13),rgba(53,212,155,.06));
+    border:1px solid rgba(245,191,61,.38);border-radius:var(--r);padding:18px 20px}
+  .tldr .big{font-size:30px;line-height:1.05;font-weight:950;color:var(--amb);text-align:center}
+  .tldr .big small{display:block;font-size:12px;color:var(--mut);font-weight:700;margin-top:8px}
+  .tldr p{font-size:15px;color:#e8eef7}.tldr b{color:#fff}
 
-  .terms{background:linear-gradient(180deg,rgba(52,211,153,.08),rgba(52,211,153,.02));border:1px solid rgba(52,211,153,.28);border-radius:var(--r);padding:16px 18px;margin:14px 0}
-  .terms .tag{font-size:12px;font-weight:800;color:var(--grn);letter-spacing:.04em;margin-bottom:10px}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+
+  .terms{background:linear-gradient(180deg,rgba(53,212,155,.09),rgba(53,212,155,.025));border:1px solid rgba(53,212,155,.28);border-radius:var(--r);padding:16px 18px;margin:14px 0}
+  .terms .tag,.analogy .tag{font-size:12px;font-weight:900;letter-spacing:0;margin-bottom:8px}
+  .terms .tag{color:var(--grn)}
   .terms dl{display:grid;gap:10px}
-  .terms dt{font-weight:800;font-size:13.5px;color:var(--txt)}
-  .terms dd{font-size:13.5px;color:#cdd8ec;margin:3px 0 0;line-height:1.55}
-  details.gloss{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:0 18px}
-  details.gloss summary{cursor:pointer;padding:16px 2px;font-weight:800;font-size:15px;list-style:none;color:var(--txt)}
-  details.gloss summary::-webkit-details-marker{display:none}
-  details.gloss summary::before{content:"▶  ";color:var(--blu);font-size:11px}
-  details.gloss[open] summary::before{content:"▼  "}
-  details.gloss .gl{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;padding:2px 0 18px}
-  .gl div{font-size:13px;color:#cdd8ec;line-height:1.5}.gl b{color:var(--txt)}
+  .terms dt{font-weight:900;font-size:13.5px;color:var(--txt)}
+  .terms dd{font-size:13.5px;color:#cfdae7;margin:3px 0 0;line-height:1.55}
+  .analogy{background:linear-gradient(180deg,rgba(101,185,245,.09),rgba(101,185,245,.025));
+    border:1px solid rgba(101,185,245,.30);border-radius:var(--r);padding:16px 18px;margin:14px 0}
+  .analogy .tag{color:var(--blu)}
+  .analogy p{font-size:14.5px;color:#d8e2ef}
 
-  .vtab{width:100%;border-collapse:collapse;font-size:13.5px}
+  .sourceBadge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;border:1px solid var(--line2);padding:2px 7px;text-decoration:none;color:var(--mut);font-size:10.5px;font-weight:800;white-space:nowrap;vertical-align:middle}
+  .sourceBadge.good{border-color:rgba(53,212,155,.45);color:var(--grn)}
+  .sourceBadge.warn{border-color:rgba(245,191,61,.48);color:var(--amb)}
+  .sourceBadge.soft{border-color:rgba(101,185,245,.40);color:var(--blu)}
+  .sourceBadge.bad{border-color:rgba(244,123,123,.45);color:var(--red)}
+
+  .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+  .vtab{width:100%;border-collapse:collapse;font-size:13.3px;min-width:780px}
+  .vtab caption{padding:12px 14px 0;text-align:left;color:var(--mut);font-size:12px}
   .vtab th,.vtab td{text-align:right;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:middle;font-variant-numeric:tabular-nums}
-  .vtab th{color:var(--dim);font-size:11.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+  .vtab th{color:var(--dim);font-size:11px;font-weight:900;text-transform:uppercase}
   .vtab th:first-child,.vtab td:first-child{text-align:left;font-variant-numeric:normal}
-  .vtab td:first-child{font-weight:700;color:var(--txt)}
-  .vtab .tk{font-size:11px;color:var(--dim);font-weight:600;margin-left:5px}
-  .pill{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;font-weight:800;font-size:11.5px;white-space:nowrap}
+  .vtab tbody tr:last-child td{border-bottom:none}
+  .vtab td:first-child{font-weight:900;color:var(--txt)}
+  .tk{font-size:11px;color:var(--dim);font-weight:700;margin-left:5px}
+  .pill{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;font-weight:900;font-size:11.5px;white-space:nowrap}
   .p-cheap{background:var(--grn-bg);color:var(--grn)}
-  .p-mid{background:rgba(96,165,250,.14);color:var(--blu)}
-  .p-rich{background:rgba(167,139,250,.16);color:var(--pur)}
+  .p-mid{background:var(--blu-bg);color:var(--blu)}
+  .p-rich{background:rgba(180,156,255,.16);color:var(--pur)}
   .p-pos{background:var(--grn-bg);color:var(--grn)}
   .p-neg{background:var(--red-bg);color:var(--red)}
   .p-warn{background:var(--amb-bg);color:var(--amb)}
 
-  .tldr{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;
-    background:linear-gradient(135deg,rgba(251,191,36,.10),rgba(96,165,250,.06));
-    border:1px solid rgba(251,191,36,.3);border-radius:var(--r);padding:18px 20px}
-  .tldr .big{font-size:28px;line-height:1.05;font-weight:900;color:var(--amb);text-align:center;min-width:120px}
-  .tldr .big small{display:block;font-size:12px;color:var(--mut);font-weight:600;margin-top:8px}
-  .tldr p{font-size:15px;color:#e6ecf7}.tldr b{color:#fff}
+  .mobile-cards{display:none}
+  .companyCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+  .companyCard h3{font-size:14px;margin-bottom:10px}
+  .miniGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .mini{background:var(--panel2);border-radius:var(--r);padding:9px}
+  .mini .l{font-size:11px;color:var(--dim);font-weight:800}
+  .mini .v{font-size:14px;font-weight:900;margin-top:2px}
 
-  .grid{display:grid;gap:14px}
-  .g2{grid-template-columns:1fr 1fr}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
-
-  .bar{display:grid;grid-template-columns:150px 1fr 120px;gap:10px;align-items:center;margin:9px 0;font-size:13px}
+  .bar{display:grid;grid-template-columns:150px 1fr 136px;gap:10px;align-items:center;margin:10px 0;font-size:13px}
   .bar .lbl{color:var(--mut);text-align:right;font-size:12.5px}.bar .lbl b{display:block;color:var(--txt);font-size:13px}
-  .track{background:var(--panel2);border-radius:8px;height:30px;position:relative;overflow:hidden}
-  .fill{height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-weight:800;font-size:12px;color:#0a0e16;min-width:44px}
-  .f-cur{background:linear-gradient(90deg,#3b4a66,#5b6f96);color:#fff}
-  .f-avg{background:linear-gradient(90deg,#2563eb,#60a5fa);color:#fff}
-  .f-pur{background:linear-gradient(90deg,#7c3aed,#a78bfa);color:#fff}
+  .track{background:var(--panel2);border-radius:var(--r);height:30px;position:relative;overflow:hidden}
+  .fill{height:100%;border-radius:var(--r);display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-weight:950;font-size:12px;color:#07100d;min-width:44px}
+  .f-cur{background:linear-gradient(90deg,#3d536d,#7d91b2);color:#fff}
+  .f-avg{background:linear-gradient(90deg,#1378b6,#65b9f5);color:#061018}
+  .f-pur{background:linear-gradient(90deg,#7b57e5,#b49cff);color:#090713}
   .bar .vs{font-size:12px;color:var(--mut);text-align:left}
 
   .disc3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
-  .dstat{background:var(--panel2);border:1px solid rgba(52,211,153,.25);border-radius:12px;padding:14px;text-align:center}
-  .dstat .v{font-size:26px;font-weight:900;color:var(--grn);font-variant-numeric:tabular-nums}
+  .dstat{background:var(--panel2);border:1px solid rgba(53,212,155,.25);border-radius:var(--r);padding:14px;text-align:center}
+  .dstat .v{font-size:26px;font-weight:950;color:var(--grn);font-variant-numeric:tabular-nums}
   .dstat .l{font-size:12px;color:var(--mut);margin-top:4px}
 
-  .ladder{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
-  .rung{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-  .rung .l{font-size:12.5px;color:var(--mut)}.rung .l b{display:block;color:var(--txt);font-size:13.5px}
+  .note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amb);border-radius:0 var(--r) var(--r) 0;padding:14px 18px;font-size:13.5px;color:#d8e2ef}
+  .note b{color:var(--amb)}
+  .note.good{border-left-color:var(--grn)}
+  .note.good b{color:var(--grn)}
+  .warnBox{background:var(--red-bg);border:1px solid rgba(244,123,123,.32);border-radius:var(--r);padding:14px 16px;color:#f3d9d9}
+  .warnBox b{color:#fff}
+
+  .scenarioHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+  .scenarioHead h3{font-size:15px}
+  .ev{font-size:12px;color:var(--mut);text-align:right}
+  .ev b{display:block;font-size:18px;color:var(--grn)}
+  .ladder{display:grid;gap:10px}
+  .rung{background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+  .rung .l{font-size:12.8px;color:var(--mut)}.rung .l b{display:block;color:var(--txt);font-size:13.8px}
   .rung .r{text-align:right;white-space:nowrap}
-  .rung .pe{font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums}
-  .rung .up{font-size:18px;font-weight:900;font-variant-numeric:tabular-nums}
-  .ub{border-color:rgba(248,113,113,.35)}.ubase{border-color:rgba(52,211,153,.35)}.ubull{border-color:rgba(167,139,250,.35)}
+  .rung .pe{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+  .rung .up{font-size:17px;font-weight:950;font-variant-numeric:tabular-nums}
+  .ub{border-color:rgba(244,123,123,.38)}.ubase{border-color:rgba(53,212,155,.38)}.ubull{border-color:rgba(180,156,255,.42)}
   .u-down{color:var(--red)}.u-base{color:var(--grn)}.u-bull{color:var(--pur)}
 
-  .eps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;margin-top:8px}
-  .eps .yr{background:var(--panel2);border-radius:10px;padding:12px 8px}
-  .eps .yr .y{font-size:11px;color:var(--dim);font-weight:700}.eps .yr .v{font-size:17px;font-weight:800;margin-top:4px;font-variant-numeric:tabular-nums}
+  .epsGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .epsCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:15px}
+  .epsCard h3{font-size:15px;margin-bottom:10px}
+  .epsMini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;margin-top:8px}
+  .epsMini .yr{background:var(--panel2);border-radius:var(--r);padding:11px 8px}
+  .epsMini .yr .y{font-size:11px;color:var(--dim);font-weight:900}.epsMini .yr .v{font-size:16px;font-weight:950;margin-top:4px;font-variant-numeric:tabular-nums}
+  .statusLine{margin-top:10px;font-size:12.5px;color:var(--mut)}
 
-  .bb{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .bull{border:1px solid rgba(52,211,153,.3);background:var(--grn-bg)}.bear{border:1px solid rgba(248,113,113,.3);background:var(--red-bg)}
-  .bb .card-h{font-weight:800;font-size:14px;margin-bottom:10px}
+  .factorTable .vtab{min-width:860px}
+  .factorAction{font-size:12.5px;color:#d6e0ea;text-align:left}
+  .auditList{display:grid;gap:8px;margin-top:10px}
+  .auditItem{display:grid;grid-template-columns:136px 1fr auto;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:8px;font-size:12.5px;color:var(--mut)}
+  .auditItem b{color:var(--txt)}
+
+  .statGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
+  .stat{background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:15px;text-align:center}
+  .stat .v{font-size:22px;font-weight:950;font-variant-numeric:tabular-nums;color:var(--red)}
+  .stat .l{font-size:12px;color:var(--mut);margin-top:4px}
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+  .bb .card{border-radius:var(--r);padding:14px}
+  .bull{border:1px solid rgba(53,212,155,.3);background:var(--grn-bg)}
+  .bear{border:1px solid rgba(244,123,123,.3);background:var(--red-bg)}
+  .bb .card-h{font-weight:900;font-size:14px;margin-bottom:10px}
   .bull .card-h{color:var(--grn)}.bear .card-h{color:var(--red)}
-  .bb ul{list-style:none;font-size:13px}.bb li{padding:5px 0 5px 18px;position:relative;color:#d4ddef}
+  .bb ul{list-style:none;font-size:13px}.bb li{padding:5px 0 5px 18px;position:relative;color:#dce5ef}
   .bb li:before{content:"•";position:absolute;left:4px}.bull li:before{color:var(--grn)}.bear li:before{color:var(--red)}
-  .bb li .src{color:var(--dim);font-size:11px}
 
-  .para{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
-  .stat{background:var(--panel2);border-radius:12px;padding:16px;text-align:center}
-  .stat .v{font-size:25px;font-weight:900;font-variant-numeric:tabular-nums;color:var(--red)}.stat .l{font-size:12.5px;color:var(--mut);margin-top:4px}
-
-  .step{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
-  .step:last-child{border-bottom:none}
-  .step .n{width:26px;height:26px;border-radius:50%;background:var(--blu);color:#0a0e16;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center}
-  .step .c{font-size:13.5px;color:#d4ddef}.step .c b{color:var(--txt)}
-  .sig{background:var(--red-bg);border:1px solid rgba(248,113,113,.3);border-radius:12px;padding:14px 16px}
+  .tranche{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+  .tranche:last-child{border-bottom:none}
+  .tranche .n{width:28px;height:28px;border-radius:50%;background:var(--blu);color:#071018;font-weight:950;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .tranche .c{font-size:13.5px;color:#dce5ef}.tranche .c b{color:var(--txt)}
+  .tranche .p{text-align:right;font-size:12.5px;color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .sig{background:var(--red-bg);border:1px solid rgba(244,123,123,.3);border-radius:var(--r);padding:14px 16px}
   .sig h4{color:var(--red);font-size:13.5px;margin-bottom:8px}
-  .sig ul{list-style:none;font-size:13px}.sig li{padding:4px 0 4px 18px;position:relative;color:#d4ddef}
-  .sig li:before{content:"!";position:absolute;left:5px;color:var(--red);font-weight:900}
+  .sig ul{list-style:none;font-size:13px}.sig li{padding:4px 0 4px 18px;position:relative;color:#f0dede}
+  .sig li:before{content:"!";position:absolute;left:5px;color:var(--red);font-weight:950}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-  .chips span{font-size:12px;color:var(--mut);background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+  .chips span{font-size:12px;color:var(--mut);background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:5px 10px}
 
-  .note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amb);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13.5px;color:#d4ddef}
-  .note b{color:var(--amb)}
-  .disc{margin-top:30px;font-size:12px;color:var(--dim);background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:16px 18px}.disc b{color:var(--mut)}
+  details.gloss{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:0 18px}
+  details.gloss summary{cursor:pointer;padding:16px 2px;font-weight:900;font-size:15px;list-style:none;color:var(--txt)}
+  details.gloss summary::-webkit-details-marker{display:none}
+  details.gloss summary::before{content:"▶  ";color:var(--blu);font-size:11px}
+  details.gloss[open] summary::before{content:"▼  "}
+  details.gloss .gl{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;padding:2px 0 18px}
+  .gl div{font-size:13px;color:#d8e2ef;line-height:1.5}.gl b{color:var(--txt)}
+  .disc{margin-top:30px;font-size:12px;color:var(--dim);background:var(--panel);border:1px dashed var(--line);border-radius:var(--r);padding:16px 18px}.disc b{color:var(--mut)}
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px}
-  footer h4{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+  footer h4{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:0;margin-bottom:10px}
   .srcs{display:flex;flex-wrap:wrap;gap:8px}
-  .srcs a{font-size:12px;color:var(--mut);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 10px;text-decoration:none}
+  .srcs a{font-size:12px;color:var(--mut);background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:5px 10px;text-decoration:none}
   .srcs a:hover{color:var(--blu);border-color:var(--blu)}
 
-  @media(max-width:820px){
-    .g2,.bb,.ladder,.disc3,.para{grid-template-columns:1fr}details.gloss .gl{grid-template-columns:1fr}
-    .bar{grid-template-columns:96px 1fr 84px}.tldr{grid-template-columns:1fr;text-align:center}
-    header h1{font-size:23px}.vtab{font-size:12px}.vtab th,.vtab td{padding:9px 6px}
+  @media(max-width:900px){
+    .g2,.g3,.g4,.epsGrid,.bb,.statGrid,.disc3{grid-template-columns:1fr}
+    .tldr{grid-template-columns:1fr;text-align:center}
+    .bar{grid-template-columns:96px 1fr 82px}
+    .bar .lbl{text-align:left}
+    header h1{font-size:24px}
+    header h1 span{display:block}
+    header h1 .h1-tail:before{content:""}
+    .vtab{font-size:12px}
+    .vtab th,.vtab td{padding:9px 7px}
+    .desktop-table{display:none}
+    .mobile-cards{display:grid}
+    .auditItem{grid-template-columns:1fr}
+    .tranche{grid-template-columns:32px 1fr}
+    .tranche .p{grid-column:2;text-align:left;white-space:normal}
+    details.gloss .gl{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -154,289 +215,468 @@
 <div class="wrap">
 
 <header>
-  <div class="eyebrow">매수 의사결정 분석 · 밸류에이션 + 시황</div>
-  <h1>SK하이닉스·삼성전자 — 사도 될까, 목표가는 얼마?</h1>
-  <p class="sub">밸류에이션(5사 비교·역프)·외부 환경(금리·유동성·지정학)·AI 메모리 사이클·수급을 다각도로 종합해, 2026년 말까지 목표가와 진입 전략을 정리합니다.</p>
-  <div class="asof"><span class="dot"></span><span>기준 · 한국주식 <b>2026-05-27 12:55 KST 장중</b> / 미국주식 <b>2026-05-26 종가</b> · 보유기간 가정 <b>~2026년 말</b></span></div>
-  <div class="asof" style="border-color:rgba(251,191,36,.4);color:var(--amb);margin-left:8px"><span>교육용 정리 · <b>매수·매도 권유가 아닙니다</b></span></div>
+  <div class="eyebrow">매수 의사결정 분석 · 밸류에이션 + 검증상태</div>
+  <h1><span>SK하이닉스·삼성전자</span><span class="h1-tail">사도 될까, 목표가는 얼마?</span></h1>
+  <p class="sub">초보자가 핵심을 놓치지 않도록 결론은 짧게, 숫자는 출처·기준일·검증상태와 함께 보여줍니다. 계산은 아래 데이터 객체에서 자동 렌더링됩니다.</p>
+  <div class="badges">
+    <div class="asof"><span class="dot"></span><span>기준 · 한국주식 <b>2026-05-27 장마감</b> / 미국주식 <b>2026-05-26 종가</b> · 보유기간 가정 <b>~2026년 말</b></span></div>
+    <div class="asof" style="border-color:rgba(245,191,61,.45);color:var(--amb)"><span>교육용 정리 · <b>매수·매도 권유가 아닙니다</b></span></div>
+  </div>
 </header>
 
-<!-- 1. TL;DR -->
-<section>
-  <div class="sectit"><span class="num">01</span><h2>한 줄 결론</h2></div>
-  <div class="tldr">
-    <div class="big">싸지만<small>지금은 타이밍 게임</small></div>
-    <p><b>밸류에이션은 싸다(미국 메모리보다 역프). 그런데 보유기간 7개월이 메모리 사이클 피크(3~4Q26)와 정면으로 겹친다.</b> 그래서 핵심은 "목표가 숫자"가 아니라 <b>진입 타이밍과 규율</b>. 기준(base) 상승 여력 SK +12~25% / 삼성 +25~47%, 하지만 이미 1년새 5~11배 올랐고 외국인은 매도 중 → <b>"싸니까 산다"가 아니라 "분할 매수 + 무효화 손절 규율".</b></p>
-  </div>
-</section>
-
-<!-- 2. 5사 비교 -->
-<section>
-  <div class="sectit"><span class="num">02</span><h2>5사 밸류에이션 한눈 비교</h2></div>
-  <p class="lead">메모리 4사는 forward PER 7~10배, 엔비디아만 24배. 한국 2사는 미국 메모리보다도 더 싸다.</p>
-  <div class="panel" style="overflow-x:auto">
-    <table class="vtab">
-      <thead><tr><th>종목</th><th>현재가</th><th>시총</th><th>Fwd PER</th><th>Trailing PER</th><th>PBR</th><th>52주 저점대비</th><th>분류</th></tr></thead>
-      <tbody>
-        <tr><td>SK하이닉스<span class="tk">000660</span></td><td>2,324,000원</td><td>1,656조</td><td><b style="color:var(--grn)">7.8배</b></td><td>22.5배</td><td>9.8배</td><td style="color:var(--grn)">+1,045%</td><td><span class="pill p-cheap">한국 메모리·최저</span></td></tr>
-        <tr><td>삼성전자<span class="tk">005930</span></td><td>319,250원</td><td>1,866조</td><td><b style="color:var(--grn)">7.4배</b></td><td>25.8배</td><td>4.4배</td><td style="color:var(--grn)">+489%</td><td><span class="pill p-cheap">한국 메모리·최저</span></td></tr>
-        <tr><td>마이크론<span class="tk">MU</span></td><td>$895.88</td><td>$1.01조</td><td><b style="color:var(--blu)">9.6배</b></td><td>42.1배</td><td>—</td><td style="color:var(--grn)">+872%</td><td><span class="pill p-mid">미국 메모리</span></td></tr>
-        <tr><td>샌디스크<span class="tk">SNDK</span></td><td>$1,589.55</td><td>$235B</td><td><b style="color:var(--blu)">9.8배</b></td><td>53.5배</td><td>—</td><td style="color:var(--grn)">+4,290%</td><td><span class="pill p-mid">미국 NAND</span></td></tr>
-        <tr><td>엔비디아<span class="tk">NVDA</span></td><td>$215</td><td>$5.19조</td><td><b style="color:var(--pur)">약 24배</b></td><td>—</td><td>—</td><td>—</td><td><span class="pill p-rich">AI 플랫폼</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="note" style="margin-top:14px"><b>읽는 법:</b> Forward PER(내년 예상 이익 기준)이 핵심 비교축. Trailing 22~53배는 "과거 불황기 이익"으로 나눠 커 보일 뿐. <b>단, 모든 EPS는 컨센서스 '추정치'</b>다(아래 04 경고 참조).</div>
-</section>
-
-<!-- 3. 왜 싼가 + 역프 -->
-<section>
-  <div class="sectit"><span class="num">03</span><h2>왜 싼가 — 멀티플 비교 & 역프(코리아 디스카운트)</h2></div>
-  <div class="terms">
-    <div class="tag">초보자 먼저 — PER·역프 30초 정리</div>
-    <dl>
-      <dt>PER (주가수익비율)</dt>
-      <dd>주가 ÷ 1주가 1년에 버는 순이익. <b>"이 회사를 통째로 사면 지금 버는 속도로 몇 년 만에 본전을 뽑나"</b>. PER 7배 = 7년치 이익에 사는 셈, 24배 = 24년치. <b>낮을수록 싸고</b>, 시장이 미래를 밝게 볼수록 더 높은 배수(더 오래)도 쳐준다.</dd>
-      <dt>EPS (주당순이익)</dt>
-      <dd>회사 순이익 ÷ 전체 주식 수 = <b>"주식 1주가 1년에 벌어주는 돈"</b>. PER 계산의 분모다. (E = Estimate, 즉 2026E는 '예상치')</dd>
-      <dt>역프 (역프리미엄) = 왜 이렇게 부르나</dt>
-      <dd>원래 한국 자산이 해외보다 <b>비싸면 '김프(김치 프리미엄)'</b>라 부른다. 그 <b>반대로 한국이 해외보다 싸면 '역(거꾸로)프리미엄' = 역프</b>. 여기선 한국 메모리(SK PER 7.8배)가 미국 메모리(마이크론 9.6배)보다 <b>PER이 낮다 = 더 싸다</b>는 뜻이다.</dd>
-    </dl>
-  </div>
-  <div class="analogy">
-    <div class="tag">한 줄 비유</div>
-    <p>같은 호황이라도 손님이 "매년 올 단골"이면 권리금을 후하게(높은 PER), "이번 대목만 반짝"이면 박하게 친다(낮은 PER). 시장은 엔비디아를 단골로, 메모리는 아직 '대목 장사'로 본다 — 게다가 한국 메모리는 미국 동종보다도 더 박하게 매겨진다(<b>역프</b>).</p>
-  </div>
-  <div class="panel">
-    <div style="font-size:13px;color:var(--mut);margin-bottom:10px">Forward PER 비교 (막대 끝 = 24배 기준)</div>
-    <div class="bar"><span class="lbl">SK하이닉스<b>한국 메모리</b></span><div class="track"><div class="fill f-cur" style="width:33%">7.8배</div></div><span class="vs">가장 쌈</span></div>
-    <div class="bar"><span class="lbl">삼성전자<b>한국 메모리</b></span><div class="track"><div class="fill f-cur" style="width:31%">7.4배</div></div><span class="vs">가장 쌈</span></div>
-    <div class="bar"><span class="lbl">마이크론<b>미국 메모리</b></span><div class="track"><div class="fill f-avg" style="width:40%">9.6배</div></div><span class="vs">한국보다 비쌈</span></div>
-    <div class="bar"><span class="lbl">엔비디아<b>AI 플랫폼</b></span><div class="track"><div class="fill f-pur" style="width:100%">약 24배</div></div><span class="vs">성장주 대접</span></div>
-  </div>
-
-  <div class="panel" style="margin-top:14px">
-    <h3 style="font-size:15px;margin-bottom:4px">역프(코리아 디스카운트) — 마이크론(9.6배) 대비</h3>
-    <div style="font-size:12.5px;color:var(--dim);margin-bottom:12px">"롤리랄" 분석가 자료에서 출발 · 수치는 자체 검증(2026-05-27, 우리 2026E 컨센 기준)</div>
-    <div class="disc3">
-      <div class="dstat"><div class="v mono">−18%</div><div class="l">SK하이닉스 (7.8 vs 9.6)</div></div>
-      <div class="dstat"><div class="v mono">−22%</div><div class="l">삼성전자 (7.4 vs 9.6)</div></div>
-      <div class="dstat"><div class="v mono">≈−20%</div><div class="l">메모리 평균 (코스피 최대 역프 섹터)</div></div>
+<main>
+  <section>
+    <div class="sectit"><span class="num">01</span><h2>한 줄 결론</h2></div>
+    <div class="tldr">
+      <div class="big">싸지만<small>지금은 타이밍 게임</small></div>
+      <p><b>밸류에이션은 미국 메모리보다 낮다.</b> 하지만 이 결론은 2026E EPS 컨센서스가 맞아야 성립한다. 보유기간 7개월은 메모리 가격 피크 논쟁과 겹치므로, 핵심은 <b>목표가 하나</b>가 아니라 <b>분할 진입·EPS 추정치 추적·무효화 손절</b>이다.</p>
     </div>
-    <div class="note" style="margin-top:14px">
-      <b>주의 — "역프 = 싸다"로 단정 금지:</b><br>
-      ① <b>이 −18~22%는 우리 보수 수치.</b> 일부 자료(롤리랄)는 −34~38%로 더 크게 보지만, 그건 <b>2026년이 아닌 2027년 이익을 분모로 써서</b> 할인을 부풀린 것.<br>
-      ② <b>이 역프는 "EPS 컨센 달성" 전제 조건부.</b> 만약 내년 이익이 컨센 대비 −20% 빗나가면 SK PER은 9.8배로 <b>마이크론과 동급(역프 소멸)</b>이 된다.<br>
-      ③ <b>코리아 디스카운트는 구조적</b>(지배구조·환율·지정학)이라 일부는 정상이다. 좁혀질 촉매(SK ADR 美상장)도 있지만 자동은 아니다.
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- 4. 더 가려면 + EPS 경고 -->
-<section>
-  <div class="sectit"><span class="num">04</span><h2>더 가려면 — 두 동력 & EPS 경고</h2></div>
-  <p class="lead">주가 = 이익(EPS) × 멀티플(PER). 추가 상승은 ①이익이 더 늘거나 ②멀티플이 더 커지거나다.</p>
-  <div class="grid g2">
-    <div class="panel" style="border-color:rgba(52,211,153,.3)">
-      <div style="color:var(--grn);font-weight:800;margin-bottom:8px">① 이미 시작됨 — 이익(EPS) 급증</div>
-      <p style="font-size:13.5px;color:var(--mut);margin-bottom:10px">AI/HBM 수요로 메모리 가격 급등(1Q26 DRAM 계약가 +90~95% QoQ)하며 이익 폭증.</p>
-      <div class="eps">
-        <div class="yr"><div class="y">SK 2025</div><div class="v mono">58,955</div></div>
-        <div style="display:flex;align-items:center;justify-content:center;color:var(--grn);font-weight:800">→</div>
-        <div class="yr"><div class="y">SK 2026E</div><div class="v mono" style="color:var(--grn)">296,550</div></div>
-      </div>
-      <div style="text-align:center;font-size:11px;color:var(--mut);margin:5px 0 10px">SK하이닉스 EPS <b style="color:var(--grn)">약 5배 ↑</b></div>
-      <div class="eps">
-        <div class="yr"><div class="y">삼성 2025</div><div class="v mono">6,564</div></div>
-        <div style="display:flex;align-items:center;justify-content:center;color:var(--grn);font-weight:800">→</div>
-        <div class="yr"><div class="y">삼성 2026E</div><div class="v mono" style="color:var(--grn)">43,004</div></div>
-      </div>
-      <div style="text-align:center;font-size:11px;color:var(--mut);margin-top:5px">삼성전자 EPS <b style="color:var(--grn)">약 6.5배 ↑</b></div>
+  <section>
+    <div class="sectit"><span class="num">02</span><h2>5사 밸류에이션 한눈 비교</h2></div>
+    <p class="lead">현재가·PER·PBR 같은 기본 숫자는 표에서 바로 확인하되, 각 행의 배지를 눌러 출처와 기준일을 추적할 수 있게 바꿨습니다.</p>
+    <div class="desktop-table table-wrap">
+      <table class="vtab" id="valuationTable">
+        <caption>한국주는 2026-05-27 장마감, 미국주는 2026-05-26 종가 기준. 컨센서스와 멀티플은 공개 데이터 스냅샷입니다.</caption>
+        <thead>
+          <tr>
+            <th scope="col">종목</th><th scope="col">현재가</th><th scope="col">시총</th><th scope="col">Fwd PER</th><th scope="col">Trailing PER</th><th scope="col">PBR</th><th scope="col">52주 저점대비</th><th scope="col">분류</th><th scope="col">출처</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
-    <div class="panel" style="border-color:rgba(167,139,250,.35)">
-      <div style="color:var(--pur);font-weight:800;margin-bottom:8px">② 아직 안 일어남 — 멀티플(PER) 확장</div>
-      <p style="font-size:13.5px;color:var(--mut);margin-bottom:10px">시장이 메모리를 "사이클주(낮은 PER)"가 아니라 "성장주(높은 PER)"로 인정하는 것. 추가 여력의 핵심.</p>
-      <div style="display:flex;align-items:center;justify-content:center;gap:14px;padding:14px 0">
-        <div style="text-align:center"><div style="font-size:11px;color:var(--dim)">지금</div><div style="font-size:26px;font-weight:900;color:var(--mut)" class="mono">7배</div><div style="font-size:10px;color:var(--dim)">SK 7.8 · 삼성 7.4</div></div>
-        <div style="font-size:22px;color:var(--pur)">→ ?</div>
-        <div style="text-align:center"><div style="font-size:11px;color:var(--dim)">목표</div><div style="font-size:26px;font-weight:900;color:var(--pur)" class="mono">9·13배</div><div style="font-size:10px;color:var(--dim)">두 종목 공통</div></div>
-      </div>
-    </div>
-  </div>
-  <div class="note" style="margin-top:14px">
-    <b>★ 가장 중요한 경고 — EPS는 '사실'이 아니라 '추정치':</b> 이 모든 분석의 토대인 2026E EPS(SK 296,550)는 <b>컨센서스 추정</b>이다. 더 위험한 건 <b>2027E 이익 컨센이 2026E보다 높게</b> 잡혀 있다는 점 — 즉 시장은 <b>사이클 하락을 전혀 반영하지 않은 슈퍼사이클</b>을 가정 중이다. 안전마진이 없다. 추정이 −20% 빗나가면 "싸다"는 명제 자체가 무너진다.
-  </div>
-</section>
+    <div class="mobile-cards grid" id="valuationCards"></div>
+    <div class="note" style="margin-top:14px"><b>읽는 법:</b> Forward PER은 미래 이익 예상치로 나눈 값이라 투자 판단에 더 직접적입니다. 단, EPS가 추정치라서 “낮은 PER = 확정적으로 싸다”는 뜻은 아닙니다.</div>
+  </section>
 
-<!-- 5. 목표가 시나리오 -->
-<section>
-  <div class="sectit"><span class="num">05</span><h2>목표가 — 2026년 말 bull / base / bear</h2></div>
-  <p class="lead">5개 밸류에이션 방법론 + 6개 시황 관점을 종합. 단일 숫자가 아니라 "어떤 조건이면 얼마"의 조건부 분기다.</p>
-  <div class="grid g2">
-    <div class="panel">
-      <h3 style="font-size:15px;margin-bottom:8px">SK하이닉스 <span style="font-size:12px;color:var(--mut)">현재 2,324,000원 · PER 7.8배</span></h3>
-      <div class="ladder" style="grid-template-columns:1fr">
-        <div class="rung ubull"><span class="l"><b>Bull</b> 재평가 지속+사이클 2027 연장 (PER 11.8~13.5)</span><span class="r"><div class="pe mono">3,500,000~4,000,000</div><div class="up u-bull mono">+51~72%</div></span></div>
-        <div class="rung ubase"><span class="l"><b>Base</b> 이익 견고+수급 소진+멀티플 횡보 (PER 8.5~10)</span><span class="r"><div class="pe mono">2,600,000~2,900,000</div><div class="up u-base mono">+12~25%</div></span></div>
-        <div class="rung ub"><span class="l"><b>Bear</b> 가격피크 통과+멀티플 컷 (PER 6~7 / PBR 정상화)</span><span class="r"><div class="pe mono">1,800,000 (최악 1,300,000)</div><div class="up u-down mono">−23~−44%</div></span></div>
-      </div>
+  <section>
+    <div class="sectit"><span class="num">03</span><h2>왜 싼가 — 멀티플 비교 & 역프</h2></div>
+    <div class="terms">
+      <div class="tag">초보자 먼저 — PER·EPS·역프 30초 정리</div>
+      <dl>
+        <dt>PER</dt>
+        <dd>주가를 1주당 이익(EPS)으로 나눈 값입니다. PER 7배는 “지금 이익 수준이 이어지면 7년치 이익 가격에 산다”는 뜻입니다.</dd>
+        <dt>EPS</dt>
+        <dd>주식 1주가 벌어주는 이익입니다. 이 숫자가 틀리면 PER도, 목표가도 같이 틀어집니다.</dd>
+        <dt>역프</dt>
+        <dd>한국 메모리주 PER이 미국 메모리 기준주보다 낮게 거래되는 상태입니다. 싸다는 힌트는 되지만, 코리아 디스카운트와 EPS 리스크 때문에 곧바로 매수 신호는 아닙니다.</dd>
+      </dl>
+    </div>
+    <div class="analogy">
+      <div class="tag">한 줄 비유</div>
+      <p>시장은 엔비디아를 “매년 손님이 올 단골 가게”로, 메모리는 아직 “대목 장사”로 봅니다. 한국 메모리는 여기에 코리아 디스카운트까지 붙어 더 낮은 권리금(PER)을 받습니다.</p>
     </div>
     <div class="panel">
-      <h3 style="font-size:15px;margin-bottom:8px">삼성전자 <span style="font-size:12px;color:var(--mut)">현재 319,250원 · PER 7.4배</span></h3>
-      <div class="ladder" style="grid-template-columns:1fr">
-        <div class="rung ubull"><span class="l"><b>Bull</b> 재평가+파운드리 흑전 (PER 13~14)</span><span class="r"><div class="pe mono">560,000~590,000</div><div class="up u-bull mono">+75~85%</div></span></div>
-        <div class="rung ubase"><span class="l"><b>Base</b> 이익 견고+파운드리 적자 축소 (PER 9~11)</span><span class="r"><div class="pe mono">400,000~470,000</div><div class="up u-base mono">+25~47%</div></span></div>
-        <div class="rung ub"><span class="l"><b>Bear</b> 사이클 회귀 (PER 6~7 / PBR 정상화)</span><span class="r"><div class="pe mono">280,000 (최악 210,000)</div><div class="up u-down mono">−12~−34%</div></span></div>
+      <div style="font-size:13px;color:var(--mut);margin-bottom:10px">Forward PER 비교 (막대 끝 = 엔비디아 약 22배 기준)</div>
+      <div id="perBars"></div>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <h3 style="font-size:15px;margin-bottom:4px">마이크론 대비 역프</h3>
+      <div style="font-size:12.5px;color:var(--dim);margin-bottom:12px">롤리랄 자료는 출발점으로만 사용. 대시보드는 2026E EPS 기준으로 재계산합니다.</div>
+      <div class="disc3" id="discountStats"></div>
+      <div class="note" style="margin-top:14px">
+        <b>주의:</b> EPS가 컨센서스보다 20% 낮아지면 역프는 대부분 사라집니다. 그래서 이 화면은 “싸다”보다 “싸다는 주장이 어떤 EPS에 기대는가”를 먼저 보여주는 구조로 바꿨습니다.
       </div>
     </div>
-  </div>
-  <div class="note" style="margin-top:14px"><b>핵심:</b> Base는 "미국 메모리 수준 인정+이익 컨센 달성"이면 비교적 견고. Bull은 "사이클이 2027로 연장"돼야. <b>모든 시나리오가 EPS 추정 유지에 달려 있고</b>, 평균 증권가 신규 목표(SK ~300만)는 Base 상단에 위치. (엔비디아식 24배=SK 710만 같은 산술적 상한은 메모리 변동성상 비현실적이라 제외.)</div>
-</section>
+  </section>
 
-<!-- 6. 외부 환경 -->
-<section>
-  <div class="sectit"><span class="num">06</span><h2>외부 환경 체크 — 거시·유동성·지정학</h2></div>
-  <p class="lead">밸류에이션(바닥)과 별개로, 멀티플을 누르거나 띄우는 top-down 요인. 각 요인이 적정 PER에 +/- 어느 방향인지.</p>
-  <div class="panel" style="overflow-x:auto">
-    <table class="vtab">
-      <thead><tr><th>요인</th><th>현황 (2026-05)</th><th>멀티플 영향</th></tr></thead>
-      <tbody>
-        <tr><td>미국 금리</td><td style="text-align:left">Fed 3.50~3.75% 동결, <b>12월 인상 확률 ~80%</b>, CPI 3.8% 재가속, 10Y 4.5%</td><td><span class="pill p-neg">− 중강</span></td></tr>
-        <tr><td>환율(원/달러)</td><td style="text-align:left">1,500원+ 사상 최약세 → 수출이익 +</td><td><span class="pill p-pos">+ (이익)</span></td></tr>
-        <tr><td>유동성(거시)</td><td style="text-align:left">QT 종료, 신용스프레드 타이트, VIX 16.7 → 위험선호 우호</td><td><span class="pill p-pos">+ 중</span></td></tr>
-        <tr><td>외국인 수급</td><td style="text-align:left"><b>5월 SK+삼성 ~38조 순매도</b> (MSCI 비중 캡 초과 → 기계적 축소)</td><td><span class="pill p-neg">− 강(단기)</span></td></tr>
-        <tr><td>지정학</td><td style="text-align:left">현재 미중 휴전+한국 232조 MFN로 약함. <b>단 11/27 휴전 만료가 보유기간 내</b></td><td><span class="pill p-warn">− 꼬리</span></td></tr>
-        <tr><td>AI 수요</td><td style="text-align:left">빅테크 AI capex 2026 ~$700B → HBM 수요 견인</td><td><span class="pill p-pos">+ (이익)</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="note" style="margin-top:14px"><b>순효과:</b> 매크로(금리)·외국인 수급은 멀티플을 <b>누르고(−)</b>, 이익(원화·AI capex)이 <b>받친다(+)</b>. 단기 7개월 창에선 <b>역풍이 우세</b> — 거시 우호가 하방을 완충하나 외국인 기계적 매도가 상단을 제약.</div>
-</section>
-
-<!-- 7. 사이클 타이밍 & 과열 -->
-<section>
-  <div class="sectit"><span class="num">07</span><h2>사이클 타이밍 & 과열 — 왜 7개월이 까다로운가</h2></div>
-  <div class="analogy">
-    <div class="tag">핵심 비유</div>
-    <p>불꽃놀이가 가장 화려해지는 순간(메모리 가격 피크 3~4Q26)이 관람 시간(연말까지) 한복판인데, <b>관객(주가)은 절정을 2~3개월 미리 보고 자리를 뜨기 시작</b>한다. "가장 좋을 때 들고 있으면 된다"가 아니라 <b>절정 직전에 이미 주가는 꺾일 수 있는</b> 비대칭 구간.</p>
-  </div>
-  <div class="para">
-    <div class="stat"><div class="v mono">+1,045%</div><div class="l">SK 52주 저점→현재 (이미 11배)</div></div>
-    <div class="stat"><div class="v mono">RSI 76</div><div class="l">필라델피아 반도체 과매수권</div></div>
-    <div class="stat"><div class="v mono">+13.3%</div><div class="l">SK 하루 상승 (5/27 당일)</div></div>
-  </div>
-  <div class="note" style="margin-top:14px">
-    <b>컨센서스 해석 주의 (stale 데이터):</b> Investing.com 3개월 평균 목표가는 SK 207만(현재가 −11% 아래)으로 "이미 과열"처럼 보이지만, 이는 <b>5월 무더기 상향을 반영 못 한 stale 값</b>. 5월 신규 증권사 중앙값은 <b>~300만(+29%)</b>. → "과열이냐 추가 여력이냐"는 <b>어느 컨센을 보느냐에 갈린다.</b>
-  </div>
-  <div class="bb" style="margin-top:14px">
-    <div class="card bull">
-      <div class="card-h">강세 — 사이클 졸업/재평가 지속</div>
-      <ul>
-        <li>모건스탠리 "메모리 겨울론" 철회, 슈퍼사이클 2027까지 <span class="src">— BigGo</span></li>
-        <li>UBS 마이크론 $535→$1,625, IDC "구조적 리셋"</li>
-        <li>DRAM 1Q26 +90~95%, 15년래 최악 쇼티지</li>
-      </ul>
+  <section>
+    <div class="sectit"><span class="num">04</span><h2>STEP 1 — EPS 입력값 검증</h2></div>
+    <p class="lead">이 대시보드의 토대입니다. 2026E EPS는 확인값으로 쓰되, 2027E와 3개월 추정치 변화율은 공개 페이지에서 완전 확인되지 않는 항목으로 분리했습니다.</p>
+    <div class="epsGrid" id="epsCards"></div>
+    <div class="table-wrap" style="margin-top:14px">
+      <table class="vtab" id="sensitivityTable">
+        <caption>EPS가 빗나갈 때 역프가 얼마나 빠르게 사라지는지 보는 민감도 표입니다.</caption>
+        <thead>
+          <tr><th scope="col">종목</th><th scope="col">EPS 가정</th><th scope="col">추정 PER</th><th scope="col">MU 9.6배 대비</th><th scope="col">판정</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
-    <div class="card bear">
-      <div class="card-h">신중 — 사이클은 반복된다</div>
-      <ul>
-        <li>하버드 Willy Shih "This too will pass, 진폭만 큰 같은 사이클" <span class="src">— Fortune 5/11</span></li>
-        <li>컨센 다수 메모리 가격 <b>3~4Q26 피크</b> 후 둔화. 2Q26 +58~63%로 모멘텀 둔화 시작</li>
-        <li>HBM 경쟁 심화: 삼성·마이크론 추격 → SK 점유율 62%→50%</li>
-      </ul>
+    <div class="warnBox" style="margin-top:14px">
+      <b>가장 중요한 경고:</b> 2026E EPS가 사실이 아니라 추정치라는 점은 유지합니다. 특히 2027E와 3개월 revision trend는 원자료가 필요하므로 “확인 불가/추가 검증 필요”로 명시했습니다.
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 8. 매수 실행 플랜 -->
-<section>
-  <div class="sectit"><span class="num">08</span><h2>매수 실행 플랜 (보유 ~2026말 · 분할 가능 · −50% 감내 기준)</h2></div>
-  <div class="panel">
-    <div style="font-weight:800;font-size:14px;margin-bottom:6px;color:var(--blu)">진입 — 일괄 매수 부적절, 분할(DCA) 권장</div>
-    <div class="step"><div class="n">1</div><div class="c"><b>현 수준 소량 진입</b> — 목표 비중의 25~30%만. (과열·외국인 매도 직후라 전량 진입 금지)</div></div>
-    <div class="step"><div class="n">2</div><div class="c"><b>외국인 순매도 → 순매수 전환 확인 시</b> 추가 트랜치</div></div>
-    <div class="step"><div class="n">3</div><div class="c"><b>RSI 60 이하 눌림 / ADR 美상장(6~7월) 전후 변동성</b>에서 분할 추가</div></div>
-  </div>
-  <div class="panel" style="margin-top:12px">
-    <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:var(--blu)">종목 비중 — 삼성 ≥ SK 고려</div>
-    <p style="font-size:13.5px;color:#d4ddef">SK는 ADR 희석 + 삼성 HBM4 추격 + 진폭 큰 −50% 노출. 삼성은 파운드리 흑전 옵셔널리티 + 하방 완만 + Base 업사이드(%)가 더 큼. <b>안정 지향이면 삼성 비중↑, 공격 지향이면 SK(HBM 1위 프리미엄) 비중↑·더 잘게 분할.</b></p>
-  </div>
-  <div class="grid g2" style="margin-top:12px">
+  <section>
+    <div class="sectit"><span class="num">05</span><h2>목표가 — 시나리오별 확률가중</h2></div>
+    <p class="lead">프롬프트 요구대로 단일 목표가 대신 bull/base/bear의 조건·PER·확률·기대값을 한 화면에 묶었습니다. 확률은 시장이 준 값이 아니라 분석 가정입니다.</p>
+    <div class="grid g2" id="scenarioPanels"></div>
+    <div class="note" style="margin-top:14px"><b>핵심:</b> Base는 2026E EPS 달성 + 미국 메모리 수준 일부 인정이 필요합니다. Bull은 “메모리가 사이클을 졸업했다”는 답이고, Bear는 “이번에도 사이클 회귀”라는 답입니다.</div>
+  </section>
+
+  <section>
+    <div class="sectit"><span class="num">06</span><h2>6개 직교 관점 — 영향과 행동</h2></div>
+    <p class="lead">거시·유동성·지정학·사이클·펀더멘털·수급을 “PER/EPS에 어떤 방향으로 작용하는가”와 “투자자가 무엇을 확인해야 하는가”로 정리했습니다.</p>
+    <div class="table-wrap factorTable">
+      <table class="vtab" id="factorTable">
+        <caption>정확한 수치가 수시로 변하는 항목은 검증 필요 배지를 붙였습니다.</caption>
+        <thead>
+          <tr><th scope="col">관점</th><th scope="col">현재 해석</th><th scope="col">영향</th><th scope="col">행동 체크</th><th scope="col">출처/상태</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="panel tight" style="margin-top:14px">
+      <div style="font-weight:900;font-size:13.5px;color:var(--blu)">출처 감사 로그</div>
+      <div class="auditList" id="auditList"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sectit"><span class="num">07</span><h2>사이클 타이밍 & 과열</h2></div>
+    <div class="analogy">
+      <div class="tag">핵심 비유</div>
+      <p>불꽃놀이가 가장 화려해지는 순간이 메모리 가격 피크라면, 주가는 종종 그보다 먼저 움직입니다. “실적이 가장 좋을 때까지 들고 있자”가 오히려 늦을 수 있는 구간입니다.</p>
+    </div>
+    <div class="statGrid" id="heatStats"></div>
+    <div class="bb">
+      <div class="card bull">
+        <div class="card-h">강세 논리 — 사이클 졸업/재평가</div>
+        <ul>
+          <li>HBM과 AI 서버 수요가 일반 DRAM보다 긴 수요 가시성을 제공한다.</li>
+          <li>미국 메모리 기준주보다 한국 메모리주 PER이 낮다.</li>
+          <li>2026E EPS 달성 시 현재 가격은 낮은 멀티플 구간이다.</li>
+        </ul>
+      </div>
+      <div class="card bear">
+        <div class="card-h">신중 논리 — 사이클 회귀</div>
+        <ul>
+          <li>메모리는 공급이 늘면 가격이 급하게 꺾인 전례가 많다.</li>
+          <li>2027E와 추정치 상향 추세가 확인되지 않으면 bull case 신뢰도가 낮아진다.</li>
+          <li>단기 급등·외국인 수급·정책 리스크가 멀티플을 누를 수 있다.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sectit"><span class="num">08</span><h2>매수 실행 플랜</h2></div>
+    <p class="lead">“분할 가능” 조건을 실제 행동표로 바꿨습니다. 가격은 2026-05-27 종가 기준으로 자동 계산됩니다.</p>
+    <div class="grid g2">
+      <div class="panel">
+        <div style="font-weight:900;font-size:14px;margin-bottom:6px;color:var(--blu)">진입 — 3회 분할</div>
+        <div id="tranches"></div>
+      </div>
+      <div class="sig">
+        <h4>무효화 / 손절 신호</h4>
+        <ul>
+          <li>2026E EPS 컨센서스가 15% 이상 하향되거나 2회 연속 하향</li>
+          <li>DRAM/HBM 계약가가 MoM 하락 전환 후 2개월 지속</li>
+          <li>외국인 매도 가속과 지정학 이벤트가 동시에 악화</li>
+          <li>주가가 본인 감내 한계(예: -50%)에 도달</li>
+        </ul>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:12px">
+      <div style="font-weight:900;font-size:14px;margin-bottom:8px;color:var(--blu)">종목 비중 — 삼성 ≥ SK를 기본값으로</div>
+      <p style="font-size:13.5px;color:#dce5ef">안정 지향이면 삼성 비중을 높이고, 공격 지향이면 SK의 HBM 프리미엄을 노리되 진입 간격을 더 넓힙니다. 지금 화면의 결론은 “둘 다 좋아 보인다”가 아니라 “둘 다 EPS 추정치가 무너지면 동시에 틀릴 수 있다”입니다.</p>
+      <div class="chips"><span>EPS 컨센서스</span><span>DRAM/HBM 가격</span><span>외국인 수급</span><span>SK ADR 일정</span><span>분기 실적·가이던스</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sectit"><span class="num">09</span><h2>정리</h2></div>
     <div class="panel">
-      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:var(--grn)">차익실현</div>
-      <p style="font-size:13px;color:#d4ddef">Base 도달 시(SK 2.7~2.9M / 삼성 43~47만) 일부 실현. Bull(SK 3.5~4M / 삼성 56~59만)은 "사이클 2027 연장" 확인돼야.</p>
+      <ol style="margin-left:18px;font-size:14.5px;color:#e1e9f2">
+        <li style="margin:6px 0"><b>밸류는 싸다.</b> 2026E EPS 기준으로 SK·삼성은 마이크론보다 낮은 forward PER에 거래된다.</li>
+        <li style="margin:6px 0"><b>하지만 싸다는 말은 EPS 달성 조건부다.</b> EPS가 20% 낮아지면 역프는 대부분 사라진다.</li>
+        <li style="margin:6px 0"><b>7개월 보유기간은 타이밍 게임이다.</b> 사이클 피크 논쟁이 보유기간 안에 들어온다.</li>
+        <li style="margin:6px 0"><b>실행은 분할 + 무효화 규율이다.</b> 목표가보다 EPS 추정치와 가격 신호를 먼저 추적한다.</li>
+      </ol>
     </div>
-    <div class="sig">
-      <h4>무효화 / 손절 신호 (이게 핵심)</h4>
-      <ul>
-        <li>DRAM/HBM 계약가 <b>MoM 하락 전환</b> (TrendForce 월간)</li>
-        <li>2026E EPS 컨센 <b>하향 전환</b></li>
-        <li>외국인 매도 가속 + <b>11/27 미중 휴전 만료</b> 악화</li>
-        <li>주가 −50% 도달 (감내 한계)</li>
-      </ul>
+    <div class="disc">
+      <b>면책</b> · 공개 데이터로 정리한 교육용 분석이며, 매수·매도 권유가 아닙니다. 모든 수치는 기준 시점 스냅샷으로 실시간 변동합니다. EPS·목표가·컨센서스는 추정치이며, 2027E EPS와 3개월 revision trend처럼 공개 페이지에서 완전 확인되지 않은 값은 확인 필요로 분리했습니다. 투자 결정 전 최신 공시·리포트·데이터벤더 값을 직접 확인하세요.
     </div>
-  </div>
-  <div style="margin-top:12px"><div style="font-size:12.5px;color:var(--mut);font-weight:700">모니터링 트리거</div>
-    <div class="chips"><span>TrendForce 월간 DRAM 계약가</span><span>외국인 수급(일간)</span><span>SK ADR 상장 일정(6~7월)</span><span>11/27 미·중 휴전</span><span>분기 실적·가이던스</span></div>
-  </div>
-</section>
+  </section>
 
-<!-- 9. 정리 -->
-<section>
-  <div class="sectit"><span class="num">09</span><h2>정리</h2></div>
-  <div class="panel">
-    <ol style="margin-left:18px;font-size:14.5px;color:#dde5f2">
-      <li style="margin:6px 0"><b>밸류는 싸다 — 미국 메모리보다도 역프(SK −18%·삼성 −22%).</b> 단 일부 자료의 −40%대는 2027E 이익으로 부풀린 것이고, "역프=싸다"는 EPS 컨센 달성이 전제다.</li>
-      <li style="margin:6px 0"><b>그러나 7개월 창은 타이밍 게임이다.</b> 가격 피크(3~4Q26)가 보유기간 한복판 + 주가는 피크 선행 → 연말 주가가 지금보다 낮을 수 있다.</li>
-      <li style="margin:6px 0"><b>단기 역풍(금리·외국인 매도·과열) vs 하방 방어(저PER·이익 견고)가 충돌.</b> 그래서 지금 일괄 매수의 risk/reward는 불리.</li>
-      <li style="margin:6px 0"><b>결론: "분할 매수 + 무효화 손절 규율".</b> 둘 중 안정 지향이면 삼성(하방 완만+파운드리 옵셔널리티)이 risk/reward 우위, SK는 더 큰 상승여력을 노리되 더 잘게 분할.</li>
-    </ol>
-  </div>
-  <div class="disc">
-    <b>면책</b> · 공개 데이터로 정리한 <b>교육용 분석</b>이며, 매수·매도 권유가 아닙니다. 모든 수치는 명시된 기준 시점 스냅샷으로 실시간 변동합니다. EPS·목표가·컨센서스는 추정치이며, 일부 증권사 목표가 일자·PBR·컨센 기준일 등은 1차 출처에서 정확히 확인되지 않았습니다. 역프 수치는 "롤리랄" 자료에서 출발해 자체 컨센 검증한 값(롤리랄 원자료는 2027E 기준으로 할인 크기가 다름). 추가 리스크: 메모리 가격 피크 전환, HBM 경쟁, 원/달러 환율, 단독 최상단 목표가 신뢰도. 투자 결정 전 최신 공시·리포트를 직접 확인하세요.
-  </div>
-</section>
-
-<!-- 용어 사전 -->
-<section>
-  <details class="gloss">
-    <summary>용어 사전 — 처음 보는 단어가 있다면 펼쳐보세요</summary>
-    <div class="gl">
-      <div><b>PER (주가수익비율)</b> — 주가 ÷ 1년 순이익. 몇 년치 이익에 사는지. 낮을수록 쌈.</div>
-      <div><b>EPS (주당순이익)</b> — 1주가 1년에 버는 돈(순이익 ÷ 주식 수). PER의 분모.</div>
-      <div><b>PBR (주가순자산비율)</b> — 주가 ÷ 1주당 순자산. 회사 장부가의 몇 배인지.</div>
-      <div><b>Forward / Trailing PER</b> — 내년 예상 이익 기준 / 지난 12개월 실적 기준 PER.</div>
-      <div><b>멀티플(multiple)</b> — PER·PBR 같은 '배수'를 통칭하는 말.</div>
-      <div><b>김프 / 역프</b> — 한국이 해외보다 비싸면 김프(김치 프리미엄), 싸면 역프(역프리미엄).</div>
-      <div><b>코리아 디스카운트</b> — 지배구조·지정학 등으로 한국 주식이 구조적으로 싸게 매겨지는 현상.</div>
-      <div><b>ROE (자기자본이익률)</b> — 순이익 ÷ 자기자본. 자본을 얼마나 효율적으로 굴리나.</div>
-      <div><b>컨센서스(consensus)</b> — 여러 증권사 애널리스트 추정치의 평균.</div>
-      <div><b>HBM (고대역폭메모리)</b> — AI GPU에 쌓아 올리는 초고속 메모리. SK·삼성·마이크론만 생산.</div>
-      <div><b>DRAM / NAND</b> — 일반 D램(연산용) / 낸드(저장용) 메모리.</div>
-      <div><b>capex (설비투자)</b> — 공장·장비 투자. 빅테크 AI capex가 HBM 수요를 견인.</div>
-      <div><b>RSI</b> — 과매수/과매도 기술 지표. 70 이상이면 과열권.</div>
-      <div><b>MSCI 비중 캡</b> — 글로벌 지수의 한 종목 비중 상한. 초과 시 패시브 펀드가 기계적으로 매도.</div>
-      <div><b>ADR</b> — 미국 증시에 상장하는 외국 주식 예탁증서. SK가 추진 중.</div>
-      <div><b>DCA (분할매수)</b> — 한 번에 안 사고 여러 번 나눠 사는 것.</div>
-      <div><b>bull / base / bear</b> — 낙관 / 기준 / 비관 시나리오.</div>
-      <div><b>QoQ / MoM</b> — 전분기 대비 / 전월 대비 변화율.</div>
-    </div>
-  </details>
-</section>
+  <section>
+    <details class="gloss">
+      <summary>용어 사전 — 처음 보는 단어가 있다면 펼쳐보세요</summary>
+      <div class="gl">
+        <div><b>PER</b> — 주가 ÷ 1년 순이익. 몇 년치 이익에 사는지.</div>
+        <div><b>EPS</b> — 1주가 1년에 버는 돈. PER의 분모.</div>
+        <div><b>PBR</b> — 주가 ÷ 1주당 순자산. 장부가의 몇 배인지.</div>
+        <div><b>Forward / Trailing PER</b> — 예상 이익 기준 / 과거 실적 기준 PER.</div>
+        <div><b>멀티플</b> — PER·PBR 같은 배수 지표.</div>
+        <div><b>김프 / 역프</b> — 한국이 해외보다 비싸면 김프, 싸면 역프.</div>
+        <div><b>코리아 디스카운트</b> — 지배구조·환율·지정학 등으로 한국 주식이 낮게 평가받는 현상.</div>
+        <div><b>컨센서스</b> — 여러 애널리스트 추정치의 평균 또는 중간값.</div>
+        <div><b>HBM</b> — AI GPU에 붙는 고대역폭 메모리.</div>
+        <div><b>DRAM / NAND</b> — 연산용 메모리 / 저장용 메모리.</div>
+        <div><b>Revision trend</b> — 애널리스트들이 이익 추정치를 올리는지 내리는지의 흐름.</div>
+        <div><b>DCA</b> — 한 번에 사지 않고 여러 번 나눠 사는 방식.</div>
+        <div><b>Bull / Base / Bear</b> — 낙관 / 기준 / 비관 시나리오.</div>
+        <div><b>MoM / QoQ</b> — 전월 대비 / 전분기 대비 변화율.</div>
+      </div>
+    </details>
+  </section>
+</main>
 
 <footer>
   <h4>출처</h4>
-  <div class="srcs">
-    <a href="https://m.stock.naver.com/domestic/stock/000660" target="_blank" rel="noopener">네이버 금융 SK하이닉스</a>
-    <a href="https://m.stock.naver.com/domestic/stock/005930" target="_blank" rel="noopener">네이버 금융 삼성전자</a>
-    <a href="https://finance.yahoo.com/quote/000660.KS" target="_blank" rel="noopener">Yahoo Finance (교차확인)</a>
-    <a href="https://stockanalysis.com/stocks/mu/" target="_blank" rel="noopener">StockAnalysis 마이크론</a>
-    <a href="https://www.investing.com/equities/sk-hynix-inc-consensus-estimates" target="_blank" rel="noopener">Investing.com 컨센서스</a>
-    <a href="https://www.trendforce.com/" target="_blank" rel="noopener">TrendForce DRAM/HBM</a>
-    <a href="https://fortune.com/2026/05/11/ai-memory-chips-semiconductor-stock-boom-price-hikes-dram-shortage-hbm/" target="_blank" rel="noopener">Fortune (신중론)</a>
-  </div>
+  <div class="srcs" id="sourceList"></div>
 </footer>
 
 </div>
+
+<script>
+const DATA = {
+  sources: {
+    naverSk: {label:"네이버·FnGuide SK", date:"2026-05-27", url:"https://m.stock.naver.com/domestic/stock/000660/total", status:"good", note:"가격·PER·PBR·52주 저점"},
+    naverSamsung: {label:"네이버·FnGuide 삼성", date:"2026-05-27", url:"https://m.stock.naver.com/domestic/stock/005930/total", status:"good", note:"가격·PER·PBR·52주 저점"},
+    stockMu: {label:"StockAnalysis MU", date:"2026-05-26", url:"https://stockanalysis.com/stocks/mu/", status:"good", note:"미국주 가격·시총·멀티플"},
+    stockSndk: {label:"StockAnalysis SNDK", date:"2026-05-26", url:"https://stockanalysis.com/stocks/sndk/", status:"soft", note:"미국주 가격·시총·멀티플"},
+    stockNvda: {label:"StockAnalysis NVDA", date:"2026-05-26", url:"https://stockanalysis.com/stocks/nvda/", status:"soft", note:"AI 플랫폼 peer"},
+    trendforce: {label:"TrendForce", date:"수시", url:"https://www.trendforce.com/", status:"warn", note:"DRAM/HBM 가격 추세는 원문 확인 필요"},
+    macro: {label:"거시 데이터", date:"2026-05", url:"https://www.federalreserve.gov/monetarypolicy.htm", status:"warn", note:"금리·인플레·국채금리는 리프레시 필요"},
+    krx: {label:"KRX 수급", date:"수시", url:"https://data.krx.co.kr/", status:"warn", note:"외국인 순매수/순매도는 일자별 재확인 필요"},
+    userPrompt: {label:"세션 검증값", date:"2026-05-27", url:"https://github.com/londonpotato1/memory-rerating-dashboard", status:"soft", note:"사용자 제공 프롬프트와 이전 세션 검증값"},
+    missing: {label:"확인 필요", date:"N/A", url:"#", status:"bad", note:"공개 페이지에서 완전 확인 불가"}
+  },
+  peers: [
+    {id:"sk", name:"SK하이닉스", ticker:"000660", type:"한국 메모리", price:2243000, priceText:"2,243,000원", marketCap:"1,598조", fwdPE:7.56, trailingPE:21.67, pbr:9.43, low52:201500, source:"naverSk", chip:"p-cheap"},
+    {id:"samsung", name:"삼성전자", ticker:"005930", type:"한국 메모리", price:307000, priceText:"307,000원", marketCap:"1,795조", fwdPE:7.14, trailingPE:24.81, pbr:4.27, low52:54200, source:"naverSamsung", chip:"p-cheap"},
+    {id:"mu", name:"마이크론", ticker:"MU", type:"미국 메모리", price:895.88, priceText:"$895.88", marketCap:"$1.01T", fwdPE:9.56, trailingPE:42.14, pbr:null, lowGain:872, source:"stockMu", chip:"p-mid"},
+    {id:"sndk", name:"샌디스크", ticker:"SNDK", type:"미국 NAND", price:1589.55, priceText:"$1,589.55", marketCap:"$235B", fwdPE:9.8, trailingPE:53.5, pbr:null, lowGain:null, source:"stockSndk", chip:"p-mid"},
+    {id:"nvda", name:"엔비디아", ticker:"NVDA", type:"AI 플랫폼", price:215, priceText:"약 $215", marketCap:"$5.2T", fwdPE:22, trailingPE:null, pbr:null, lowGain:null, source:"stockNvda", chip:"p-rich"}
+  ],
+  eps: {
+    sk: {label:"SK하이닉스", eps2025:58955, eps2026:296550, eps2027:null, revision:"정량 확인 필요", source:"naverSk", caveat:"2026E EPS 점값은 확인. 3개월 상향률과 2027E는 별도 데이터벤더/리포트 필요."},
+    samsung: {label:"삼성전자", eps2025:6564, eps2026:43004, eps2027:null, revision:"정량 확인 필요", source:"naverSamsung", caveat:"2026E EPS 점값은 확인. 3개월 상향률과 2027E는 별도 데이터벤더/리포트 필요."}
+  },
+  scenarios: {
+    sk: {
+      label:"SK하이닉스", current:2243000, source:"naverSk",
+      cases:[
+        {name:"Bull", klass:"ubull", prob:25, range:[3500000,4000000], per:"11.8~13.5", condition:"재평가 지속 + 사이클 2027 연장", color:"u-bull"},
+        {name:"Base", klass:"ubase", prob:45, range:[2600000,2900000], per:"8.5~10", condition:"EPS 달성 + 수급 소진 + MU 수준 일부 인정", color:"u-base"},
+        {name:"Bear", klass:"ub", prob:30, range:[1300000,1800000], per:"6~7", condition:"가격 피크 통과 + EPS 하향 + 멀티플 컷", color:"u-down"}
+      ]
+    },
+    samsung: {
+      label:"삼성전자", current:307000, source:"naverSamsung",
+      cases:[
+        {name:"Bull", klass:"ubull", prob:25, range:[560000,590000], per:"13~14", condition:"메모리 재평가 + 파운드리 흑자전환 가시화", color:"u-bull"},
+        {name:"Base", klass:"ubase", prob:45, range:[400000,470000], per:"9~11", condition:"EPS 달성 + 파운드리 적자 축소", color:"u-base"},
+        {name:"Bear", klass:"ub", prob:30, range:[210000,280000], per:"6~7", condition:"사이클 회귀 + HBM 추격 지연", color:"u-down"}
+      ]
+    }
+  },
+  factors: [
+    {name:"미국 경제·금리", read:"고금리와 인플레 재가속은 성장주/반도체 멀티플에 부담.", effect:"− 중강", pill:"p-neg", action:"금리·CPI·10년물 상승 시 PER 상향 가정 축소", source:"macro"},
+    {name:"유동성", read:"신용스프레드와 위험선호가 우호적이면 멀티플 하방을 완충.", effect:"+ 중", pill:"p-pos", action:"VIX·스프레드 급등 시 분할매수 속도 낮춤", source:"macro"},
+    {name:"지정학·전쟁", read:"미중 반도체 통제·대만/한반도 리스크는 요구수익률을 높임.", effect:"− 꼬리", pill:"p-warn", action:"정책 이벤트 직전에는 전량 진입 회피", source:"macro"},
+    {name:"반도체·AI 사이클", read:"HBM 수요는 강하지만 DRAM 가격 피크 시점이 EPS 지속성을 좌우.", effect:"+ EPS / − 타이밍", pill:"p-warn", action:"TrendForce 가격·재고·capex를 월간 확인", source:"trendforce"},
+    {name:"기업 펀더멘털", read:"2026E 기준 낮은 PER이 핵심 장점. 단 PBR과 ROE 정상화가 필요.", effect:"+ 조건부", pill:"p-pos", action:"EPS 하향 전환 전까지 thesis 유지", source:"naverSk"},
+    {name:"수급·이벤트", read:"외국인 수급과 SK ADR 일정은 단기 가격 변동성을 키움.", effect:"− 단기 / + 촉매", pill:"p-warn", action:"순매도 둔화·ADR 세부조건 확인 후 추가 진입", source:"krx"}
+  ],
+  heat: [
+    {v:"+1,013%", l:"SK 52주 저점→종가", source:"naverSk"},
+    {v:"+466%", l:"삼성 52주 저점→종가", source:"naverSamsung"},
+    {v:"3~4Q26", l:"가격 피크 논쟁 구간", source:"trendforce"},
+    {v:"EPS -20%", l:"역프 대부분 소멸", source:"userPrompt"}
+  ],
+  tranches: [
+    {n:1, weight:"25~30%", trigger:"현 수준 소량 진입", range:[0,0], note:"관심 포지션만 열고 EPS·수급 확인"},
+    {n:2, weight:"30~35%", trigger:"종가 대비 -8~-12% 눌림 또는 외국인 순매수 전환", range:[-12,-8], note:"과열 해소 확인 후 추가"},
+    {n:3, weight:"35~40%", trigger:"종가 대비 -18~-25% 눌림 + EPS 컨센 유지", range:[-25,-18], note:"하락이 thesis 훼손이 아니라 변동성일 때만"}
+  ]
+};
+
+const fmt = {
+  num(n){ return Math.round(n).toLocaleString("ko-KR"); },
+  won(n){ return `${Math.round(n).toLocaleString("ko-KR")}원`; },
+  pct(n){ return `${n >= 0 ? "+" : ""}${n.toFixed(0)}%`; },
+  pe(n){ return n == null ? "—" : `${n.toFixed(n < 10 ? 1 : 0)}배`; },
+  signed(n){ return `${n >= 0 ? "+" : ""}${n.toFixed(1)}%`; }
+};
+
+function sourceBadge(id, compact=false){
+  const s = DATA.sources[id] || DATA.sources.missing;
+  if(id === "missing") return `<span class="sourceBadge bad">확인 필요</span>`;
+  return `<a class="sourceBadge ${s.status}" href="${s.url}" target="_blank" rel="noopener">${compact ? s.label.split(" ")[0] : s.label} · ${s.date}</a>`;
+}
+
+function lowGain(peer){
+  if(peer.lowGain != null) return peer.lowGain;
+  if(peer.low52) return (peer.price / peer.low52 - 1) * 100;
+  return null;
+}
+
+function discountToMu(peer){
+  const mu = DATA.peers.find(p => p.id === "mu").fwdPE;
+  return (peer.fwdPE / mu - 1) * 100;
+}
+
+function renderValuation(){
+  const tbody = document.querySelector("#valuationTable tbody");
+  tbody.innerHTML = DATA.peers.map(p => {
+    const gain = lowGain(p);
+    return `<tr>
+      <td>${p.name}<span class="tk">${p.ticker}</span></td>
+      <td>${p.priceText}</td>
+      <td>${p.marketCap}</td>
+      <td><b style="color:${p.fwdPE < 9 ? "var(--grn)" : p.fwdPE < 15 ? "var(--blu)" : "var(--pur)"}">${fmt.pe(p.fwdPE)}</b></td>
+      <td>${fmt.pe(p.trailingPE)}</td>
+      <td>${fmt.pe(p.pbr)}</td>
+      <td style="color:${gain == null ? "var(--dim)" : "var(--grn)"}">${gain == null ? "—" : fmt.pct(gain)}</td>
+      <td><span class="pill ${p.chip}">${p.type}</span></td>
+      <td>${sourceBadge(p.source,true)}</td>
+    </tr>`;
+  }).join("");
+
+  document.getElementById("valuationCards").innerHTML = DATA.peers.map(p => {
+    const gain = lowGain(p);
+    return `<article class="companyCard">
+      <h3>${p.name}<span class="tk">${p.ticker}</span> ${sourceBadge(p.source,true)}</h3>
+      <div class="miniGrid">
+        <div class="mini"><div class="l">현재가</div><div class="v">${p.priceText}</div></div>
+        <div class="mini"><div class="l">시총</div><div class="v">${p.marketCap}</div></div>
+        <div class="mini"><div class="l">Fwd PER</div><div class="v" style="color:var(--grn)">${fmt.pe(p.fwdPE)}</div></div>
+        <div class="mini"><div class="l">52주 저점대비</div><div class="v">${gain == null ? "—" : fmt.pct(gain)}</div></div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+function renderPerBars(){
+  const max = Math.max(...DATA.peers.map(p => p.fwdPE || 0));
+  document.getElementById("perBars").innerHTML = DATA.peers.filter(p => ["sk","samsung","mu","nvda"].includes(p.id)).map(p => {
+    const width = Math.max(16, (p.fwdPE / max) * 100);
+    const klass = p.id === "nvda" ? "f-pur" : p.id === "mu" ? "f-avg" : "f-cur";
+    const vs = p.id === "mu" ? "미국 메모리 기준" : p.id === "nvda" ? "AI 플랫폼 대접" : `${fmt.signed(discountToMu(p))} vs MU`;
+    return `<div class="bar"><span class="lbl">${p.name}<b>${p.type}</b></span><div class="track"><div class="fill ${klass}" style="width:${width}%">${fmt.pe(p.fwdPE)}</div></div><span class="vs">${vs}</span></div>`;
+  }).join("");
+
+  const sk = DATA.peers.find(p => p.id === "sk");
+  const samsung = DATA.peers.find(p => p.id === "samsung");
+  const avg = (discountToMu(sk) + discountToMu(samsung)) / 2;
+  document.getElementById("discountStats").innerHTML = [
+    {v:fmt.signed(discountToMu(sk)), l:"SK하이닉스 vs MU"},
+    {v:fmt.signed(discountToMu(samsung)), l:"삼성전자 vs MU"},
+    {v:`≈${fmt.signed(avg)}`, l:"한국 메모리 평균"}
+  ].map(x => `<div class="dstat"><div class="v mono">${x.v}</div><div class="l">${x.l}</div></div>`).join("");
+}
+
+function renderEps(){
+  const keys = ["sk","samsung"];
+  document.getElementById("epsCards").innerHTML = keys.map(id => {
+    const e = DATA.eps[id];
+    const p = DATA.peers.find(x => x.id === id);
+    const growth = (e.eps2026 / e.eps2025 - 1) * 100;
+    return `<article class="epsCard">
+      <h3>${e.label} ${sourceBadge(e.source,true)}</h3>
+      <div class="epsMini">
+        <div class="yr"><div class="y">2025 EPS</div><div class="v">${fmt.num(e.eps2025)}</div></div>
+        <div class="yr"><div class="y">2026E EPS</div><div class="v" style="color:var(--grn)">${fmt.num(e.eps2026)}</div></div>
+        <div class="yr"><div class="y">2027E EPS</div><div class="v" style="color:var(--amb)">확인 필요</div></div>
+      </div>
+      <div class="statusLine">2026E 성장률 ${fmt.pct(growth)} · 현재 Fwd PER ${fmt.pe(p.price / e.eps2026)} · 3개월 revision: <b style="color:var(--amb)">${e.revision}</b></div>
+      <div class="statusLine">${e.caveat}</div>
+    </article>`;
+  }).join("");
+
+  const tbody = document.querySelector("#sensitivityTable tbody");
+  tbody.innerHTML = keys.flatMap(id => {
+    const e = DATA.eps[id];
+    const p = DATA.peers.find(x => x.id === id);
+    return [
+      {label:"컨센 100%", eps:e.eps2026, status:"역프 유지"},
+      {label:"EPS -20%", eps:e.eps2026 * .8, status:"역프 대부분 소멸"},
+      {label:"EPS -30%", eps:e.eps2026 * .7, status:"미국 메모리보다 비쌀 수 있음"}
+    ].map(row => {
+      const pe = p.price / row.eps;
+      const disc = (pe / DATA.peers.find(x => x.id === "mu").fwdPE - 1) * 100;
+      const pill = disc < -10 ? "p-pos" : disc < 0 ? "p-warn" : "p-neg";
+      return `<tr><td>${e.label}</td><td>${row.label}</td><td>${fmt.pe(pe)}</td><td>${fmt.signed(disc)}</td><td><span class="pill ${pill}">${row.status}</span></td></tr>`;
+    });
+  }).join("");
+}
+
+function rangeText(range){
+  return `${fmt.won(range[0])}~${fmt.won(range[1])}`;
+}
+
+function mid(range){ return (range[0] + range[1]) / 2; }
+
+function renderScenarios(){
+  document.getElementById("scenarioPanels").innerHTML = Object.values(DATA.scenarios).map(s => {
+    const expected = s.cases.reduce((acc, c) => acc + mid(c.range) * c.prob / 100, 0);
+    const expectedUp = (expected / s.current - 1) * 100;
+    return `<article class="panel">
+      <div class="scenarioHead">
+        <h3>${s.label} <span style="font-size:12px;color:var(--mut)">현재 ${fmt.won(s.current)}</span> ${sourceBadge(s.source,true)}</h3>
+        <div class="ev">확률가중 기대값<b class="mono">${fmt.won(expected)}</b><span class="mono">${fmt.signed(expectedUp)}</span></div>
+      </div>
+      <div class="ladder">
+        ${s.cases.map(c => {
+          const up = (mid(c.range) / s.current - 1) * 100;
+          return `<div class="rung ${c.klass}">
+            <span class="l"><b>${c.name} · ${c.prob}%</b>${c.condition} <span class="mono">(PER ${c.per})</span></span>
+            <span class="r"><div class="pe mono">${rangeText(c.range)}</div><div class="up ${c.color} mono">${fmt.signed(up)}</div></span>
+          </div>`;
+        }).join("")}
+      </div>
+    </article>`;
+  }).join("");
+}
+
+function renderFactors(){
+  document.querySelector("#factorTable tbody").innerHTML = DATA.factors.map(f => `<tr>
+    <td>${f.name}</td>
+    <td style="text-align:left">${f.read}</td>
+    <td><span class="pill ${f.pill}">${f.effect}</span></td>
+    <td class="factorAction">${f.action}</td>
+    <td>${sourceBadge(f.source,true)}</td>
+  </tr>`).join("");
+
+  const audit = ["naverSk","naverSamsung","stockMu","trendforce","macro","krx","missing"];
+  document.getElementById("auditList").innerHTML = audit.map(id => {
+    const s = DATA.sources[id];
+    return `<div class="auditItem"><b>${s.label}</b><span>${s.note}</span>${sourceBadge(id,true)}</div>`;
+  }).join("");
+}
+
+function renderHeat(){
+  document.getElementById("heatStats").innerHTML = DATA.heat.map(h => `<div class="stat">
+    <div class="v mono">${h.v}</div>
+    <div class="l">${h.l}</div>
+    <div style="margin-top:7px">${sourceBadge(h.source,true)}</div>
+  </div>`).join("");
+}
+
+function renderTranches(){
+  const sk = DATA.peers.find(p => p.id === "sk");
+  const samsung = DATA.peers.find(p => p.id === "samsung");
+  document.getElementById("tranches").innerHTML = DATA.tranches.map(t => {
+    const skRange = t.range[0] === 0 ? fmt.won(sk.price) : `${fmt.won(sk.price * (1 + t.range[0]/100))}~${fmt.won(sk.price * (1 + t.range[1]/100))}`;
+    const ssRange = t.range[0] === 0 ? fmt.won(samsung.price) : `${fmt.won(samsung.price * (1 + t.range[0]/100))}~${fmt.won(samsung.price * (1 + t.range[1]/100))}`;
+    return `<div class="tranche">
+      <div class="n">${t.n}</div>
+      <div class="c"><b>${t.trigger}</b> · 목표 비중 ${t.weight}<br><span style="color:var(--mut)">${t.note}</span></div>
+      <div class="p">SK ${skRange}<br>삼성 ${ssRange}</div>
+    </div>`;
+  }).join("");
+}
+
+function renderSources(){
+  document.getElementById("sourceList").innerHTML = Object.entries(DATA.sources)
+    .filter(([id]) => id !== "missing")
+    .map(([id,s]) => `<a href="${s.url}" target="_blank" rel="noopener">${s.label} · ${s.date}</a>`)
+    .join("");
+}
+
+renderValuation();
+renderPerBars();
+renderEps();
+renderScenarios();
+renderFactors();
+renderHeat();
+renderTranches();
+renderSources();
+</script>
 </body>
 </html>
