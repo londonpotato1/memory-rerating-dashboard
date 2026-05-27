@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SK하이닉스·삼성전자 매수 분석 — 목표가 & 진입 전략</title>
+<style>
+  :root{
+    --bg:#0a0e16; --panel:#121826; --panel2:#1a2235; --line:#242d42;
+    --txt:#e8edf6; --mut:#93a0b8; --dim:#65718c;
+    --grn:#34d399; --grn-bg:rgba(52,211,153,.12);
+    --amb:#fbbf24; --amb-bg:rgba(251,191,36,.12);
+    --red:#f87171; --red-bg:rgba(248,113,113,.12);
+    --blu:#60a5fa; --pur:#a78bfa; --cyn:#22d3ee;
+    --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--txt);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(1200px 600px at 80% -10%,rgba(96,165,250,.08),transparent),radial-gradient(900px 500px at 0% 0%,rgba(167,139,250,.07),transparent);
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 80px}
+  h1,h2,h3{line-height:1.3;letter-spacing:-.02em}
+  .mono{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+
+  header{margin-bottom:30px}
+  .eyebrow{color:var(--blu);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+  header h1{font-size:29px;margin:8px 0 10px;font-weight:800}
+  .sub{color:var(--mut);font-size:16px;max-width:800px}
+  .asof{margin-top:14px;display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap;
+    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12.5px;color:var(--mut)}
+  .asof b{color:var(--txt)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--grn);box-shadow:0 0 0 4px var(--grn-bg)}
+
+  section{margin-top:34px}
+  .sectit{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+  .sectit .num{color:var(--dim);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums}
+  .sectit h2{font-size:21px;font-weight:800}
+  .lead{color:var(--mut);font-size:15px;margin-bottom:16px;max-width:860px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+
+  .analogy{background:linear-gradient(180deg,rgba(96,165,250,.08),rgba(96,165,250,.02));
+    border:1px solid rgba(96,165,250,.28);border-radius:var(--r);padding:16px 18px;margin:14px 0}
+  .analogy .tag{font-size:12px;font-weight:800;color:var(--blu);letter-spacing:.04em;margin-bottom:6px}
+  .analogy p{font-size:14.5px;color:#cdd8ec}.analogy p+p{margin-top:8px}
+
+  .vtab{width:100%;border-collapse:collapse;font-size:13.5px}
+  .vtab th,.vtab td{text-align:right;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:middle;font-variant-numeric:tabular-nums}
+  .vtab th{color:var(--dim);font-size:11.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+  .vtab th:first-child,.vtab td:first-child{text-align:left;font-variant-numeric:normal}
+  .vtab td:first-child{font-weight:700;color:var(--txt)}
+  .vtab .tk{font-size:11px;color:var(--dim);font-weight:600;margin-left:5px}
+  .pill{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;font-weight:800;font-size:11.5px;white-space:nowrap}
+  .p-cheap{background:var(--grn-bg);color:var(--grn)}
+  .p-mid{background:rgba(96,165,250,.14);color:var(--blu)}
+  .p-rich{background:rgba(167,139,250,.16);color:var(--pur)}
+  .p-pos{background:var(--grn-bg);color:var(--grn)}
+  .p-neg{background:var(--red-bg);color:var(--red)}
+  .p-warn{background:var(--amb-bg);color:var(--amb)}
+
+  .tldr{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;
+    background:linear-gradient(135deg,rgba(251,191,36,.10),rgba(96,165,250,.06));
+    border:1px solid rgba(251,191,36,.3);border-radius:var(--r);padding:18px 20px}
+  .tldr .big{font-size:28px;line-height:1.05;font-weight:900;color:var(--amb);text-align:center;min-width:120px}
+  .tldr .big small{display:block;font-size:12px;color:var(--mut);font-weight:600;margin-top:8px}
+  .tldr p{font-size:15px;color:#e6ecf7}.tldr b{color:#fff}
+
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:1fr 1fr}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+
+  .bar{display:grid;grid-template-columns:150px 1fr 120px;gap:10px;align-items:center;margin:9px 0;font-size:13px}
+  .bar .lbl{color:var(--mut);text-align:right;font-size:12.5px}.bar .lbl b{display:block;color:var(--txt);font-size:13px}
+  .track{background:var(--panel2);border-radius:8px;height:30px;position:relative;overflow:hidden}
+  .fill{height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-weight:800;font-size:12px;color:#0a0e16;min-width:44px}
+  .f-cur{background:linear-gradient(90deg,#3b4a66,#5b6f96);color:#fff}
+  .f-avg{background:linear-gradient(90deg,#2563eb,#60a5fa);color:#fff}
+  .f-pur{background:linear-gradient(90deg,#7c3aed,#a78bfa);color:#fff}
+  .bar .vs{font-size:12px;color:var(--mut);text-align:left}
+
+  .disc3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+  .dstat{background:var(--panel2);border:1px solid rgba(52,211,153,.25);border-radius:12px;padding:14px;text-align:center}
+  .dstat .v{font-size:26px;font-weight:900;color:var(--grn);font-variant-numeric:tabular-nums}
+  .dstat .l{font-size:12px;color:var(--mut);margin-top:4px}
+
+  .ladder{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .rung{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .rung .l{font-size:12.5px;color:var(--mut)}.rung .l b{display:block;color:var(--txt);font-size:13.5px}
+  .rung .r{text-align:right;white-space:nowrap}
+  .rung .pe{font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums}
+  .rung .up{font-size:18px;font-weight:900;font-variant-numeric:tabular-nums}
+  .ub{border-color:rgba(248,113,113,.35)}.ubase{border-color:rgba(52,211,153,.35)}.ubull{border-color:rgba(167,139,250,.35)}
+  .u-down{color:var(--red)}.u-base{color:var(--grn)}.u-bull{color:var(--pur)}
+
+  .eps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;margin-top:8px}
+  .eps .yr{background:var(--panel2);border-radius:10px;padding:12px 8px}
+  .eps .yr .y{font-size:11px;color:var(--dim);font-weight:700}.eps .yr .v{font-size:17px;font-weight:800;margin-top:4px;font-variant-numeric:tabular-nums}
+
+  .bb{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .bull{border:1px solid rgba(52,211,153,.3);background:var(--grn-bg)}.bear{border:1px solid rgba(248,113,113,.3);background:var(--red-bg)}
+  .bb .card-h{font-weight:800;font-size:14px;margin-bottom:10px}
+  .bull .card-h{color:var(--grn)}.bear .card-h{color:var(--red)}
+  .bb ul{list-style:none;font-size:13px}.bb li{padding:5px 0 5px 18px;position:relative;color:#d4ddef}
+  .bb li:before{content:"•";position:absolute;left:4px}.bull li:before{color:var(--grn)}.bear li:before{color:var(--red)}
+  .bb li .src{color:var(--dim);font-size:11px}
+
+  .para{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+  .stat{background:var(--panel2);border-radius:12px;padding:16px;text-align:center}
+  .stat .v{font-size:25px;font-weight:900;font-variant-numeric:tabular-nums;color:var(--red)}.stat .l{font-size:12.5px;color:var(--mut);margin-top:4px}
+
+  .step{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:none}
+  .step .n{width:26px;height:26px;border-radius:50%;background:var(--blu);color:#0a0e16;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .step .c{font-size:13.5px;color:#d4ddef}.step .c b{color:var(--txt)}
+  .sig{background:var(--red-bg);border:1px solid rgba(248,113,113,.3);border-radius:12px;padding:14px 16px}
+  .sig h4{color:var(--red);font-size:13.5px;margin-bottom:8px}
+  .sig ul{list-style:none;font-size:13px}.sig li{padding:4px 0 4px 18px;position:relative;color:#d4ddef}
+  .sig li:before{content:"!";position:absolute;left:5px;color:var(--red);font-weight:900}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chips span{font-size:12px;color:var(--mut);background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+
+  .note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amb);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13.5px;color:#d4ddef}
+  .note b{color:var(--amb)}
+  .disc{margin-top:30px;font-size:12px;color:var(--dim);background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:16px 18px}.disc b{color:var(--mut)}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px}
+  footer h4{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+  .srcs{display:flex;flex-wrap:wrap;gap:8px}
+  .srcs a{font-size:12px;color:var(--mut);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 10px;text-decoration:none}
+  .srcs a:hover{color:var(--blu);border-color:var(--blu)}
+
+  @media(max-width:820px){
+    .g2,.bb,.ladder,.disc3,.para{grid-template-columns:1fr}
+    .bar{grid-template-columns:96px 1fr 84px}.tldr{grid-template-columns:1fr;text-align:center}
+    header h1{font-size:23px}.vtab{font-size:12px}.vtab th,.vtab td{padding:9px 6px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">매수 의사결정 분석 · 밸류에이션 + 시황</div>
+  <h1>SK하이닉스·삼성전자 — 사도 될까, 목표가는 얼마?</h1>
+  <p class="sub">밸류에이션(5사 비교·역프)·외부 환경(금리·유동성·지정학)·AI 메모리 사이클·수급을 다각도로 종합해, 2026년 말까지 목표가와 진입 전략을 정리합니다.</p>
+  <div class="asof"><span class="dot"></span><span>기준 · 한국주식 <b>2026-05-27 12:55 KST 장중</b> / 미국주식 <b>2026-05-26 종가</b> · 보유기간 가정 <b>~2026년 말</b></span></div>
+  <div class="asof" style="border-color:rgba(251,191,36,.4);color:var(--amb);margin-left:8px"><span>교육용 정리 · <b>매수·매도 권유가 아닙니다</b></span></div>
+</header>
+
+<!-- 1. TL;DR -->
+<section>
+  <div class="sectit"><span class="num">01</span><h2>한 줄 결론</h2></div>
+  <div class="tldr">
+    <div class="big">싸지만<small>지금은 타이밍 게임</small></div>
+    <p><b>밸류에이션은 싸다(미국 메모리보다 역프). 그런데 보유기간 7개월이 메모리 사이클 피크(3~4Q26)와 정면으로 겹친다.</b> 그래서 핵심은 "목표가 숫자"가 아니라 <b>진입 타이밍과 규율</b>. 기준(base) 상승 여력 SK +12~25% / 삼성 +25~47%, 하지만 이미 1년새 5~11배 올랐고 외국인은 매도 중 → <b>"싸니까 산다"가 아니라 "분할 매수 + 무효화 손절 규율".</b></p>
+  </div>
+</section>
+
+<!-- 2. 5사 비교 -->
+<section>
+  <div class="sectit"><span class="num">02</span><h2>5사 밸류에이션 한눈 비교</h2></div>
+  <p class="lead">메모리 4사는 forward PER 7~10배, 엔비디아만 24배. 한국 2사는 미국 메모리보다도 더 싸다.</p>
+  <div class="panel" style="overflow-x:auto">
+    <table class="vtab">
+      <thead><tr><th>종목</th><th>현재가</th><th>시총</th><th>Fwd PER</th><th>Trailing PER</th><th>PBR</th><th>52주 저점대비</th><th>분류</th></tr></thead>
+      <tbody>
+        <tr><td>SK하이닉스<span class="tk">000660</span></td><td>2,324,000원</td><td>1,656조</td><td><b style="color:var(--grn)">7.8배</b></td><td>22.5배</td><td>9.8배</td><td style="color:var(--grn)">+1,045%</td><td><span class="pill p-cheap">한국 메모리·최저</span></td></tr>
+        <tr><td>삼성전자<span class="tk">005930</span></td><td>319,250원</td><td>1,866조</td><td><b style="color:var(--grn)">7.4배</b></td><td>25.8배</td><td>4.4배</td><td style="color:var(--grn)">+489%</td><td><span class="pill p-cheap">한국 메모리·최저</span></td></tr>
+        <tr><td>마이크론<span class="tk">MU</span></td><td>$895.88</td><td>$1.01조</td><td><b style="color:var(--blu)">9.6배</b></td><td>42.1배</td><td>—</td><td style="color:var(--grn)">+872%</td><td><span class="pill p-mid">미국 메모리</span></td></tr>
+        <tr><td>샌디스크<span class="tk">SNDK</span></td><td>$1,589.55</td><td>$235B</td><td><b style="color:var(--blu)">9.8배</b></td><td>53.5배</td><td>—</td><td style="color:var(--grn)">+4,290%</td><td><span class="pill p-mid">미국 NAND</span></td></tr>
+        <tr><td>엔비디아<span class="tk">NVDA</span></td><td>$215</td><td>$5.19조</td><td><b style="color:var(--pur)">약 24배</b></td><td>—</td><td>—</td><td>—</td><td><span class="pill p-rich">AI 플랫폼</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note" style="margin-top:14px"><b>읽는 법:</b> Forward PER(내년 예상 이익 기준)이 핵심 비교축. Trailing 22~53배는 "과거 불황기 이익"으로 나눠 커 보일 뿐. <b>단, 모든 EPS는 컨센서스 '추정치'</b>다(아래 04 경고 참조).</div>
+</section>
+
+<!-- 3. 왜 싼가 + 역프 -->
+<section>
+  <div class="sectit"><span class="num">03</span><h2>왜 싼가 — 멀티플 비교 & 역프(코리아 디스카운트)</h2></div>
+  <div class="analogy">
+    <div class="tag">한 줄 비유</div>
+    <p>같은 호황이라도 손님이 "매년 올 단골"이면 권리금을 후하게(높은 PER), "이번 대목만 반짝"이면 박하게 친다(낮은 PER). 시장은 엔비디아를 단골로, 메모리는 아직 '대목 장사'로 본다 — 게다가 한국 메모리는 미국 동종보다도 더 박하게 매겨진다(<b>역프</b>).</p>
+  </div>
+  <div class="panel">
+    <div style="font-size:13px;color:var(--mut);margin-bottom:10px">Forward PER 비교 (막대 끝 = 24배 기준)</div>
+    <div class="bar"><span class="lbl">SK하이닉스<b>한국 메모리</b></span><div class="track"><div class="fill f-cur" style="width:33%">7.8배</div></div><span class="vs">가장 쌈</span></div>
+    <div class="bar"><span class="lbl">삼성전자<b>한국 메모리</b></span><div class="track"><div class="fill f-cur" style="width:31%">7.4배</div></div><span class="vs">가장 쌈</span></div>
+    <div class="bar"><span class="lbl">마이크론<b>미국 메모리</b></span><div class="track"><div class="fill f-avg" style="width:40%">9.6배</div></div><span class="vs">한국보다 비쌈</span></div>
+    <div class="bar"><span class="lbl">엔비디아<b>AI 플랫폼</b></span><div class="track"><div class="fill f-pur" style="width:100%">약 24배</div></div><span class="vs">성장주 대접</span></div>
+  </div>
+
+  <div class="panel" style="margin-top:14px">
+    <h3 style="font-size:15px;margin-bottom:4px">역프(코리아 디스카운트) — 마이크론(9.6배) 대비</h3>
+    <div style="font-size:12.5px;color:var(--dim);margin-bottom:12px">"롤리랄" 분석가 자료에서 출발 · 수치는 자체 검증(2026-05-27, 우리 2026E 컨센 기준)</div>
+    <div class="disc3">
+      <div class="dstat"><div class="v mono">−18%</div><div class="l">SK하이닉스 (7.8 vs 9.6)</div></div>
+      <div class="dstat"><div class="v mono">−22%</div><div class="l">삼성전자 (7.4 vs 9.6)</div></div>
+      <div class="dstat"><div class="v mono">≈−20%</div><div class="l">메모리 평균 (코스피 최대 역프 섹터)</div></div>
+    </div>
+    <div class="note" style="margin-top:14px">
+      <b>주의 — "역프 = 싸다"로 단정 금지:</b><br>
+      ① <b>이 −18~22%는 우리 보수 수치.</b> 일부 자료(롤리랄)는 −34~38%로 더 크게 보지만, 그건 <b>2026년이 아닌 2027년 이익을 분모로 써서</b> 할인을 부풀린 것.<br>
+      ② <b>이 역프는 "EPS 컨센 달성" 전제 조건부.</b> 만약 내년 이익이 컨센 대비 −20% 빗나가면 SK PER은 9.8배로 <b>마이크론과 동급(역프 소멸)</b>이 된다.<br>
+      ③ <b>코리아 디스카운트는 구조적</b>(지배구조·환율·지정학)이라 일부는 정상이다. 좁혀질 촉매(SK ADR 美상장)도 있지만 자동은 아니다.
+    </div>
+  </div>
+</section>
+
+<!-- 4. 더 가려면 + EPS 경고 -->
+<section>
+  <div class="sectit"><span class="num">04</span><h2>더 가려면 — 두 동력 & EPS 경고</h2></div>
+  <p class="lead">주가 = 이익(EPS) × 멀티플(PER). 추가 상승은 ①이익이 더 늘거나 ②멀티플이 더 커지거나다.</p>
+  <div class="grid g2">
+    <div class="panel" style="border-color:rgba(52,211,153,.3)">
+      <div style="color:var(--grn);font-weight:800;margin-bottom:8px">① 이미 시작됨 — 이익(EPS) 급증</div>
+      <p style="font-size:13.5px;color:var(--mut);margin-bottom:10px">AI/HBM 수요로 메모리 가격 급등(1Q26 DRAM 계약가 +90~95% QoQ)하며 이익 폭증.</p>
+      <div class="eps">
+        <div class="yr"><div class="y">SK 2025</div><div class="v mono">58,955</div></div>
+        <div style="display:flex;align-items:center;justify-content:center;color:var(--grn);font-weight:800">→</div>
+        <div class="yr"><div class="y">SK 2026E</div><div class="v mono" style="color:var(--grn)">296,550</div></div>
+      </div>
+      <div style="text-align:center;font-size:12px;color:var(--mut);margin-top:6px">SK EPS 약 5배 · 삼성 6,564→43,004 (약 6.5배)</div>
+    </div>
+    <div class="panel" style="border-color:rgba(167,139,250,.35)">
+      <div style="color:var(--pur);font-weight:800;margin-bottom:8px">② 아직 안 일어남 — 멀티플(PER) 확장</div>
+      <p style="font-size:13.5px;color:var(--mut);margin-bottom:10px">시장이 메모리를 "사이클주(낮은 PER)"가 아니라 "성장주(높은 PER)"로 인정하는 것. 추가 여력의 핵심.</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;padding:14px 0">
+        <div style="text-align:center"><div style="font-size:11px;color:var(--dim)">지금</div><div style="font-size:26px;font-weight:900;color:var(--mut)" class="mono">7배</div></div>
+        <div style="font-size:22px;color:var(--pur)">→ ?</div>
+        <div style="text-align:center"><div style="font-size:11px;color:var(--dim)">목표</div><div style="font-size:26px;font-weight:900;color:var(--pur)" class="mono">9·13배</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:14px">
+    <b>★ 가장 중요한 경고 — EPS는 '사실'이 아니라 '추정치':</b> 이 모든 분석의 토대인 2026E EPS(SK 296,550)는 <b>컨센서스 추정</b>이다. 더 위험한 건 <b>2027E 이익 컨센이 2026E보다 높게</b> 잡혀 있다는 점 — 즉 시장은 <b>사이클 하락을 전혀 반영하지 않은 슈퍼사이클</b>을 가정 중이다. 안전마진이 없다. 추정이 −20% 빗나가면 "싸다"는 명제 자체가 무너진다.
+  </div>
+</section>
+
+<!-- 5. 목표가 시나리오 -->
+<section>
+  <div class="sectit"><span class="num">05</span><h2>목표가 — 2026년 말 bull / base / bear</h2></div>
+  <p class="lead">5개 밸류에이션 방법론 + 6개 시황 관점을 종합. 단일 숫자가 아니라 "어떤 조건이면 얼마"의 조건부 분기다.</p>
+  <div class="grid g2">
+    <div class="panel">
+      <h3 style="font-size:15px;margin-bottom:8px">SK하이닉스 <span style="font-size:12px;color:var(--mut)">현재 2,324,000원 · PER 7.8배</span></h3>
+      <div class="ladder" style="grid-template-columns:1fr">
+        <div class="rung ubull"><span class="l"><b>Bull</b> 재평가 지속+사이클 2027 연장 (PER 11.8~13.5)</span><span class="r"><div class="pe mono">3,500,000~4,000,000</div><div class="up u-bull mono">+51~72%</div></span></div>
+        <div class="rung ubase"><span class="l"><b>Base</b> 이익 견고+수급 소진+멀티플 횡보 (PER 8.5~10)</span><span class="r"><div class="pe mono">2,600,000~2,900,000</div><div class="up u-base mono">+12~25%</div></span></div>
+        <div class="rung ub"><span class="l"><b>Bear</b> 가격피크 통과+멀티플 컷 (PER 6~7 / PBR 정상화)</span><span class="r"><div class="pe mono">1,800,000 (최악 1,300,000)</div><div class="up u-down mono">−23~−44%</div></span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3 style="font-size:15px;margin-bottom:8px">삼성전자 <span style="font-size:12px;color:var(--mut)">현재 319,250원 · PER 7.4배</span></h3>
+      <div class="ladder" style="grid-template-columns:1fr">
+        <div class="rung ubull"><span class="l"><b>Bull</b> 재평가+파운드리 흑전 (PER 13~14)</span><span class="r"><div class="pe mono">560,000~590,000</div><div class="up u-bull mono">+75~85%</div></span></div>
+        <div class="rung ubase"><span class="l"><b>Base</b> 이익 견고+파운드리 적자 축소 (PER 9~11)</span><span class="r"><div class="pe mono">400,000~470,000</div><div class="up u-base mono">+25~47%</div></span></div>
+        <div class="rung ub"><span class="l"><b>Bear</b> 사이클 회귀 (PER 6~7 / PBR 정상화)</span><span class="r"><div class="pe mono">280,000 (최악 210,000)</div><div class="up u-down mono">−12~−34%</div></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:14px"><b>핵심:</b> Base는 "미국 메모리 수준 인정+이익 컨센 달성"이면 비교적 견고. Bull은 "사이클이 2027로 연장"돼야. <b>모든 시나리오가 EPS 추정 유지에 달려 있고</b>, 평균 증권가 신규 목표(SK ~300만)는 Base 상단에 위치. (엔비디아식 24배=SK 710만 같은 산술적 상한은 메모리 변동성상 비현실적이라 제외.)</div>
+</section>
+
+<!-- 6. 외부 환경 -->
+<section>
+  <div class="sectit"><span class="num">06</span><h2>외부 환경 체크 — 거시·유동성·지정학</h2></div>
+  <p class="lead">밸류에이션(바닥)과 별개로, 멀티플을 누르거나 띄우는 top-down 요인. 각 요인이 적정 PER에 +/- 어느 방향인지.</p>
+  <div class="panel" style="overflow-x:auto">
+    <table class="vtab">
+      <thead><tr><th>요인</th><th>현황 (2026-05)</th><th>멀티플 영향</th></tr></thead>
+      <tbody>
+        <tr><td>미국 금리</td><td style="text-align:left">Fed 3.50~3.75% 동결, <b>12월 인상 확률 ~80%</b>, CPI 3.8% 재가속, 10Y 4.5%</td><td><span class="pill p-neg">− 중강</span></td></tr>
+        <tr><td>환율(원/달러)</td><td style="text-align:left">1,500원+ 사상 최약세 → 수출이익 +</td><td><span class="pill p-pos">+ (이익)</span></td></tr>
+        <tr><td>유동성(거시)</td><td style="text-align:left">QT 종료, 신용스프레드 타이트, VIX 16.7 → 위험선호 우호</td><td><span class="pill p-pos">+ 중</span></td></tr>
+        <tr><td>외국인 수급</td><td style="text-align:left"><b>5월 SK+삼성 ~38조 순매도</b> (MSCI 비중 캡 초과 → 기계적 축소)</td><td><span class="pill p-neg">− 강(단기)</span></td></tr>
+        <tr><td>지정학</td><td style="text-align:left">현재 미중 휴전+한국 232조 MFN로 약함. <b>단 11/27 휴전 만료가 보유기간 내</b></td><td><span class="pill p-warn">− 꼬리</span></td></tr>
+        <tr><td>AI 수요</td><td style="text-align:left">빅테크 AI capex 2026 ~$700B → HBM 수요 견인</td><td><span class="pill p-pos">+ (이익)</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note" style="margin-top:14px"><b>순효과:</b> 매크로(금리)·외국인 수급은 멀티플을 <b>누르고(−)</b>, 이익(원화·AI capex)이 <b>받친다(+)</b>. 단기 7개월 창에선 <b>역풍이 우세</b> — 거시 우호가 하방을 완충하나 외국인 기계적 매도가 상단을 제약.</div>
+</section>
+
+<!-- 7. 사이클 타이밍 & 과열 -->
+<section>
+  <div class="sectit"><span class="num">07</span><h2>사이클 타이밍 & 과열 — 왜 7개월이 까다로운가</h2></div>
+  <div class="analogy">
+    <div class="tag">핵심 비유</div>
+    <p>불꽃놀이가 가장 화려해지는 순간(메모리 가격 피크 3~4Q26)이 관람 시간(연말까지) 한복판인데, <b>관객(주가)은 절정을 2~3개월 미리 보고 자리를 뜨기 시작</b>한다. "가장 좋을 때 들고 있으면 된다"가 아니라 <b>절정 직전에 이미 주가는 꺾일 수 있는</b> 비대칭 구간.</p>
+  </div>
+  <div class="para">
+    <div class="stat"><div class="v mono">+1,045%</div><div class="l">SK 52주 저점→현재 (이미 11배)</div></div>
+    <div class="stat"><div class="v mono">RSI 76</div><div class="l">필라델피아 반도체 과매수권</div></div>
+    <div class="stat"><div class="v mono">+13.3%</div><div class="l">SK 하루 상승 (5/27 당일)</div></div>
+  </div>
+  <div class="note" style="margin-top:14px">
+    <b>컨센서스 해석 주의 (stale 데이터):</b> Investing.com 3개월 평균 목표가는 SK 207만(현재가 −11% 아래)으로 "이미 과열"처럼 보이지만, 이는 <b>5월 무더기 상향을 반영 못 한 stale 값</b>. 5월 신규 증권사 중앙값은 <b>~300만(+29%)</b>. → "과열이냐 추가 여력이냐"는 <b>어느 컨센을 보느냐에 갈린다.</b>
+  </div>
+  <div class="bb" style="margin-top:14px">
+    <div class="card bull">
+      <div class="card-h">강세 — 사이클 졸업/재평가 지속</div>
+      <ul>
+        <li>모건스탠리 "메모리 겨울론" 철회, 슈퍼사이클 2027까지 <span class="src">— BigGo</span></li>
+        <li>UBS 마이크론 $535→$1,625, IDC "구조적 리셋"</li>
+        <li>DRAM 1Q26 +90~95%, 15년래 최악 쇼티지</li>
+      </ul>
+    </div>
+    <div class="card bear">
+      <div class="card-h">신중 — 사이클은 반복된다</div>
+      <ul>
+        <li>하버드 Willy Shih "This too will pass, 진폭만 큰 같은 사이클" <span class="src">— Fortune 5/11</span></li>
+        <li>컨센 다수 메모리 가격 <b>3~4Q26 피크</b> 후 둔화. 2Q26 +58~63%로 모멘텀 둔화 시작</li>
+        <li>HBM 경쟁 심화: 삼성·마이크론 추격 → SK 점유율 62%→50%</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 8. 매수 실행 플랜 -->
+<section>
+  <div class="sectit"><span class="num">08</span><h2>매수 실행 플랜 (보유 ~2026말 · 분할 가능 · −50% 감내 기준)</h2></div>
+  <div class="panel">
+    <div style="font-weight:800;font-size:14px;margin-bottom:6px;color:var(--blu)">진입 — 일괄 매수 부적절, 분할(DCA) 권장</div>
+    <div class="step"><div class="n">1</div><div class="c"><b>현 수준 소량 진입</b> — 목표 비중의 25~30%만. (과열·외국인 매도 직후라 전량 진입 금지)</div></div>
+    <div class="step"><div class="n">2</div><div class="c"><b>외국인 순매도 → 순매수 전환 확인 시</b> 추가 트랜치</div></div>
+    <div class="step"><div class="n">3</div><div class="c"><b>RSI 60 이하 눌림 / ADR 美상장(6~7월) 전후 변동성</b>에서 분할 추가</div></div>
+  </div>
+  <div class="panel" style="margin-top:12px">
+    <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:var(--blu)">종목 비중 — 삼성 ≥ SK 고려</div>
+    <p style="font-size:13.5px;color:#d4ddef">SK는 ADR 희석 + 삼성 HBM4 추격 + 진폭 큰 −50% 노출. 삼성은 파운드리 흑전 옵셔널리티 + 하방 완만 + Base 업사이드(%)가 더 큼. <b>안정 지향이면 삼성 비중↑, 공격 지향이면 SK(HBM 1위 프리미엄) 비중↑·더 잘게 분할.</b></p>
+  </div>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="panel">
+      <div style="font-weight:800;font-size:14px;margin-bottom:8px;color:var(--grn)">차익실현</div>
+      <p style="font-size:13px;color:#d4ddef">Base 도달 시(SK 2.7~2.9M / 삼성 43~47만) 일부 실현. Bull(SK 3.5~4M / 삼성 56~59만)은 "사이클 2027 연장" 확인돼야.</p>
+    </div>
+    <div class="sig">
+      <h4>무효화 / 손절 신호 (이게 핵심)</h4>
+      <ul>
+        <li>DRAM/HBM 계약가 <b>MoM 하락 전환</b> (TrendForce 월간)</li>
+        <li>2026E EPS 컨센 <b>하향 전환</b></li>
+        <li>외국인 매도 가속 + <b>11/27 미중 휴전 만료</b> 악화</li>
+        <li>주가 −50% 도달 (감내 한계)</li>
+      </ul>
+    </div>
+  </div>
+  <div style="margin-top:12px"><div style="font-size:12.5px;color:var(--mut);font-weight:700">모니터링 트리거</div>
+    <div class="chips"><span>TrendForce 월간 DRAM 계약가</span><span>외국인 수급(일간)</span><span>SK ADR 상장 일정(6~7월)</span><span>11/27 미·중 휴전</span><span>분기 실적·가이던스</span></div>
+  </div>
+</section>
+
+<!-- 9. 정리 -->
+<section>
+  <div class="sectit"><span class="num">09</span><h2>정리</h2></div>
+  <div class="panel">
+    <ol style="margin-left:18px;font-size:14.5px;color:#dde5f2">
+      <li style="margin:6px 0"><b>밸류는 싸다 — 미국 메모리보다도 역프(SK −18%·삼성 −22%).</b> 단 일부 자료의 −40%대는 2027E 이익으로 부풀린 것이고, "역프=싸다"는 EPS 컨센 달성이 전제다.</li>
+      <li style="margin:6px 0"><b>그러나 7개월 창은 타이밍 게임이다.</b> 가격 피크(3~4Q26)가 보유기간 한복판 + 주가는 피크 선행 → 연말 주가가 지금보다 낮을 수 있다.</li>
+      <li style="margin:6px 0"><b>단기 역풍(금리·외국인 매도·과열) vs 하방 방어(저PER·이익 견고)가 충돌.</b> 그래서 지금 일괄 매수의 risk/reward는 불리.</li>
+      <li style="margin:6px 0"><b>결론: "분할 매수 + 무효화 손절 규율".</b> 둘 중 안정 지향이면 삼성(하방 완만+파운드리 옵셔널리티)이 risk/reward 우위, SK는 더 큰 상승여력을 노리되 더 잘게 분할.</li>
+    </ol>
+  </div>
+  <div class="disc">
+    <b>면책</b> · 공개 데이터로 정리한 <b>교육용 분석</b>이며, 매수·매도 권유가 아닙니다. 모든 수치는 명시된 기준 시점 스냅샷으로 실시간 변동합니다. EPS·목표가·컨센서스는 추정치이며, 일부 증권사 목표가 일자·PBR·컨센 기준일 등은 1차 출처에서 정확히 확인되지 않았습니다. 역프 수치는 "롤리랄" 자료에서 출발해 자체 컨센 검증한 값(롤리랄 원자료는 2027E 기준으로 할인 크기가 다름). 추가 리스크: 메모리 가격 피크 전환, HBM 경쟁, 원/달러 환율, 단독 최상단 목표가 신뢰도. 투자 결정 전 최신 공시·리포트를 직접 확인하세요.
+  </div>
+</section>
+
+<footer>
+  <h4>출처</h4>
+  <div class="srcs">
+    <a href="https://m.stock.naver.com/domestic/stock/000660" target="_blank" rel="noopener">네이버 금융 SK하이닉스</a>
+    <a href="https://m.stock.naver.com/domestic/stock/005930" target="_blank" rel="noopener">네이버 금융 삼성전자</a>
+    <a href="https://finance.yahoo.com/quote/000660.KS" target="_blank" rel="noopener">Yahoo Finance (교차확인)</a>
+    <a href="https://stockanalysis.com/stocks/mu/" target="_blank" rel="noopener">StockAnalysis 마이크론</a>
+    <a href="https://www.investing.com/equities/sk-hynix-inc-consensus-estimates" target="_blank" rel="noopener">Investing.com 컨센서스</a>
+    <a href="https://www.trendforce.com/" target="_blank" rel="noopener">TrendForce DRAM/HBM</a>
+    <a href="https://fortune.com/2026/05/11/ai-memory-chips-semiconductor-stock-boom-price-hikes-dram-shortage-hbm/" target="_blank" rel="noopener">Fortune (신중론)</a>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
