@@ -16,11 +16,12 @@
     --pur:#b49cff; --r:8px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;overflow-x:hidden}
   body{
     background:var(--bg); color:var(--txt);
     font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
     line-height:1.65; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
     background-image:
       linear-gradient(180deg,rgba(101,185,245,.06),transparent 340px),
       linear-gradient(90deg,rgba(53,212,155,.045),transparent 42%,rgba(245,191,61,.035));
@@ -178,6 +179,74 @@
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
   .chips span{font-size:12px;color:var(--mut);background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:5px 10px}
 
+  .triad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+  .verdict{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:15px;min-height:174px}
+  .verdict .axis{font-size:11.5px;color:var(--dim);font-weight:900;text-transform:uppercase}
+  .verdict .call{font-size:22px;font-weight:950;margin:6px 0 8px}
+  .verdict .call.good{color:var(--grn)}
+  .verdict .call.watch{color:var(--amb)}
+  .verdict .call.risk{color:var(--red)}
+  .verdict p{font-size:13px;color:#d8e2ef;line-height:1.55}
+  .cycleTable{background:linear-gradient(180deg,rgba(101,185,245,.05),rgba(17,21,28,.98))}
+  .cycleTable .vtab{min-width:1040px;border-collapse:separate;border-spacing:0}
+  .cycleTable .vtab caption{padding:14px 16px;color:#c3ceda}
+  .cycleTable .vtab thead th{position:sticky;top:0;z-index:2;background:#131a23;color:#eef3f8;border-bottom:1px solid var(--line2);text-align:center;padding:14px 12px}
+  .cycleTable .vtab thead th:first-child{text-align:left;color:#c9d4e2}
+  .cycleTable .vtab tbody tr:nth-child(even){background:rgba(255,255,255,.018)}
+  .cycleTable .vtab tbody tr:hover{background:rgba(101,185,245,.06)}
+  .cycleTable .vtab th,.cycleTable .vtab td{border-right:1px solid rgba(54,80,100,.38)}
+  .cycleTable .vtab th:last-child,.cycleTable .vtab td:last-child{border-right:none}
+  .matrixHead{display:inline-flex;flex-direction:column;align-items:center;gap:3px;border-radius:var(--r);padding:7px 12px;font-size:14px;font-weight:950;letter-spacing:0;min-width:148px}
+  .matrixHead small{font-size:10.5px;color:rgba(238,243,248,.68);font-weight:900}
+  .matrixHead.dot{background:rgba(101,185,245,.13);border:1px solid rgba(101,185,245,.52);color:#8fd0ff}
+  .matrixHead.phone{background:rgba(245,191,61,.14);border:1px solid rgba(245,191,61,.50);color:#ffd472}
+  .matrixHead.ai{background:rgba(53,212,155,.15);border:1px solid rgba(53,212,155,.52);color:#59edba}
+  .axisCell{position:sticky;left:0;z-index:1;background:#101721!important;border-left:3px solid var(--blu);font-size:13.8px!important;line-height:1.45!important;color:#f4f8fc!important;vertical-align:top!important;text-align:left!important;width:132px;min-width:132px}
+  .eraCell{vertical-align:top!important;text-align:left!important;font-variant-numeric:normal!important;color:#e3ebf4!important;font-size:13.2px;line-height:1.64;padding:15px 14px!important}
+  .eraCell.dotcom{box-shadow:inset 3px 0 0 rgba(101,185,245,.38)}
+  .eraCell.phone{box-shadow:inset 3px 0 0 rgba(245,191,61,.38)}
+  .eraCell.ai{box-shadow:inset 3px 0 0 rgba(53,212,155,.42)}
+  .cellEra{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:0;color:var(--dim)}
+  .cellEra span{display:inline-flex;border-radius:999px;padding:2px 7px}
+  .cellEra .dot{background:rgba(101,185,245,.12);color:#8fd0ff}
+  .cellEra .phone{background:rgba(245,191,61,.12);color:#ffd472}
+  .cellEra .ai{background:rgba(53,212,155,.12);color:#59edba}
+  .cellText{min-height:72px}
+  .cellSources{margin-top:11px;display:flex;flex-wrap:wrap;gap:6px}
+  .hi{font-weight:950}
+  .hi-ai{color:var(--grn)}
+  .hi-capex{color:var(--amb)}
+  .hi-risk{color:var(--red)}
+  .hi-money{color:var(--blu)}
+  .hi-win{color:var(--pur)}
+  .hi-memory{color:#75e0ff}
+  .cycleCards{display:none;margin-top:12px;gap:12px}
+  .cycleCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+  .cycleCard h3{font-size:14px;margin-bottom:10px;color:#f4f8fc}
+  .eraMini{display:grid;gap:9px}
+  .eraMini article{border-radius:var(--r);padding:12px;border:1px solid var(--line);background:var(--panel2)}
+  .eraMini article.dotcom{border-color:rgba(101,185,245,.34)}
+  .eraMini article.phone{border-color:rgba(245,191,61,.34)}
+  .eraMini article.ai{border-color:rgba(53,212,155,.36)}
+  .eraMini h4{font-size:12.5px;margin-bottom:6px}
+  .eraMini article.dotcom h4{color:#8fd0ff}
+  .eraMini article.phone h4{color:#ffd472}
+  .eraMini article.ai h4{color:#59edba}
+  .eraMini p{font-size:13px;color:#dfe8f2;line-height:1.58}
+  .capexTable .vtab{min-width:980px}
+  .leftText{text-align:left!important;color:#d8e2ef;font-variant-numeric:normal!important}
+  .bubbleGrid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:14px}
+  .signalList{display:grid;gap:9px}
+  .signal{display:grid;grid-template-columns:132px 1fr auto;gap:10px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:11px 12px;font-size:12.8px;color:#d8e2ef}
+  .signal b{color:var(--txt)}
+  .scenarioMini{display:grid;gap:10px}
+  .scenarioMini .miniCase{background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+  .miniCase h3{font-size:14px;margin-bottom:5px}
+  .miniCase p{font-size:13px;color:#d8e2ef;line-height:1.55}
+  .logicSteps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+  .logicSteps div{background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:10px;font-size:12.3px;color:#d8e2ef}
+  .logicSteps b{display:block;color:var(--blu);font-size:11.5px;margin-bottom:4px}
+
   details.gloss{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:0 18px}
   details.gloss summary{cursor:pointer;padding:16px 2px;font-weight:900;font-size:15px;list-style:none;color:var(--txt)}
   details.gloss summary::-webkit-details-marker{display:none}
@@ -193,7 +262,7 @@
   .srcs a:hover{color:var(--blu);border-color:var(--blu)}
 
   @media(max-width:900px){
-    .g2,.g3,.g4,.epsGrid,.bb,.statGrid,.disc3{grid-template-columns:1fr}
+    .g2,.g3,.g4,.epsGrid,.bb,.statGrid,.disc3,.triad,.bubbleGrid,.logicSteps{grid-template-columns:1fr}
     .tldr{grid-template-columns:1fr;text-align:center}
     .bar{grid-template-columns:96px 1fr 82px}
     .bar .lbl{text-align:left}
@@ -204,7 +273,10 @@
     .vtab th,.vtab td{padding:9px 7px}
     .desktop-table{display:none}
     .mobile-cards{display:grid}
+    .cycleDesktop{display:none}
+    .cycleCards{display:grid}
     .auditItem{grid-template-columns:1fr}
+    .signal{grid-template-columns:1fr}
     .tranche{grid-template-columns:32px 1fr}
     .tranche .p{grid-column:2;text-align:left;white-space:normal}
     details.gloss .gl{grid-template-columns:1fr}
@@ -393,6 +465,60 @@
   </section>
 
   <section>
+    <div class="sectit"><span class="num">10</span><h2>AI 사이클은 버블인가</h2></div>
+    <p class="lead">AI의 기술 채택, 인프라 CAPEX, 주식 밸류에이션을 분리해 봅니다. 결론부터 말하면 기술은 이미 실체가 있지만, CAPEX ROI와 메모리 EPS 지속성은 아직 증명 중입니다.</p>
+    <div class="triad" id="aiVerdicts"></div>
+    <div class="note good" style="margin-top:14px">
+      <b>5단계 판정:</b> 현재 AI 사이클은 2. 생산성 검증을 통과하는 중이며, 동시에 3. 인프라 과잉투자 위험을 키우는 구간입니다. 아직 4. 수익성 검증 실패나 5. 버블 붕괴/정상화로 단정할 근거는 부족합니다.
+    </div>
+
+    <div class="table-wrap cycleTable cycleDesktop" style="margin-top:14px">
+      <table class="vtab cycleMatrix" id="cycleCompareTable">
+        <caption>닷컴버블, 스마트폰 초기, AI 사이클 비교. 역사 수치는 안정 자료, 2026 이후 수치는 최신 웹 확인값입니다.</caption>
+        <thead>
+          <tr>
+            <th scope="col">비교 항목</th>
+            <th scope="col"><span class="matrixHead dot">닷컴버블<small>1995~2002</small></span></th>
+            <th scope="col"><span class="matrixHead phone">스마트폰<small>2007~2015</small></span></th>
+            <th scope="col"><span class="matrixHead ai">AI 사이클<small>2022~2026</small></span></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="cycleCards" id="cycleCompareCards"></div>
+
+    <div class="bubbleGrid">
+      <div class="panel">
+        <h3 style="font-size:15px;margin-bottom:8px;color:var(--blu)">CAPEX 지속가능성</h3>
+        <div class="table-wrap capexTable">
+          <table class="vtab" id="aiCapexTable">
+            <caption>각 회사의 최신 발표 기준. 회사별 CAPEX 정의가 달라 직접 합산은 방향성 지표로만 봅니다.</caption>
+            <thead>
+              <tr><th scope="col">회사</th><th scope="col">2026 CAPEX</th><th scope="col">AI/클라우드 매출 신호</th><th scope="col">FCF/감가상각 부담</th><th scope="col">투자자 우려</th><th scope="col">출처</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel">
+        <h3 style="font-size:15px;margin-bottom:8px;color:var(--amb)">버블 붕괴를 의심할 선행지표</h3>
+        <div class="signalList" id="aiSignals"></div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:14px">
+      <h3 style="font-size:15px;margin-bottom:8px;color:var(--grn)">메모리주에 필요한 5개 연결고리</h3>
+      <div class="logicSteps" id="memoryLogic"></div>
+      <div class="note" style="margin-top:14px">
+        <b>핵심:</b> “AI는 진짜”만으로는 SK하이닉스·삼성전자 매수 결론이 나오지 않습니다. AI 사용량이 유료 매출로 바뀌고, 그 매출이 CAPEX를 정당화하며, 그 CAPEX가 HBM/DRAM 가격과 물량을 지탱하고, 그 이익이 이미 주가에 덜 반영돼 있어야 합니다.
+      </div>
+    </div>
+
+    <div class="grid g3" id="bubbleScenarios" style="margin-top:14px"></div>
+  </section>
+
+  <section>
     <details class="gloss">
       <summary>용어 사전 — 처음 보는 단어가 있다면 펼쳐보세요</summary>
       <div class="gl">
@@ -410,6 +536,9 @@
         <div><b>DCA</b> — 한 번에 사지 않고 여러 번 나눠 사는 방식.</div>
         <div><b>Bull / Base / Bear</b> — 낙관 / 기준 / 비관 시나리오.</div>
         <div><b>MoM / QoQ</b> — 전월 대비 / 전분기 대비 변화율.</div>
+        <div><b>CAPEX</b> — 데이터센터·서버·장비 같은 장기 자산 투자.</div>
+        <div><b>FCF</b> — 영업현금흐름에서 CAPEX를 뺀 잉여현금흐름.</div>
+        <div><b>ROI / ROIC</b> — 투자한 돈이 얼마나 이익과 현금흐름으로 돌아오는지.</div>
       </div>
     </details>
   </section>
@@ -431,6 +560,20 @@ const DATA = {
     stockSndk: {label:"StockAnalysis SNDK", date:"2026-05-26", url:"https://stockanalysis.com/stocks/sndk/", status:"soft", note:"미국주 가격·시총·멀티플"},
     stockNvda: {label:"StockAnalysis NVDA", date:"2026-05-26", url:"https://stockanalysis.com/stocks/nvda/", status:"soft", note:"AI 플랫폼 peer"},
     trendforce: {label:"TrendForce", date:"수시", url:"https://www.trendforce.com/", status:"warn", note:"DRAM/HBM 가격 추세는 원문 확인 필요"},
+    trendforceQ126: {label:"TrendForce 1Q26 가격", date:"2026-01-05", url:"https://www.trendforce.com/presscenter/news/20260105-12860.html", status:"good", note:"1Q26 DRAM/NAND 계약가 및 AI 서버 수요"},
+    trendforceQ226: {label:"TrendForce 2Q26 가격", date:"2026-03-31", url:"https://www.trendforce.com/presscenter/news/20260331-12995.html", status:"good", note:"2Q26 메모리 계약가와 HBM/서버 우선 배정"},
+    msftQ326: {label:"Microsoft FY26 Q3", date:"2026-04-29", url:"https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q3", status:"good", note:"AI ARR, Cloud 매출, CAPEX, Azure 성장 가이던스"},
+    alphabetQ126: {label:"Alphabet Q1 2026", date:"2026-04-29", url:"https://s206.q4cdn.com/479360582/files/doc_events/2026/Apr/29/2026_Q1_Earnings_Transcript.pdf", status:"good", note:"CAPEX 가이던스, Cloud 매출, AI compute 수요, 감가상각 압력"},
+    alphabetSlidesQ126: {label:"Alphabet Q1 slides", date:"2026-04-29", url:"https://s206.q4cdn.com/479360582/files/doc_financials/2026/q1/Alphabet-Q1-2026-Earnings-Slides.pdf", status:"good", note:"Q1 CAPEX, OCF, FCF, Cloud 수치"},
+    amazonQ126: {label:"Amazon Q1 2026", date:"2026-04-29", url:"https://s2.q4cdn.com/299287126/files/doc_earnings/2026/q1/earnings-result/AMZN-Q1-2026-Earnings-Release.pdf", status:"good", note:"AWS 성장, TTM FCF, AI 투자 영향, Trainium/NVIDIA GPU 공개"},
+    amazonQ425: {label:"Amazon Q4 2025", date:"2026-02-05", url:"https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Fourth-Quarter-Results/default.aspx", status:"good", note:"2026 CAPEX 약 $200B 가이던스"},
+    metaQ126: {label:"Meta Q1 2026", date:"2026-04-29", url:"https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-First-Quarter-2026-Results/", status:"good", note:"2026 CAPEX 가이던스, FCF, 매출, 비용 전망"},
+    oracleQ326: {label:"Oracle FY26 Q3", date:"2026-03-10", url:"https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Fiscal-Year-2026-Third-Quarter-Financial-Results/default.aspx", status:"good", note:"OCI 성장, RPO, FY26 CAPEX, 고객 선불/GPU 조달 구조"},
+    nvidiaQ127: {label:"NVIDIA FY27 Q1", date:"2026-05-20", url:"https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx", status:"good", note:"AI accelerator 수요 확인용 Data Center 매출"},
+    skhynixQ126: {label:"SK hynix Q1 2026", date:"2026-04-23", url:"https://news.skhynix.co.kr/q1-2026-business-results/", status:"good", note:"HBM/서버 DRAM 수요와 1Q26 실적"},
+    samsungQ126: {label:"Samsung 1Q26 IR", date:"2026-04-30", url:"https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2026_1Q_conference_eng.pdf", status:"good", note:"메모리·HBM·서버 수요와 1Q26 실적 설명"},
+    nasdaqDotcom: {label:"JEC dot-com data", date:"2004-03-18", url:"https://www.jec.senate.gov/public/_cache/files/36a08a83-0308-4244-a53b-7bc704b4c7b5/international-economic-performance-since-the-stock-market-bubble---03-18-04.pdf", status:"soft", note:"NASDAQ 2000 peak/2002 trough 역사 데이터"},
+    idc2015: {label:"IDC smartphone 2015", date:"2016-01-27", url:"https://www.phonearena.com/news/IDC-Smartphone-shipments-hit-a-record-1.43-billion-units-in-2015_id77789", status:"soft", note:"2015년 스마트폰 출하량 IDC 인용"},
     macro: {label:"거시 데이터", date:"2026-05", url:"https://www.federalreserve.gov/monetarypolicy.htm", status:"warn", note:"금리·인플레·국채금리는 리프레시 필요"},
     krx: {label:"KRX 수급", date:"수시", url:"https://data.krx.co.kr/", status:"warn", note:"외국인 순매수/순매도는 일자별 재확인 필요"},
     userPrompt: {label:"세션 검증값", date:"2026-05-27", url:"https://github.com/londonpotato1/memory-rerating-dashboard", status:"soft", note:"사용자 제공 프롬프트와 이전 세션 검증값"},
@@ -483,6 +626,53 @@ const DATA = {
     {n:1, weight:"25~30%", trigger:"현 수준 소량 진입", range:[0,0], note:"관심 포지션만 열고 EPS·수급 확인"},
     {n:2, weight:"30~35%", trigger:"종가 대비 -8~-12% 눌림 또는 외국인 순매수 전환", range:[-12,-8], note:"과열 해소 확인 후 추가"},
     {n:3, weight:"35~40%", trigger:"종가 대비 -18~-25% 눌림 + EPS 컨센 유지", range:[-25,-18], note:"하락이 thesis 훼손이 아니라 변동성일 때만"}
+  ],
+  aiVerdicts: [
+    {axis:"A. 기술 채택 사이클", call:"실체 있음", klass:"good", body:"닷컴처럼 기술 자체는 진짜다. Microsoft AI ARR $37B, Alphabet API 16B tokens/min, Amazon chips ARR $20B 같은 매출·사용량 신호가 이미 공개됐다.", sources:["msftQ326","alphabetQ126","amazonQ126"]},
+    {axis:"B. CAPEX/인프라 사이클", call:"검증 중", klass:"watch", body:"4대 hyperscaler의 2026 CAPEX 가이던스는 약 $695~725B, Oracle까지 더하면 약 $745~775B다. FCF와 감가상각이 뒤따라오는지가 승부처다.", sources:["msftQ326","alphabetQ126","amazonQ425","metaQ126","oracleQ326"]},
+    {axis:"C. 주식 밸류에이션 사이클", call:"가격 별도", klass:"risk", body:"좋은 기술이어도 주가가 이미 EPS·멀티플을 과하게 선반영하면 수익률은 나쁠 수 있다. 메모리주는 특히 CAPEX 둔화→HBM/DRAM 가격→EPS 경로가 빠르게 작동한다.", sources:["trendforceQ126","trendforceQ226","userPrompt"]}
+  ],
+  aiCycleCompare: [
+    {item:"핵심 기술의 실제 사용성", dotcom:"인터넷은 실제 혁신이었지만 1999~2000년 다수 dot-com은 사용량보다 트래픽·스토리 중심이었다.", dotSrc:"nasdaqDotcom", phone:"스마트폰은 통화·인터넷·앱·카메라가 한 기기로 통합되며 소비자 효용이 즉시 보였다.", phoneSrc:"idc2015", ai:"생성AI는 검색·코딩·광고·클라우드·업무 자동화에서 사용량과 유료화가 동시에 관측된다.", aiSrc:"msftQ326"},
+    {item:"매출 실체", dotcom:"Amazon·eBay·Yahoo 같은 승자는 있었지만, 많은 상장사는 적자와 낮은 매출 품질을 동반했다.", dotSrc:"nasdaqDotcom", phone:"Apple iPhone, Android 생태계, 앱스토어, 통신사 보조금이 명확한 매출 풀을 만들었다.", phoneSrc:"idc2015", ai:"MS AI ARR $37B, Google Cloud $20B, AWS $37.6B, Oracle Cloud $8.9B로 매출 실체는 닷컴 초기보다 강하다.", aiSrc:"msftQ326"},
+    {item:"수익성", dotcom:"광고·전자상거래 장기 승자는 살아남았지만 시장 전체는 2000~2002년 수익성 재평가를 겪었다.", dotSrc:"nasdaqDotcom", phone:"Apple·Google은 플랫폼 수익성이 높았고, 부품사는 가격 사이클에 노출됐다.", phoneSrc:"idc2015", ai:"NVIDIA와 클라우드 일부는 고수익이나, hyperscaler는 감가상각·전력·부품비 부담이 커진다.", aiSrc:"nvidiaQ127"},
+    {item:"CAPEX 규모와 주체", dotcom:"통신사·장비사가 광섬유·서버·네트워크에 과잉 투자했고, 수요가 늦게 따라오며 파산이 발생했다.", dotSrc:"nasdaqDotcom", phone:"통신망·부품·파운드리 투자는 있었지만 투자가 통신사·OEM·부품사로 분산됐다.", phoneSrc:"idc2015", ai:"Microsoft, Alphabet, Amazon, Meta, Oracle이 GPU·데이터센터·전력·HBM을 집중 구매한다.", aiSrc:"alphabetQ126"},
+    {item:"Adoption 속도", dotcom:"가정용 인터넷 보급은 빠르게 늘었지만 결제·물류·광고 인프라는 미성숙했다.", dotSrc:"nasdaqDotcom", phone:"2007~2015년 스마트폰 출하량이 10억대 규모로 커지며 글로벌 소비자 채택이 폭발했다.", phoneSrc:"idc2015", ai:"기업 도입은 빠르지만 paid conversion과 업무 ROI가 산업별로 다르다.", aiSrc:"alphabetQ126"},
+    {item:"대표 승자와 패자", dotcom:"승자: Amazon, eBay, Google 후발. 패자: Pets.com, Webvan, Global Crossing, WorldCom.", dotSrc:"nasdaqDotcom", phone:"승자: Apple, Google, TSMC, ARM/IP, 앱 생태계. 메모리는 장기 승자라기보다 사이클 수혜자였다.", phoneSrc:"idc2015", ai:"승자 후보: NVIDIA, hyperscaler, HBM 선두. 리스크: 고객 집중·과잉투자·전력 병목에 걸린 인프라 사업자.", aiSrc:"nvidiaQ127"},
+    {item:"밸류에이션 과열 지표", dotcom:"NASDAQ은 2000년 3월 고점 후 2002년 10월까지 약 78% 하락했다.", dotSrc:"nasdaqDotcom", phone:"Apple·Google의 플랫폼 프리미엄은 실적 성장으로 상당 부분 흡수됐다.", phoneSrc:"idc2015", ai:"현재는 주가보다 CAPEX/FCF/감가상각 비율과 메모리 EPS 민감도가 핵심 과열 지표다.", aiSrc:"metaQ126"},
+    {item:"조정 trigger", dotcom:"금리 상승, 자금조달 중단, 매출 부재, 통신 CAPEX 과잉, 회계 스캔들이 연쇄 trigger였다.", dotSrc:"nasdaqDotcom", phone:"성숙기 이후 스마트폰 출하 성장률 둔화와 부품 가격 하락이 부품사 실적을 흔들었다.", phoneSrc:"idc2015", ai:"AI 매출이 CAPEX를 못 따라가거나 GPU 활용률·클라우드 성장률·FCF가 꺾이면 메모리 EPS가 먼저 흔들릴 수 있다.", aiSrc:"amazonQ126"},
+    {item:"반도체 수요 영향", dotcom:"서버·통신장비 수요가 먼저 급증했다가 장비 재고와 설비 과잉으로 급랭했다.", dotSrc:"nasdaqDotcom", phone:"모바일 AP·NAND·DRAM·디스플레이 수요가 커졌지만 메모리 가격은 주기적으로 흔들렸다.", phoneSrc:"idc2015", ai:"HBM과 서버 DRAM은 구조적 수혜지만, CAPEX 둔화 시 일반 DRAM 가격과 EPS가 같이 압박받는다.", aiSrc:"trendforceQ226"}
+  ],
+  aiCapex: [
+    {company:"Microsoft", capex:"CY2026 약 $190B · FY26 Q3 capex $31.9B", revenue:"AI ARR $37B(+123% YoY), Microsoft Cloud $54.5B(+29%), Azure +40%", burden:"Q3 현금 PPE $30.9B, gross margin은 AI 인프라·사용량 증가로 하락 압력", concern:"CAPEX가 revenue-ready로 전환되는 시차와 사용량 기반 과금의 실제 ROI", sources:["msftQ326"]},
+    {company:"Alphabet", capex:"FY2026 $180~190B · Q1 capex $35.7B", revenue:"Google Cloud $20.0B(+63%), Cloud backlog $462B, API 16B tokens/min", burden:"Q1 FCF $10.1B, TTM FCF $64.4B. 감가상각·전력비가 P&L 압력", concern:"2027 CAPEX가 2026보다 크게 늘어날 경우 FCF 방어력", sources:["alphabetQ126","alphabetSlidesQ126"]},
+    {company:"Amazon", capex:"CY2026 약 $200B", revenue:"AWS $37.6B(+28%), chips ARR $20B, Bedrock spend +170% QoQ", burden:"TTM OCF $148.5B이나 FCF $1.2B까지 축소. PPE 증가분 $59.3B는 주로 AI 투자", concern:"AWS 성장률이 CAPEX와 전력·칩 투자를 충분히 흡수하는지", sources:["amazonQ126","amazonQ425"]},
+    {company:"Meta", capex:"FY2026 $125~145B · Q1 capex $19.84B", revenue:"Q1 revenue $56.31B(+33%), 광고 가격 +12%와 impressions +19%", burden:"Q1 FCF $12.39B. 부품 가격·데이터센터 비용으로 CAPEX 가이던스 상향", concern:"AI 인프라 비용이 광고/AI 제품 매출로 얼마나 빨리 회수되는지", sources:["metaQ126"]},
+    {company:"Oracle", capex:"FY2026 $50B", revenue:"Cloud $8.9B(+44%), IaaS $4.9B(+84%), RPO $553B(+325%)", burden:"LTM OCF $23.5B. 대형 AI 계약은 선불·고객 GPU 공급 구조로 일부 부담 완화", concern:"고객 집중, 부채/자본 조달, 계약 이행 전력·데이터센터 리스크", sources:["oracleQ326"]},
+    {company:"Tesla/xAI", capex:"공식 AI CAPEX 분리 확인 불가", revenue:"Tesla와 xAI의 AI 인프라·Grok 매출 기여는 공개 자료만으로 분리 확인 불가", burden:"별도 산식 불가", concern:"비상장 xAI와 Tesla 간 자본·칩·데이터센터 경계가 불명확", sources:["missing"]}
+  ],
+  aiSignals: [
+    {metric:"AI revenue / AI CAPEX", good:"상승", bad:"하락 지속", source:"msftQ326"},
+    {metric:"GPU utilization", good:"공급 부족·대기열", bad:"클러스터 유휴율 상승", source:"missing"},
+    {metric:"Cloud AI 성장률", good:"Azure/AWS/GCP 가속", bad:"성장률 둔화 + 가격 인하", source:"alphabetQ126"},
+    {metric:"Hyperscaler FCF", good:"CAPEX 후에도 양호", bad:"FCF 급감·부채 의존", source:"amazonQ126"},
+    {metric:"NVIDIA Data Center", good:"고성장·백로그 유지", bad:"주문 취소·리드타임 단축", source:"nvidiaQ127"},
+    {metric:"HBM/DRAM 가격", good:"계약가 상승·장기계약", bad:"MoM 하락 2개월", source:"trendforceQ226"},
+    {metric:"전력/데이터센터 병목", good:"용량 확보", bad:"지연·규제·전력비 급등", source:"oracleQ326"},
+    {metric:"AI 앱 유료 전환율", good:"좌석·사용량 증가", bad:"무료 사용만 증가", source:"msftQ326"},
+    {metric:"기업용 AI ROI", good:"비용 절감/매출 증가 사례", bad:"파일럿 후 확산 실패", source:"alphabetQ126"}
+  ],
+  memoryLogic: [
+    {k:"1", t:"AI 사용량", d:"검색·코딩·광고·업무 자동화 사용량이 실제 과금으로 이어져야 한다."},
+    {k:"2", t:"CAPEX 지속", d:"hyperscaler가 FCF를 훼손하지 않고 GPU·전력·데이터센터 투자를 이어가야 한다."},
+    {k:"3", t:"HBM/DRAM 가격", d:"장기계약과 공급부족이 일반 DRAM 가격까지 지지해야 한다."},
+    {k:"4", t:"EPS 달성", d:"SK·삼성의 2026E EPS가 하향되지 않아야 낮은 PER 논리가 유지된다."},
+    {k:"5", t:"멀티플 유지", d:"사이클주 디스카운트가 다시 커지지 않아야 주가 상승 여지가 남는다."}
+  ],
+  aiBubbleScenarios: [
+    {name:"Bull · 30%", klass:"bull", title:"생산성 검증 → 인프라 흡수", text:"AI 매출과 클라우드 성장률이 CAPEX보다 빠르게 개선된다. HBM/DRAM 가격은 강세를 유지하고 SK·삼성 EPS는 추가 상향된다.", trigger:"관찰 trigger: Azure/AWS/GCP 가속, FCF 방어, HBM 장기계약 연장"},
+    {name:"Base · 45%", klass:"ubase", title:"기술은 진짜, CAPEX는 선별 조정", text:"AI 사용성은 유지되지만 CAPEX 증가율은 2027년에 둔화된다. 메모리 가격은 높은 수준을 유지하되 EPS 상향 속도는 둔화된다.", trigger:"관찰 trigger: CAPEX 가이던스 유지, DRAM 상승률 둔화, EPS revision 중립"},
+    {name:"Bear · 25%", klass:"bear", title:"ROI 의심 → 사이클 정상화", text:"AI 앱 유료 전환과 클라우드 AI 매출이 CAPEX를 못 따라간다. GPU 주문이 늦춰지고 HBM/DRAM 가격이 꺾이면 메모리주는 EPS와 멀티플이 동시에 맞는다.", trigger:"관찰 trigger: FCF 급락, GPU 리드타임 단축, DRAM/HBM MoM 하락, EPS 15~20% 하향"}
   ]
 };
 
@@ -662,6 +852,94 @@ function renderTranches(){
   }).join("");
 }
 
+function badges(ids){
+  return ids.map(id => sourceBadge(id,true)).join(" ");
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, ch => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    "\"":"&quot;",
+    "'":"&#39;"
+  }[ch]));
+}
+
+function emphasize(text){
+  let out = escapeHtml(text);
+  const rules = [
+    [/(\$?\d[\d.,]*B|\d+\.?\d*조|\d+\.?\d*억|\d+%|\+?\d+%|\d+~\d+년|\d{4}~\d{4}년)/g, "hi-money"],
+    [/(AI|생성AI|agentic|Cloud|Azure|AWS|GCP|API|tokens\/min)/g, "hi-ai"],
+    [/(CAPEX|투자|데이터센터|전력|GPU|서버|네트워크|광섬유)/g, "hi-capex"],
+    [/(HBM|DRAM|NAND|메모리|반도체|TPU|Trainium|NVIDIA)/g, "hi-memory"],
+    [/(승자|고수익|수익성|매출|유료화|채택|성장|효용|실체)/g, "hi-win"],
+    [/(패자|리스크|적자|과잉|파산|둔화|하락|급랭|압박|부담|부재|스캔들|중단|흔들)/g, "hi-risk"]
+  ];
+  rules.forEach(([pattern, klass]) => {
+    out = out.replace(pattern, `<span class="hi ${klass}">$1</span>`);
+  });
+  return out;
+}
+
+function eraCell(text, source, type, label){
+  return `<td class="eraCell ${type}">
+    <div class="cellEra"><span class="${type}">${label}</span></div>
+    <div class="cellText">${emphasize(text)}</div>
+    <div class="cellSources">${sourceBadge(source,true)}</div>
+  </td>`;
+}
+
+function renderAiCycle(){
+  document.getElementById("aiVerdicts").innerHTML = DATA.aiVerdicts.map(v => `<article class="verdict">
+    <div class="axis">${v.axis}</div>
+    <div class="call ${v.klass}">${v.call}</div>
+    <p>${v.body}</p>
+    <div style="margin-top:10px">${badges(v.sources)}</div>
+  </article>`).join("");
+
+  document.querySelector("#cycleCompareTable tbody").innerHTML = DATA.aiCycleCompare.map(r => `<tr>
+    <th scope="row" class="axisCell">${r.item}</th>
+    ${eraCell(r.dotcom, r.dotSrc, "dotcom", "닷컴버블")}
+    ${eraCell(r.phone, r.phoneSrc, "phone", "스마트폰")}
+    ${eraCell(r.ai, r.aiSrc, "ai", "AI 사이클")}
+  </tr>`).join("");
+
+  document.getElementById("cycleCompareCards").innerHTML = DATA.aiCycleCompare.map(r => `<article class="cycleCard">
+    <h3>${r.item}</h3>
+    <div class="eraMini">
+      <article class="dotcom"><h4>닷컴버블 1995~2002</h4><p>${emphasize(r.dotcom)}</p><div class="cellSources">${sourceBadge(r.dotSrc,true)}</div></article>
+      <article class="phone"><h4>스마트폰 2007~2015</h4><p>${emphasize(r.phone)}</p><div class="cellSources">${sourceBadge(r.phoneSrc,true)}</div></article>
+      <article class="ai"><h4>AI 사이클 2022~2026</h4><p>${emphasize(r.ai)}</p><div class="cellSources">${sourceBadge(r.aiSrc,true)}</div></article>
+    </div>
+  </article>`).join("");
+
+  document.querySelector("#aiCapexTable tbody").innerHTML = DATA.aiCapex.map(r => `<tr>
+    <td>${r.company}</td>
+    <td class="leftText">${r.capex}</td>
+    <td class="leftText">${r.revenue}</td>
+    <td class="leftText">${r.burden}</td>
+    <td class="leftText">${r.concern}</td>
+    <td>${badges(r.sources)}</td>
+  </tr>`).join("");
+
+  document.getElementById("aiSignals").innerHTML = DATA.aiSignals.map(s => `<div class="signal">
+    <b>${s.metric}</b>
+    <span><span style="color:var(--grn)">정상:</span> ${s.good}<br><span style="color:var(--red)">위험:</span> ${s.bad}</span>
+    ${sourceBadge(s.source,true)}
+  </div>`).join("");
+
+  document.getElementById("memoryLogic").innerHTML = DATA.memoryLogic.map(x => `<div>
+    <b>${x.k}. ${x.t}</b>${x.d}
+  </div>`).join("");
+
+  document.getElementById("bubbleScenarios").innerHTML = DATA.aiBubbleScenarios.map(s => `<article class="miniCase ${s.klass}">
+    <h3>${s.name}</h3>
+    <p><b style="color:var(--txt)">${s.title}</b><br>${s.text}</p>
+    <p style="margin-top:8px;color:var(--mut)">${s.trigger}</p>
+  </article>`).join("");
+}
+
 function renderSources(){
   document.getElementById("sourceList").innerHTML = Object.entries(DATA.sources)
     .filter(([id]) => id !== "missing")
@@ -676,6 +954,7 @@ renderScenarios();
 renderFactors();
 renderHeat();
 renderTranches();
+renderAiCycle();
 renderSources();
 </script>
 </body>
