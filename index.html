@@ -7,14 +7,15 @@
 <link rel="icon" href="data:,">
 <style>
   :root{
-    --bg:#080a0d; --panel:#11151c; --panel2:#171d26; --panel3:#0f2522;
-    --line:#29313b; --line2:#365064;
-    --txt:#eef3f8; --mut:#a6b1c0; --dim:#7f8b9c;
-    --grn:#35d49b; --grn-bg:rgba(53,212,155,.12);
-    --amb:#f5bf3d; --amb-bg:rgba(245,191,61,.13);
-    --red:#f47b7b; --red-bg:rgba(244,123,123,.13);
-    --blu:#65b9f5; --blu-bg:rgba(101,185,245,.13);
-    --pur:#b49cff; --r:8px;
+    --bg:#fafafa; --panel:#ffffff; --panel2:#f5f6f8; --panel3:#f0fdf9;
+    --line:#e8eaed; --line2:#dce0e5;
+    --txt:#1a1a1a; --mut:#4b5563; --dim:#6b7280;
+    --grn:#047857; --grn-bg:#ecfdf5;
+    --amb:#b45309; --amb-bg:#fffbeb;
+    --red:#dc2626; --red-bg:#fef2f2;
+    --blu:#2563eb; --blu-bg:#eff6ff;
+    --pur:#7c3aed; --r:14px;
+    --shadow:0 1px 3px rgba(0,0,0,.04),0 4px 20px -8px rgba(0,0,0,.08);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;overflow-x:hidden}
@@ -66,7 +67,7 @@
   .tldr > *,.panel,.auditBanner,.decisionCard,.companyCard,.mini{min-width:0}
   .tldr .big{font-size:28px;line-height:1.08;font-weight:950;color:var(--amb);text-align:center;word-break:keep-all;grid-row:1 / span 2}
   .tldr .big small{display:block;font-size:12px;color:var(--mut);font-weight:700;margin-top:8px}
-  .tldr p{font-size:15px;color:#e8eef7}.tldr b{color:#fff}
+  .tldr p{font-size:15px;color:var(--txt)}.tldr b{color:var(--txt)}
   .tldr .big ~ p{grid-column:2}
 
   .grid{display:grid;gap:14px}
@@ -79,11 +80,11 @@
   .terms .tag{color:var(--grn)}
   .terms dl{display:grid;gap:10px}
   .terms dt{font-weight:900;font-size:13.5px;color:var(--txt)}
-  .terms dd{font-size:13.5px;color:#cfdae7;margin:3px 0 0;line-height:1.55}
+  .terms dd{font-size:13.5px;color:var(--txt);margin:3px 0 0;line-height:1.55}
   .analogy{background:linear-gradient(180deg,rgba(101,185,245,.09),rgba(101,185,245,.025));
     border:1px solid rgba(101,185,245,.30);border-radius:var(--r);padding:16px 18px;margin:14px 0}
   .analogy .tag{color:var(--blu)}
-  .analogy p{font-size:14.5px;color:#d8e2ef}
+  .analogy p{font-size:14.5px;color:var(--txt)}
 
   .sourceBadge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;border:1px solid var(--line2);padding:2px 7px;text-decoration:none;color:var(--mut);font-size:10.5px;font-weight:800;white-space:nowrap;vertical-align:middle}
   .sourceBadge.good{border-color:rgba(53,212,155,.45);color:var(--grn)}
@@ -91,22 +92,22 @@
   .sourceBadge.soft{border-color:rgba(101,185,245,.40);color:var(--blu)}
   .sourceBadge.bad{border-color:rgba(244,123,123,.45);color:var(--red)}
 
-  .auditBanner{margin-top:14px;background:linear-gradient(135deg,rgba(244,123,123,.14),rgba(245,191,61,.07));border:1px solid rgba(244,123,123,.34);border-left:3px solid var(--red);border-radius:0 var(--r) var(--r) 0;padding:14px 16px;color:#f2dde0;font-size:13.5px}
-  .auditBanner b{color:#fff}
+  .auditBanner{margin-top:14px;background:linear-gradient(135deg,rgba(244,123,123,.14),rgba(245,191,61,.07));border:1px solid rgba(244,123,123,.34);border-left:3px solid var(--red);border-radius:0 var(--r) var(--r) 0;padding:14px 16px;color:#991b1b;font-size:13.5px}
+  .auditBanner b{color:#991b1b}
   .decisionGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
   .decisionCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;min-height:132px}
   .decisionCard .k{font-size:11px;color:var(--dim);font-weight:950;text-transform:uppercase}
   .decisionCard .v{font-size:15px;font-weight:950;margin:5px 0;color:var(--txt)}
-  .decisionCard p{font-size:12.7px;color:#d8e2ef;line-height:1.52}
+  .decisionCard p{font-size:12.7px;color:var(--txt);line-height:1.52}
   .decisionCard.fact{border-color:rgba(53,212,155,.34)}
   .decisionCard.est{border-color:rgba(245,191,61,.36)}
   .decisionCard.view{border-color:rgba(101,185,245,.36)}
   .decisionCard.act{border-color:rgba(244,123,123,.34)}
 
   .memorySummaryGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-  .memorySummaryCard{background:linear-gradient(180deg,rgba(101,185,245,.08),rgba(17,21,28,.98));border:1px solid var(--line);border-radius:var(--r);padding:14px;min-width:0;min-height:130px}
-  .memorySummaryCard h3{font-size:15px;margin-bottom:7px;color:#f5f9ff}
-  .memorySummaryCard p{font-size:13px;color:#dce5ef;line-height:1.48;overflow-wrap:anywhere}
+  .memorySummaryCard{background:linear-gradient(180deg,rgba(101,185,245,.08),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:14px;min-width:0;min-height:130px}
+  .memorySummaryCard h3{font-size:15px;margin-bottom:7px;color:var(--txt)}
+  .memorySummaryCard p{font-size:13px;color:var(--txt);line-height:1.48;overflow-wrap:anywhere}
   .memorySummaryCard:nth-child(1){border-color:rgba(53,212,155,.34)}
   .memorySummaryCard:nth-child(2){border-color:rgba(101,185,245,.34)}
   .memorySummaryCard:nth-child(3){border-color:rgba(245,191,61,.38)}
@@ -115,14 +116,14 @@
   .memoryGlossaryGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
   .memoryTerm{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px;min-width:0}
   .memoryTerm h3{font-size:13px;color:var(--blu);margin-bottom:5px}
-  .memoryTerm p{font-size:12.6px;color:#dce5ef;line-height:1.45}
+  .memoryTerm p{font-size:12.6px;color:var(--txt);line-height:1.45}
   .memoryDecisionGrid,.memoryScenarioGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
   .memoryDecisionCard,.memoryScenarioCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px;min-width:0}
   .memoryDecisionCard h3,.memoryScenarioCard h3{font-size:15px;margin-bottom:7px}
-  .memoryDecisionCard p,.memoryScenarioCard p{font-size:13px;color:#dce5ef;line-height:1.48}
+  .memoryDecisionCard p,.memoryScenarioCard p{font-size:13px;color:var(--txt);line-height:1.48}
   .memoryDecisionCard .watchList{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-  .memoryDecisionCard .watchList span{border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:3px 7px;color:#dce5ef;font-size:11.5px;font-weight:850}
-  .memoryDecisionCard .memoryRiskLine{border-top:1px solid var(--line);margin-top:10px;padding-top:9px;color:#f0dddd}
+  .memoryDecisionCard .watchList span{border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:3px 7px;color:var(--txt);font-size:11.5px;font-weight:850}
+  .memoryDecisionCard .memoryRiskLine{border-top:1px solid var(--line);margin-top:10px;padding-top:9px;color:#991b1b}
   .memoryCompanyGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .memoryStockCard{background:radial-gradient(circle at 86% 0,rgba(53,212,155,.13),transparent 34%),var(--panel);border:1px solid rgba(101,185,245,.34);border-radius:var(--r);padding:14px;display:grid;gap:12px;min-width:0}
   .memoryStockCard:nth-child(2){background:radial-gradient(circle at 86% 0,rgba(101,185,245,.13),transparent 34%),var(--panel)}
@@ -130,11 +131,11 @@
   .memoryStockCard .priceHero strong{font-size:20px}
   .memoryStockCard .scenarioChip{min-height:64px}
   .memoryStockCard .slideSignals{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .memoryKeyLine{font-size:12.5px;color:#dce5ef;line-height:1.45}
+  .memoryKeyLine{font-size:12.5px;color:var(--txt);line-height:1.45}
   .memoryKeyLine b{color:var(--dim);font-size:10.5px;text-transform:uppercase;display:block;margin-bottom:3px}
   .memoryStockNote{font-size:11.5px;color:var(--dim);border-top:1px solid var(--line);padding-top:8px}
   .scenarioLine{display:grid;gap:6px;margin-top:8px}
-  .scenarioLine div{font-size:12.8px;color:#dce5ef;line-height:1.45}
+  .scenarioLine div{font-size:12.8px;color:var(--txt);line-height:1.45}
   .scenarioLine b{display:block;color:var(--dim);font-size:10.5px;text-transform:uppercase}
   .sourceDetailGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 
@@ -167,9 +168,9 @@
   .bar .lbl{color:var(--mut);text-align:right;font-size:12.5px}.bar .lbl b{display:block;color:var(--txt);font-size:13px}
   .track{background:var(--panel2);border-radius:var(--r);height:30px;position:relative;overflow:hidden}
   .fill{height:100%;border-radius:var(--r);display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-weight:950;font-size:12px;color:#07100d;min-width:44px}
-  .f-cur{background:linear-gradient(90deg,#3d536d,#7d91b2);color:#fff}
+  .f-cur{background:linear-gradient(90deg,#3d536d,#7d91b2);color:#061018}
   .f-avg{background:linear-gradient(90deg,#1378b6,#65b9f5);color:#061018}
-  .f-pur{background:linear-gradient(90deg,#7b57e5,#b49cff);color:#090713}
+  .f-pur{background:linear-gradient(90deg,#7b57e5,#b49cff);color:#061018}
   .bar .vs{font-size:12px;color:var(--mut);text-align:left}
 
   .disc3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
@@ -177,12 +178,12 @@
   .dstat .v{font-size:26px;font-weight:950;color:var(--grn);font-variant-numeric:tabular-nums}
   .dstat .l{font-size:12px;color:var(--mut);margin-top:4px}
 
-  .note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amb);border-radius:0 var(--r) var(--r) 0;padding:14px 18px;font-size:13.5px;color:#d8e2ef}
+  .note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amb);border-radius:0 var(--r) var(--r) 0;padding:14px 18px;font-size:13.5px;color:var(--txt)}
   .note b{color:var(--amb)}
   .note.good{border-left-color:var(--grn)}
   .note.good b{color:var(--grn)}
-  .warnBox{background:var(--red-bg);border:1px solid rgba(244,123,123,.32);border-radius:var(--r);padding:14px 16px;color:#f3d9d9}
-  .warnBox b{color:#fff}
+  .warnBox{background:var(--red-bg);border:1px solid rgba(244,123,123,.32);border-radius:var(--r);padding:14px 16px;color:#991b1b}
+  .warnBox b{color:var(--red)}
 
   .scenarioHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
   .scenarioHead h3{font-size:15px}
@@ -206,7 +207,7 @@
   .statusLine{margin-top:10px;font-size:12.5px;color:var(--mut)}
 
   .factorTable .vtab{min-width:860px}
-  .factorAction{font-size:12.5px;color:#d6e0ea;text-align:left}
+  .factorAction{font-size:12.5px;color:var(--txt);text-align:left}
   .auditList{display:grid;gap:8px;margin-top:10px}
   .auditItem{display:grid;grid-template-columns:136px 1fr auto;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:8px;font-size:12.5px;color:var(--mut)}
   .auditItem b{color:var(--txt)}
@@ -221,17 +222,17 @@
   .bear{border:1px solid rgba(244,123,123,.3);background:var(--red-bg)}
   .bb .card-h{font-weight:900;font-size:14px;margin-bottom:10px}
   .bull .card-h{color:var(--grn)}.bear .card-h{color:var(--red)}
-  .bb ul{list-style:none;font-size:13px}.bb li{padding:5px 0 5px 18px;position:relative;color:#dce5ef}
+  .bb ul{list-style:none;font-size:13px}.bb li{padding:5px 0 5px 18px;position:relative;color:var(--txt)}
   .bb li:before{content:"•";position:absolute;left:4px}.bull li:before{color:var(--grn)}.bear li:before{color:var(--red)}
 
   .tranche{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
   .tranche:last-child{border-bottom:none}
-  .tranche .n{width:28px;height:28px;border-radius:50%;background:var(--blu);color:#071018;font-weight:950;font-size:13px;display:flex;align-items:center;justify-content:center}
-  .tranche .c{font-size:13.5px;color:#dce5ef}.tranche .c b{color:var(--txt)}
+  .tranche .n{width:28px;height:28px;border-radius:50%;background:var(--blu);color:#fff;font-weight:950;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .tranche .c{font-size:13.5px;color:var(--txt)}.tranche .c b{color:var(--txt)}
   .tranche .p{text-align:right;font-size:12.5px;color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap}
   .sig{background:var(--red-bg);border:1px solid rgba(244,123,123,.3);border-radius:var(--r);padding:14px 16px}
   .sig h4{color:var(--red);font-size:13.5px;margin-bottom:8px}
-  .sig ul{list-style:none;font-size:13px}.sig li{padding:4px 0 4px 18px;position:relative;color:#f0dede}
+  .sig ul{list-style:none;font-size:13px}.sig li{padding:4px 0 4px 18px;position:relative;color:#991b1b}
   .sig li:before{content:"!";position:absolute;left:5px;color:var(--red);font-weight:950}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
   .chips span{font-size:12px;color:var(--mut);background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:5px 10px}
@@ -243,31 +244,31 @@
   .verdict .call.good{color:var(--grn)}
   .verdict .call.watch{color:var(--amb)}
   .verdict .call.risk{color:var(--red)}
-  .verdict p{font-size:13px;color:#d8e2ef;line-height:1.55}
-  .cycleTable{background:linear-gradient(180deg,rgba(101,185,245,.05),rgba(17,21,28,.98))}
+  .verdict p{font-size:13px;color:var(--txt);line-height:1.55}
+  .cycleTable{background:linear-gradient(180deg,rgba(101,185,245,.05),var(--panel))}
   .cycleTable .vtab{min-width:1040px;border-collapse:separate;border-spacing:0}
-  .cycleTable .vtab caption{padding:14px 16px;color:#c3ceda}
-  .cycleTable .vtab thead th{position:sticky;top:0;z-index:2;background:#131a23;color:#eef3f8;border-bottom:1px solid var(--line2);text-align:center;padding:14px 12px}
-  .cycleTable .vtab thead th:first-child{text-align:left;color:#c9d4e2}
-  .cycleTable .vtab tbody tr:nth-child(even){background:rgba(255,255,255,.018)}
+  .cycleTable .vtab caption{padding:14px 16px;color:var(--mut)}
+  .cycleTable .vtab thead th{position:sticky;top:0;z-index:2;background:var(--panel2);color:var(--txt);border-bottom:1px solid var(--line2);text-align:center;padding:14px 12px}
+  .cycleTable .vtab thead th:first-child{text-align:left;color:var(--mut)}
+  .cycleTable .vtab tbody tr:nth-child(even){background:rgba(0,0,0,.02)}
   .cycleTable .vtab tbody tr:hover{background:rgba(101,185,245,.06)}
   .cycleTable .vtab th,.cycleTable .vtab td{border-right:1px solid rgba(54,80,100,.38)}
   .cycleTable .vtab th:last-child,.cycleTable .vtab td:last-child{border-right:none}
   .matrixHead{display:inline-flex;flex-direction:column;align-items:center;gap:3px;border-radius:var(--r);padding:7px 12px;font-size:14px;font-weight:950;letter-spacing:0;min-width:148px}
-  .matrixHead small{font-size:10.5px;color:rgba(238,243,248,.68);font-weight:900}
-  .matrixHead.dotcom{background:rgba(101,185,245,.13);border:1px solid rgba(101,185,245,.52);color:#8fd0ff}
-  .matrixHead.phone{background:rgba(245,191,61,.14);border:1px solid rgba(245,191,61,.50);color:#ffd472}
-  .matrixHead.ai{background:rgba(53,212,155,.15);border:1px solid rgba(53,212,155,.52);color:#59edba}
-  .axisCell{position:sticky;left:0;z-index:1;background:#101721!important;border-left:3px solid var(--blu);font-size:13.8px!important;line-height:1.45!important;color:#f4f8fc!important;vertical-align:top!important;text-align:left!important;width:132px;min-width:132px}
-  .eraCell{vertical-align:top!important;text-align:left!important;font-variant-numeric:normal!important;color:#e3ebf4!important;font-size:13.2px;line-height:1.64;padding:15px 14px!important}
+  .matrixHead small{font-size:10.5px;color:var(--mut);font-weight:900}
+  .matrixHead.dotcom{background:rgba(101,185,245,.13);border:1px solid rgba(101,185,245,.52);color:var(--blu)}
+  .matrixHead.phone{background:rgba(245,191,61,.14);border:1px solid rgba(245,191,61,.50);color:var(--amb)}
+  .matrixHead.ai{background:rgba(53,212,155,.15);border:1px solid rgba(53,212,155,.52);color:var(--grn)}
+  .axisCell{position:sticky;left:0;z-index:1;background:#f5f6f8!important;border-left:3px solid var(--blu);font-size:13.8px!important;line-height:1.45!important;color:var(--txt)!important;vertical-align:top!important;text-align:left!important;width:132px;min-width:132px}
+  .eraCell{vertical-align:top!important;text-align:left!important;font-variant-numeric:normal!important;color:var(--txt)!important;font-size:13.2px;line-height:1.64;padding:15px 14px!important}
   .eraCell.dotcom{box-shadow:inset 3px 0 0 rgba(101,185,245,.38)}
   .eraCell.phone{box-shadow:inset 3px 0 0 rgba(245,191,61,.38)}
   .eraCell.ai{box-shadow:inset 3px 0 0 rgba(53,212,155,.42)}
   .cellEra{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:0;color:var(--dim)}
   .cellEra span{display:inline-flex;border-radius:999px;padding:2px 7px}
-  .cellEra .dot{background:rgba(101,185,245,.12);color:#8fd0ff}
-  .cellEra .phone{background:rgba(245,191,61,.12);color:#ffd472}
-  .cellEra .ai{background:rgba(53,212,155,.12);color:#59edba}
+  .cellEra .dot{background:rgba(101,185,245,.12);color:var(--blu)}
+  .cellEra .phone{background:rgba(245,191,61,.12);color:var(--amb)}
+  .cellEra .ai{background:rgba(53,212,155,.12);color:var(--grn)}
   .cellText{min-height:72px}
   .cellSources{margin-top:11px;display:flex;flex-wrap:wrap;gap:6px}
   .hi{font-weight:950}
@@ -276,76 +277,76 @@
   .hi-risk{color:var(--red)}
   .hi-money{color:var(--blu)}
   .hi-win{color:var(--pur)}
-  .hi-memory{color:#75e0ff}
+  .hi-memory{color:#0369a1}
   .cycleCards{display:none;margin-top:12px;gap:12px}
   .cycleCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px}
-  .cycleCard h3{font-size:14px;margin-bottom:10px;color:#f4f8fc}
+  .cycleCard h3{font-size:14px;margin-bottom:10px;color:var(--txt)}
   .eraMini{display:grid;gap:9px}
   .eraMini article{border-radius:var(--r);padding:12px;border:1px solid var(--line);background:var(--panel2)}
   .eraMini article.dotcom{border-color:rgba(101,185,245,.34)}
   .eraMini article.phone{border-color:rgba(245,191,61,.34)}
   .eraMini article.ai{border-color:rgba(53,212,155,.36)}
   .eraMini h4{font-size:12.5px;margin-bottom:6px}
-  .eraMini article.dotcom h4{color:#8fd0ff}
-  .eraMini article.phone h4{color:#ffd472}
-  .eraMini article.ai h4{color:#59edba}
-  .eraMini p{font-size:13px;color:#dfe8f2;line-height:1.58}
+  .eraMini article.dotcom h4{color:var(--blu)}
+  .eraMini article.phone h4{color:var(--amb)}
+  .eraMini article.ai h4{color:var(--grn)}
+  .eraMini p{font-size:13px;color:var(--txt);line-height:1.58}
   .capexTable .vtab{min-width:980px}
-  .leftText{text-align:left!important;color:#d8e2ef;font-variant-numeric:normal!important}
+  .leftText{text-align:left!important;color:var(--txt);font-variant-numeric:normal!important}
   .bubbleGrid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
   .signalList{display:grid;gap:9px}
-  .signal{display:grid;grid-template-columns:132px 1fr auto;gap:10px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:11px 12px;font-size:12.8px;color:#d8e2ef}
+  .signal{display:grid;grid-template-columns:132px 1fr auto;gap:10px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:11px 12px;font-size:12.8px;color:var(--txt)}
   .signal b{color:var(--txt)}
   .scenarioMini{display:grid;gap:10px}
   .scenarioMini .miniCase{background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:12px}
   .miniCase h3{font-size:14px;margin-bottom:5px}
-  .miniCase p{font-size:13px;color:#d8e2ef;line-height:1.55}
+  .miniCase p{font-size:13px;color:var(--txt);line-height:1.55}
   .logicSteps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
-  .logicSteps div{background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:10px;font-size:12.3px;color:#d8e2ef}
+  .logicSteps div{background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:10px;font-size:12.3px;color:var(--txt)}
   .logicSteps b{display:block;color:var(--blu);font-size:11.5px;margin-bottom:4px}
   .pcbTopGrid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(300px,.94fr);gap:14px;align-items:start}
   .summaryCardGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .summaryCard{background:linear-gradient(180deg,rgba(101,185,245,.08),rgba(17,21,28,.98));border:1px solid var(--line);border-radius:var(--r);padding:14px;min-height:116px}
+  .summaryCard{background:linear-gradient(180deg,rgba(101,185,245,.08),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:14px;min-height:116px}
   .summaryCard .k{font-size:11px;color:var(--dim);font-weight:950;text-transform:uppercase}
   .summaryCard h3{font-size:15px;margin:4px 0 6px;color:var(--txt)}
-  .summaryCard p{font-size:13px;color:#dce5ef;line-height:1.48}
+  .summaryCard p{font-size:13px;color:var(--txt);line-height:1.48}
   .quickStack{display:grid;gap:10px}
   .quickHeader{background:linear-gradient(135deg,rgba(53,212,155,.12),rgba(101,185,245,.07));border:1px solid rgba(53,212,155,.3);border-radius:var(--r);padding:12px 14px}
   .quickHeader h3{font-size:14px;color:var(--grn);margin-bottom:4px}
-  .quickHeader p{font-size:12.8px;color:#dce5ef;line-height:1.5}
+  .quickHeader p{font-size:12.8px;color:var(--txt);line-height:1.5}
   .quickGroupGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .quickGroupCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px;min-width:0}
   .quickGroupCard h3{font-size:13px;margin-bottom:8px}
   .quickNames{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
-  .quickNames span{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 7px;color:#dce5ef;font-size:11.2px;font-weight:850;max-width:100%;overflow-wrap:anywhere}
+  .quickNames span{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 7px;color:var(--txt);font-size:11.2px;font-weight:850;max-width:100%;overflow-wrap:anywhere}
   .quickGroupCard p{font-size:12.2px;color:var(--mut);line-height:1.45}
   .priceBurdenStrip{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px}
   .priceBurdenStrip h3{font-size:13px;margin-bottom:8px;color:var(--txt)}
   .burdenList{display:grid;gap:7px}
   .burdenItem{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:8px 9px;min-width:0}
-  .burdenItem b{font-size:12.3px;color:#edf4fb;overflow-wrap:anywhere}
+  .burdenItem b{font-size:12.3px;color:var(--txt);overflow-wrap:anywhere}
   .burdenItem small{display:block;margin-top:2px;color:var(--mut);font-size:11px}
   .glossaryGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   .glossTerm{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px}
   .glossTerm h3{font-size:13px;color:var(--blu);margin-bottom:5px}
-  .glossTerm p{font-size:12.7px;color:#dce5ef;line-height:1.48}
+  .glossTerm p{font-size:12.7px;color:var(--txt);line-height:1.48}
   .pcbHero{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:stretch}
   .pcbHero .tldr{height:100%}
   .pcbStamp{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;gap:10px}
   .pcbStamp h3{font-size:15px;color:var(--blu)}
-  .pcbStamp p{font-size:13.2px;color:#d8e2ef;line-height:1.55}
+  .pcbStamp p{font-size:13.2px;color:var(--txt);line-height:1.55}
   .summaryList{display:grid;gap:9px;counter-reset:summary}
-  .summaryList li{list-style:none;counter-increment:summary;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px 10px 42px;position:relative;font-size:13.5px;color:#dce5ef}
+  .summaryList li{list-style:none;counter-increment:summary;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px 10px 42px;position:relative;font-size:13.5px;color:var(--txt)}
   .summaryList li:before{content:counter(summary);position:absolute;left:12px;top:10px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--blu-bg);color:var(--blu);font-size:11px;font-weight:950}
   .chainMap{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}
-  .chainNode{background:linear-gradient(180deg,rgba(101,185,245,.08),rgba(17,21,28,.98));border:1px solid var(--line);border-radius:var(--r);padding:13px;min-height:138px;position:relative}
+  .chainNode{background:linear-gradient(180deg,rgba(101,185,245,.08),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:13px;min-height:138px;position:relative}
   .chainNode:after{content:"→";position:absolute;right:-13px;top:22px;color:var(--line2);font-weight:950}
   .chainNode:last-child:after{content:""}
   .chainNode h3{font-size:14px;margin-bottom:8px;color:var(--txt)}
   .chainKeyword{font-size:11px;color:var(--blu);font-weight:950;text-transform:uppercase;margin-bottom:4px}
-  .chainNode p{font-size:12.7px;color:#d8e2ef;line-height:1.48}
+  .chainNode p{font-size:12.7px;color:var(--txt);line-height:1.48}
   .chainNode dl{display:grid;gap:6px}
-  .chainNode div{font-size:12.1px;color:#d8e2ef;line-height:1.42}
+  .chainNode div{font-size:12.1px;color:var(--txt);line-height:1.42}
   .chainNode b{color:var(--grn);font-size:11px;margin-right:4px}
   .chainNode .pill{margin-top:10px}
   .compactClaims .vtab{min-width:0;table-layout:fixed}
@@ -361,20 +362,20 @@
   .pcbMobileList{display:none}
   .pcbInfoCard{background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:12px}
   .pcbInfoCard h3{font-size:13.5px;margin-bottom:7px;color:var(--txt)}
-  .pcbInfoCard p{font-size:12.5px;color:#dce5ef;line-height:1.5;margin-top:6px}
-  .bridgeSentence{background:linear-gradient(135deg,rgba(53,212,155,.11),rgba(245,191,61,.07));border:1px solid rgba(53,212,155,.3);border-left:3px solid var(--grn);border-radius:0 var(--r) var(--r) 0;padding:15px 17px;color:#e8eef7;font-size:14.5px;font-weight:850}
+  .pcbInfoCard p{font-size:12.5px;color:var(--txt);line-height:1.5;margin-top:6px}
+  .bridgeSentence{background:linear-gradient(135deg,rgba(53,212,155,.11),rgba(245,191,61,.07));border:1px solid rgba(53,212,155,.3);border-left:3px solid var(--grn);border-radius:0 var(--r) var(--r) 0;padding:15px 17px;color:var(--txt);font-size:14.5px;font-weight:850}
   .claimTable .vtab{min-width:1060px}
   .pcbCompanies .vtab{min-width:1280px}
   .valuationSummaryGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:12px}
-  .valuationCard{background:linear-gradient(180deg,rgba(101,185,245,.08),rgba(17,21,28,.98));border:1px solid var(--line);border-radius:var(--r);padding:14px;min-width:0}
+  .valuationCard{background:linear-gradient(180deg,rgba(101,185,245,.08),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:14px;min-width:0}
   .valuationCard h3{font-size:14px;margin-bottom:6px;color:var(--txt)}
-  .valuationCard p{font-size:12.7px;color:#dce5ef;line-height:1.48}
+  .valuationCard p{font-size:12.7px;color:var(--txt);line-height:1.48}
   .valuationCard .sourceLine{margin-top:9px}
   .valuationCard.burden{border-color:rgba(245,191,61,.35)}
   .valuationCard.watch{border-color:rgba(101,185,245,.35)}
   .valuationCard.entry{border-color:rgba(53,212,155,.35)}
   .valuationCard.recheck{border-color:rgba(255,111,145,.35)}
-  .valuationBoard{margin-top:14px;background:linear-gradient(180deg,rgba(17,21,28,.94),rgba(11,14,19,.98));border:1px solid var(--line);border-radius:var(--r);padding:14px;overflow:hidden}
+  .valuationBoard{margin-top:14px;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);padding:14px;overflow:hidden}
   .valuationBoardHead{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
   .valuationBoardHead h3{font-size:15px;color:var(--txt);margin-bottom:4px}
   .valuationBoardHead p{font-size:12.7px;color:var(--mut);line-height:1.48}
@@ -396,20 +397,20 @@
   .valuationSlide.watchTone{border-color:rgba(101,185,245,.34)}
   .valuationSlide.recheckTone{border-color:rgba(255,111,145,.34)}
   .slideTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-  .slideTop h3{font-size:15px;color:#f3f7fc;margin-bottom:3px}
+  .slideTop h3{font-size:15px;color:var(--txt);margin-bottom:3px}
   .slideTop .tk{font-size:11px;color:var(--dim);font-weight:900}
-  .priceHero{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:7px;padding:11px}
+  .priceHero{background:rgba(0,0,0,.025);border:1px solid var(--line);border-radius:7px;padding:11px}
   .priceHero small{display:block;color:var(--dim);font-size:10.8px;font-weight:900;text-transform:uppercase;margin-bottom:3px}
-  .priceHero strong{display:block;color:#f8fbff;font-size:17px;line-height:1.35}
+  .priceHero strong{display:block;color:var(--txt);font-size:17px;line-height:1.35}
   .priceHero span{display:block;color:var(--mut);font-size:12px;margin-top:5px}
   .scenarioStrip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
   .scenarioChip{border:1px solid var(--line);background:var(--panel2);border-radius:7px;padding:8px;min-width:0}
   .scenarioChip b{display:block;font-size:10px;color:var(--dim);text-transform:uppercase;margin-bottom:3px}
-  .scenarioChip span{display:block;color:#dce5ef;font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+  .scenarioChip span{display:block;color:var(--txt);font-size:12px;line-height:1.35;overflow-wrap:anywhere}
   .scenarioChip.base{border-color:rgba(101,185,245,.35)}
   .scenarioChip.bull{border-color:rgba(245,191,61,.34)}
   .priceScale{position:relative;height:34px;border-radius:999px;background:linear-gradient(90deg,rgba(255,111,145,.2),rgba(101,185,245,.22),rgba(245,191,61,.22));border:1px solid var(--line);overflow:hidden}
-  .priceScale span{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.18)}
+  .priceScale span{position:absolute;top:0;bottom:0;width:1px;background:rgba(0,0,0,.16)}
   .priceScale span:nth-child(1){left:33%}
   .priceScale span:nth-child(2){left:66%}
   .priceScale i{position:absolute;top:5px;width:22px;height:22px;border-radius:50%;background:#eef6ff;border:3px solid var(--panel);box-shadow:0 0 0 1px rgba(101,185,245,.8);transform:translateX(-50%)}
@@ -419,11 +420,11 @@
   .priceScale.pos-recheck i{left:70%;box-shadow:0 0 0 1px rgba(255,111,145,.85)}
   .rangeLegend{display:flex;justify-content:space-between;color:var(--dim);font-size:10.5px;font-weight:900;margin-top:-7px}
   .zoneGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-  .zoneTile{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:7px;padding:8px;color:#dce5ef;font-size:12px;line-height:1.35}
+  .zoneTile{background:rgba(0,0,0,.025);border:1px solid var(--line);border-radius:7px;padding:8px;color:var(--txt);font-size:12px;line-height:1.35}
   .zoneTile b{display:block;color:var(--dim);font-size:10px;text-transform:uppercase;margin-bottom:3px}
-  .slideTake{font-size:13px;line-height:1.52;color:#edf4fb;border-left:3px solid var(--blu);padding-left:10px}
+  .slideTake{font-size:13px;line-height:1.52;color:var(--txt);border-left:3px solid var(--blu);padding-left:10px}
   .slideSignals{display:grid;gap:7px}
-  .slideSignals div{font-size:12px;color:#dce5ef;line-height:1.45}
+  .slideSignals div{font-size:12px;color:var(--txt);line-height:1.45}
   .slideSignals b{display:block;color:var(--dim);font-size:10.5px;text-transform:uppercase}
   .valuationCardDetail{border-top:1px solid var(--line);padding-top:8px}
   .valuationCardDetail summary{cursor:pointer;list-style:none;color:var(--blu);font-size:12px;font-weight:950}
@@ -432,33 +433,33 @@
   .checkGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
   .checkCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px}
   .checkCard h3{font-size:13.5px;margin-bottom:6px;color:var(--txt)}
-  .checkCard p{font-size:12.5px;color:#dce5ef;line-height:1.5}
+  .checkCard p{font-size:12.5px;color:var(--txt);line-height:1.5}
   .valuationTable .vtab{min-width:1760px}
   .valuationRanges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;min-width:220px}
-  .valuationRanges span{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:7px 8px;font-size:11.5px;color:#dce5ef;line-height:1.35}
+  .valuationRanges span{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:7px 8px;font-size:11.5px;color:var(--txt);line-height:1.35}
   .valuationRanges b{display:block;color:var(--dim);font-size:10px;text-transform:uppercase}
   .valuationDetailGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   .valuationMiniGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:8px}
-  .valuationMiniGrid div{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:7px;padding:7px;font-size:12px;color:#dce5ef;line-height:1.42}
+  .valuationMiniGrid div{background:rgba(0,0,0,.025);border:1px solid var(--line);border-radius:7px;padding:7px;font-size:12px;color:var(--txt);line-height:1.42}
   .valuationMiniGrid b{display:block;color:var(--dim);font-size:10.5px;text-transform:uppercase;margin-bottom:2px}
   .rankGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
   .rankCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px}
   .rankCard h3{font-size:14px;margin-bottom:9px}
-  .rankCard ol{margin-left:18px;color:#dce5ef;font-size:13px}
+  .rankCard ol{margin-left:18px;color:var(--txt);font-size:13px}
   .rankCard li{margin:5px 0}
   .rankMeta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
   .score{display:inline-flex;align-items:center;gap:5px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 7px;color:var(--mut);font-size:11px;font-weight:900}
   .scenarioGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
   .pcbScenario{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:15px}
   .pcbScenario h3{font-size:15px;margin-bottom:8px}
-  .pcbScenario .caseLine{font-size:13.5px;color:#f2f6fa;line-height:1.5;margin-bottom:10px;font-weight:850}
+  .pcbScenario .caseLine{font-size:13.5px;color:var(--txt);line-height:1.5;margin-bottom:10px;font-weight:850}
   .pcbScenario dl{display:grid;gap:8px}
-  .pcbScenario div{font-size:12.8px;color:#dce5ef;line-height:1.5}
+  .pcbScenario div{font-size:12.8px;color:var(--txt);line-height:1.5}
   .pcbScenario b{display:block;color:var(--dim);font-size:11px;text-transform:uppercase}
   .bridgeGrid,.conclusionGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
   .bridgeCard,.conclusionCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px}
   .bridgeCard h3,.conclusionCard h3{font-size:14px;margin-bottom:7px}
-  .bridgeCard p,.conclusionCard p{font-size:13px;color:#dce5ef;line-height:1.55}
+  .bridgeCard p,.conclusionCard p{font-size:13px;color:var(--txt);line-height:1.55}
   .sourceLine{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 
   details.gloss{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:0 18px}
@@ -467,7 +468,7 @@
   details.gloss summary::before{content:"▶  ";color:var(--blu);font-size:11px}
   details.gloss[open] summary::before{content:"▼  "}
   details.gloss .gl{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;padding:2px 0 18px}
-  .gl div{font-size:13px;color:#d8e2ef;line-height:1.5}.gl b{color:var(--txt)}
+  .gl div{font-size:13px;color:var(--txt);line-height:1.5}.gl b{color:var(--txt)}
   .disc{margin-top:30px;font-size:12px;color:var(--dim);background:var(--panel);border:1px dashed var(--line);border-radius:var(--r);padding:16px 18px}.disc b{color:var(--mut)}
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px}
   footer h4{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:0;margin-bottom:10px}
@@ -531,6 +532,17 @@
   .silicaNode small{display:block;color:var(--mut);font-size:11.5px;margin-top:4px;line-height:1.45}
   .silicaArrow{display:flex;align-items:center;color:var(--pur);font-size:12px;font-weight:700;white-space:nowrap}
   @media(max-width:640px){.silicaArrow{justify-content:center;width:100%}}
+
+  /* --- light theme additions (Wave 0) --- */
+  .panel,.tldr,.table-wrap,.detailBox,.terms,.analogy,.note,.warnBox,.decisionCard,.memorySummaryCard,.memoryTerm,.memoryDecisionCard,.memoryScenarioCard,.memoryStockCard,.companyCard,.epsCard,.verdict,.cycleCard,.summaryCard,.quickGroupCard,.glossTerm,.chainNode,.valuationCard,.valuationBoard,.rankCard,.pcbScenario,.bridgeCard,.conclusionCard,.checkCard,.pcbStamp,.pcbInfoCard,details.gloss{box-shadow:var(--shadow)}
+  /* usar warmth utilities (used in later waves) */
+  .hl-y{background:linear-gradient(180deg,transparent 58%,#fef08a 58%);padding:0 2px;border-radius:2px}
+  .hl-r{background:linear-gradient(180deg,transparent 58%,#fecaca 58%);padding:0 2px;border-radius:2px}
+  .hl-g{background:linear-gradient(180deg,transparent 58%,#bbf7d0 58%);padding:0 2px;border-radius:2px}
+  .emoji-xl{font-size:clamp(38px,7vw,58px);line-height:1;display:block}
+  .closing{background:linear-gradient(135deg,#1e293b,#0f172a);color:#fff;border-radius:var(--r)}
+  .closing b{color:#fff}
+  .closing .pill-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:800}
 </style>
 </head>
 <body>
@@ -763,7 +775,7 @@
     </div>
     <div class="panel" style="margin-top:12px">
       <div style="font-weight:900;font-size:14px;margin-bottom:8px;color:var(--blu)">종목 비중 — 삼성 ≥ SK를 기본값으로</div>
-      <p style="font-size:13.5px;color:#dce5ef">안정 지향이면 삼성 비중을 높이고, 공격 지향이면 SK의 HBM 프리미엄을 보되 관찰 간격을 더 넓힙니다. 지금 화면의 결론은 “둘 다 좋아 보인다”가 아니라 “둘 다 EPS 추정치가 무너지면 동시에 틀릴 수 있다”입니다.</p>
+      <p style="font-size:13.5px;color:var(--txt)">안정 지향이면 삼성 비중을 높이고, 공격 지향이면 SK의 HBM 프리미엄을 보되 관찰 간격을 더 넓힙니다. 지금 화면의 결론은 “둘 다 좋아 보인다”가 아니라 “둘 다 EPS 추정치가 무너지면 동시에 틀릴 수 있다”입니다.</p>
       <div class="chips"><span>EPS 컨센서스</span><span>DRAM/HBM 가격</span><span>외국인 수급</span><span>SK ADR 일정</span><span>분기 실적·가이던스</span></div>
     </div>
   </section>
@@ -771,7 +783,7 @@
   <section>
     <div class="sectit"><span class="num">09</span><h2>정리</h2></div>
     <div class="panel">
-      <ol style="margin-left:18px;font-size:14.5px;color:#e1e9f2">
+      <ol style="margin-left:18px;font-size:14.5px;color:var(--txt)">
         <li style="margin:6px 0"><b>조건부 저평가다.</b> 2026E EPS 스냅샷 기준으로 SK·삼성은 마이크론보다 낮은 forward PER에 거래된다.</li>
         <li style="margin:6px 0"><b>하지만 이 말은 EPS 달성 조건부다.</b> EPS가 20% 낮아지면 역프는 대부분 사라진다.</li>
         <li style="margin:6px 0"><b>7개월 보유기간은 타이밍 게임이다.</b> 사이클 피크 논쟁이 보유기간 안에 들어온다.</li>
@@ -838,7 +850,7 @@
       <h3 style="font-size:15px;margin-bottom:6px;color:var(--pur)">강세 반론 — 왜 이번엔 다른가 (Box of Silica)
         <a class="sourceBadge soft" href="https://www.state.gov/pax-silica" target="_blank" rel="noopener">미 국무부 Pax Silica</a>
         <a class="sourceBadge warn" href="https://www.youtube.com/@hs_academy" target="_blank" rel="noopener">이효석 해석 · 견해</a></h3>
-      <p style="font-size:13.5px;color:#d8e2ef;margin-bottom:12px">위 경계론에 대한 강세 반론입니다. <b>“20세기는 oil·steel, 21세기는 compute·mineral”</b>은 미 국무부 Pax Silica(2025-12) 표현이고, 한 유튜버(이효석)가 이를 빌려 <b>닷컴은 수익모델(BM)이 없어서</b>, <b>모바일은 플랫폼이 CAPEX를 안 해서</b> 수혜가 갈렸지만 <b>AI는 BM·CAPEX·돈의 흐름이 모두 살아 있다</b>고 해석합니다(검증된 사실 아님).</p>
+      <p style="font-size:13.5px;color:var(--txt);margin-bottom:12px">위 경계론에 대한 강세 반론입니다. <b>“20세기는 oil·steel, 21세기는 compute·mineral”</b>은 미 국무부 Pax Silica(2025-12) 표현이고, 한 유튜버(이효석)가 이를 빌려 <b>닷컴은 수익모델(BM)이 없어서</b>, <b>모바일은 플랫폼이 CAPEX를 안 해서</b> 수혜가 갈렸지만 <b>AI는 BM·CAPEX·돈의 흐름이 모두 살아 있다</b>고 해석합니다(검증된 사실 아님).</p>
       <div class="silicaFlow">
         <div class="silicaNode"><b>엔비디아 (AI 팩토리)</b><small>compute 생산 = 21세기의 ‘원유’</small></div>
         <div class="silicaArrow">→ 대금</div>
@@ -879,11 +891,11 @@
     <div class="grid g2" style="margin-top:14px">
       <div class="panel">
         <h3 style="font-size:15px;margin-bottom:6px;color:var(--amb)">① 되돌릴 수 없는 금리 (No way back)</h3>
-        <p style="font-size:13.5px;color:#d8e2ef">유가·일회성 이벤트發 금리 상승은 ‘되돌릴 수 있어’ 단기 조정에 그칩니다. 진짜 위험은 <b>인플레發</b> 긴축 — 물가가 오르면 경기·증시가 흔들려도 멈출 수 없습니다. 닷컴 때도 2000년 봄 경기 과열(1Q GDP 연율 5%+·근원물가 3%대 급등) 속 5월 50bp 인상이 방아쇠였습니다.</p>
+        <p style="font-size:13.5px;color:var(--txt)">유가·일회성 이벤트發 금리 상승은 ‘되돌릴 수 있어’ 단기 조정에 그칩니다. 진짜 위험은 <b>인플레發</b> 긴축 — 물가가 오르면 경기·증시가 흔들려도 멈출 수 없습니다. 닷컴 때도 2000년 봄 경기 과열(1Q GDP 연율 5%+·근원물가 3%대 급등) 속 5월 50bp 인상이 방아쇠였습니다.</p>
       </div>
       <div class="panel">
         <h3 style="font-size:15px;margin-bottom:6px;color:var(--blu)">② 역사적 고점 돌파 (Breaking to New Highs)</h3>
-        <p style="font-size:13.5px;color:#d8e2ef">1999년 6월 첫 인상은 버블을 못 깼습니다 — 5% 금리는 1년 전에도 겪은 익숙한 수준이었기 때문. 10~20년 내 못 본 레벨을 뚫을 때 비로소 ‘내가 든 게 가치 있나’라는 의심의 방아쇠가 당겨집니다.</p>
+        <p style="font-size:13.5px;color:var(--txt)">1999년 6월 첫 인상은 버블을 못 깼습니다 — 5% 금리는 1년 전에도 겪은 익숙한 수준이었기 때문. 10~20년 내 못 본 레벨을 뚫을 때 비로소 ‘내가 든 게 가치 있나’라는 의심의 방아쇠가 당겨집니다.</p>
       </div>
     </div>
 
@@ -922,7 +934,7 @@
   <section>
     <div class="sectit"><span class="num">12</span><h2>통합 결론</h2></div>
     <div class="tldr" style="grid-template-columns:1fr">
-      <p style="font-size:15px;color:#e8eef7">기술은 진짜다 <b>≠</b> 지금 이 가격이 옳다. SK·삼성은 <b>2026E EPS가 유지될 때</b> 미국 메모리보다 낮은 PER에 거래되지만, 그 EPS는 추정치이고 데이터벤더 기준도 맞춰야 합니다. AI CAPEX 둔화와 미 10년물 <b>5.3% 추세 돌파</b> 같은 금리 트리거가 동시에 오면 EPS와 멀티플이 함께 눌릴 수 있습니다. 그래서 결론은 목표가 하나가 아니라 <b>동일 기준 재검산 · 단계적 확인 · EPS 추적 · 금리 감시 · 무효화 기준</b>입니다.</p>
+      <p style="font-size:15px;color:var(--txt)">기술은 진짜다 <b>≠</b> 지금 이 가격이 옳다. SK·삼성은 <b>2026E EPS가 유지될 때</b> 미국 메모리보다 낮은 PER에 거래되지만, 그 EPS는 추정치이고 데이터벤더 기준도 맞춰야 합니다. AI CAPEX 둔화와 미 10년물 <b>5.3% 추세 돌파</b> 같은 금리 트리거가 동시에 오면 EPS와 멀티플이 함께 눌릴 수 있습니다. 그래서 결론은 목표가 하나가 아니라 <b>동일 기준 재검산 · 단계적 확인 · EPS 추적 · 금리 감시 · 무효화 기준</b>입니다.</p>
     </div>
     <div class="disc">
       <b>면책</b> · 공개 데이터로 정리한 교육용 분석이며, 매수·매도 권유가 아닙니다. 모든 수치는 기준 시점 스냅샷으로 실시간 변동합니다. EPS·목표가·컨센서스는 추정치이며, 가격·PER·PBR은 데이터벤더마다 기준이 달라질 수 있습니다. 투자 결정 전 최신 공시·리포트·데이터벤더 값을 같은 기준으로 직접 재확인하세요.
