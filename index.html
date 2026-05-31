@@ -451,6 +451,30 @@
   .valuationMiniGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:8px}
   .valuationMiniGrid div{background:var(--ovl);border:1px solid var(--line);border-radius:7px;padding:7px;font-size:12px;color:var(--txt);line-height:1.42}
   .valuationMiniGrid b{display:block;color:var(--dim);font-size:10.5px;text-transform:uppercase;margin-bottom:2px}
+  .pcbDecisionHero .lead{max-width:980px}
+  .topFiveGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:14px 0 12px}
+  .rankTopCard,.rankMobileCard{background:radial-gradient(circle at 86% 0,rgba(53,212,155,.12),transparent 34%),var(--panel);border:1px solid rgba(101,185,245,.28);border-radius:var(--r);padding:12px;min-width:0;display:grid;gap:8px}
+  .rankTopCard:nth-child(4),.rankTopCard:nth-child(5){background:radial-gradient(circle at 86% 0,rgba(245,191,61,.13),transparent 34%),var(--panel)}
+  .rankTopHead,.rankMobileHead{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+  .rankTopHead h3,.rankMobileHead h3{font-size:13.5px;color:var(--txt);line-height:1.32}
+  .rankTopHead .tk,.rankMobileHead .tk{display:block;color:var(--dim);font-size:10.5px;font-weight:900;margin-top:2px}
+  .rankBadge{display:inline-flex;align-items:center;justify-content:center;min-width:42px;border-radius:999px;background:var(--grn-bg);border:1px solid rgba(53,212,155,.36);color:var(--grn);font-weight:950;font-size:12px;padding:3px 7px;white-space:nowrap}
+  .rankLine{background:var(--ovl);border:1px solid var(--line);border-radius:7px;padding:7px;font-size:12px;color:var(--txt);line-height:1.42}
+  .rankLine b{display:block;color:var(--dim);font-size:10.3px;text-transform:uppercase;margin-bottom:2px}
+  .rankDecisionCell{min-width:310px}
+  .rankDecisionGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .scoreFormulaGrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:12px 0}
+  .scoreFormulaChip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:8px 10px;color:var(--txt);font-size:12px;font-weight:900;display:flex;justify-content:space-between;gap:8px}
+  .scoreFormulaChip span{color:var(--dim);font-weight:850}
+  .pcbRankingWrap{margin-top:12px}
+  .pcbRankingWrap .vtab{min-width:920px}
+  .pcbRankingWrap .vtab th,.pcbRankingWrap .vtab td{text-align:left;white-space:normal}
+  .pcbRankingWrap .vtab th:nth-child(1),.pcbRankingWrap .vtab td:nth-child(1),.pcbRankingWrap .vtab th:nth-child(4),.pcbRankingWrap .vtab td:nth-child(4){text-align:center;width:86px}
+  .rankCompanyCell b{display:block;color:var(--txt);font-size:13px}
+  .rankCompanyCell span{display:block;color:var(--dim);font-size:11px;font-weight:900}
+  .analogyGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+  .analogyGrid div{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:9px 10px;color:var(--txt);font-size:12.3px;line-height:1.45}
+  .analogyGrid b{display:block;color:var(--blu);font-size:11px;text-transform:uppercase;margin-bottom:3px}
   .rankGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
   .rankCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px}
   .rankCard h3{font-size:14px;margin-bottom:9px}
@@ -483,7 +507,7 @@
   footer h4{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:0;margin-bottom:10px}
 
   @media(max-width:900px){
-    .g2,.g3,.g4,.epsGrid,.bb,.statGrid,.disc3,.triad,.bubbleGrid,.logicSteps,.decisionGrid,.memorySummaryGrid,.memoryGlossaryGrid,.memoryDecisionGrid,.memoryCompanyGrid,.memoryScenarioGrid,.sourceDetailGrid,.pcbHero,.pcbTopGrid,.summaryCardGrid,.quickGroupGrid,.glossaryGrid,.chainMap,.detailCardGrid,.rankGrid,.scenarioGrid,.bridgeGrid,.conclusionGrid,.valuationSummaryGrid,.checkGrid,.valuationDetailGrid{grid-template-columns:1fr}
+    .g2,.g3,.g4,.epsGrid,.bb,.statGrid,.disc3,.triad,.bubbleGrid,.logicSteps,.decisionGrid,.memorySummaryGrid,.memoryGlossaryGrid,.memoryDecisionGrid,.memoryCompanyGrid,.memoryScenarioGrid,.sourceDetailGrid,.pcbHero,.pcbTopGrid,.summaryCardGrid,.quickGroupGrid,.glossaryGrid,.chainMap,.detailCardGrid,.rankGrid,.scenarioGrid,.bridgeGrid,.conclusionGrid,.valuationSummaryGrid,.checkGrid,.valuationDetailGrid,.topFiveGrid,.scoreFormulaGrid,.analogyGrid{grid-template-columns:1fr}
     .tabNav{margin-top:-2px}
     .tabBtn{flex-basis:100%;font-size:12.8px;padding:10px 12px}
     .tldr{grid-template-columns:1fr;text-align:center}
@@ -729,6 +753,7 @@
       <summary>출처와 기준일 펼치기</summary>
       <div class="detailInner">
         <div class="auditBanner" style="margin-top:0"><b>먼저 확인할 점:</b> 가격·시총은 2026-05-29 최신 공개 스냅샷으로 갱신했지만, 2026E EPS는 2026-05-27 FnGuide 계열 스냅샷입니다. StockAnalysis의 최신 Forward PE와 대시보드 산식이 완전히 같지 않으므로, 실제 투자 전에는 같은 데이터벤더 기준으로 EPS·PER·PBR을 다시 맞춰야 합니다.</div>
+        <div class="sourceLine" id="sourceList" aria-label="출처 감사 로그"></div>
 
   <section>
     <div class="sectit"><span class="num">06</span><h2>리스크 6개 — 영향과 행동</h2></div>
@@ -1000,22 +1025,40 @@
 </main>
 
 <main id="pcbTab" class="tabPanel" role="tabpanel" aria-labelledby="tab-pcb" hidden>
-  <section>
-    <div class="sectit"><span class="num">A</span><h2><span class="secIcon" aria-hidden="true">🎯</span>3초 결론</h2></div>
-    <div class="pcbTopGrid">
-      <div class="summaryCardGrid" id="pcbSummaryCards"></div>
-      <div class="quickStack">
-        <div class="quickHeader">
-          <h3>후보군 먼저 보기</h3>
-          <p>AI 서버가 빨라질수록 보드·기판·소재도 고급화됩니다. 수혜 가능성과 투자 성과는 다르므로 후보군으로만 봅니다.</p>
+  <section id="pcbDecisionHero" class="pcbDecisionHero">
+    <div class="sectit"><span class="num">A</span><h2><span class="secIcon" aria-hidden="true">🎯</span>AI PCB 16개 기업, 지금 새로 산다면 어디가 더 매력적인가?</h2></div>
+    <p class="lead">좋은 회사와 지금 새로 보기 좋은 가격은 다릅니다. 아래 순위는 기존 조사 내용을 100점 기준으로 다시 접은 현재 공개자료 기준 관심도/매력도 순위이며, 매수·매도 권유가 아닙니다.</p>
+    <div class="topFiveGrid" id="pcbTopFiveCards" aria-label="AI PCB 매력도 Top 5"></div>
+    <div class="scoreFormulaGrid" id="pcbScoreFormula" aria-label="100점 점수 산식"></div>
+    <div class="table-wrap pcbRankingWrap pcbDesktopOnly">
+      <table class="vtab" id="pcbRankingTable">
+        <caption>현재 공개자료 기준 AI PCB·CCL·동박 16개 기업 신규 관심도 순위</caption>
+        <thead>
+          <tr><th scope="col">순위</th><th scope="col">회사</th><th scope="col">국가/분야</th><th scope="col">총점</th><th scope="col">쉬운 한 줄</th><th scope="col">위험 배지</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="pcbMobileList rankingCards" id="pcbRankingCards" aria-label="모바일용 AI PCB 16개 기업 순위"></div>
+    <details class="detailBox" id="pcbRankingEvidence">
+      <summary>점수 근거와 쉬운 비유 펼치기</summary>
+      <div class="detailInner">
+        <div class="analogyGrid">
+          <div><b>PCB</b><span>AI 서버 안의 고속도로 판</span></div>
+          <div><b>CCL</b><span>그 고속도로를 깔기 위한 바닥판</span></div>
+          <div><b>동박/HVLP</b><span>전기가 지나가는 매끈한 구리 도로</span></div>
+          <div><b>ABF 기판</b><span>GPU와 보드를 잇는 초미세 연결 다리</span></div>
+          <div><b>ODM</b><span>AI 서버를 실제로 조립하는 공장</span></div>
+          <div><b>밸류에이션</b><span>이미 주가에 기대가 얼마나 붙었는지 보는 가격표</span></div>
         </div>
+        <div class="summaryCardGrid" id="pcbSummaryCards"></div>
         <div class="priceBurdenStrip" aria-label="가격 부담 스냅샷">
           <h3>가격 부담 스냅샷</h3>
           <div class="burdenList" id="pcbPriceBurden"></div>
         </div>
         <div class="quickGroupGrid" id="pcbQuickGroups"></div>
       </div>
-    </div>
+    </details>
   </section>
 
   <section>
@@ -1376,6 +1419,7 @@ const DATA = {
       {term:"ABF 기판", desc:"GPU/CPU 같은 고성능 칩과 메인보드를 이어주는 고급 기판이다."},
       {term:"Rubin/Kyber", desc:"NVIDIA 차세대 AI 서버/랙 구조 전환과 관련된 키워드다."}
     ],
+    scoreFormula:{directBenefit:25, earnings:20, valueAttractiveness:20, verification:15, businessPurity:10, lowRisk:10},
     quickGroups:[
       {group:"1순위로 먼저 볼 기업", tone:"p-pos", names:["TTM Technologies","Gold Circuit Electronics","Unimicron","Nan Ya PCB","이수페타시스"], reason:"AI 서버 PCB/ABF와 실적 연결이 비교적 보이는 후보군."},
       {group:"관찰할 기업", tone:"p-mid", names:["Elite Material","두산 전자BG","롯데에너지머티리얼즈","Quanta/QCT","Foxconn/Hon Hai"], reason:"소재·ODM 수혜 가능성은 있으나 매출 분리와 고객 인증 확인이 필요."},
@@ -1422,22 +1466,22 @@ const DATA = {
       {title:"그룹사/혼합 사업", body:"두산·롯데처럼 사업이 섞인 회사는 pure-play 멀티플을 그대로 적용하지 않고 SOTP 또는 할인율을 둔다.", sources:["doosanValuation","lotteValuation","lotteDoosanMou"]}
     ],
     valuationModels:[
-      {name:"TTM Technologies", ticker:"TTMI", group:"1순위", current:"$173.72 (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"$90~110", base:"$145~165", bull:"$195~220", entry:"$102~125", burden:"$195 이상", metrics:"시총 $18.04B, TTM 매출 $3.10B, 순이익 $195M, PE 94.47, Forward PE 38.89. 공식 1Q26 매출 $846M, 조정 EBITDA margin 15.7%.", verification:"확인됨: Data Center & Networking 36%, book-to-bill 1.41. 특정 AI 고객은 미공개.", upside:"Data Center & Networking 주문 비중 확대와 고다층 PCB ASP 방어.", wrong:"book-to-bill 둔화, AI 주문 공백, PCB ASP 하락.", weak:"Data Center & Networking 매출을 AI 서버로 과대해석하는 위험.", method:"PCB pure-play: P/S + 영업이익률 개선 시나리오.", sources:["ttmQ126","ttmiRevenue"]},
-      {name:"Gold Circuit Electronics", ticker:"2368.TW", group:"1순위/주의", current:"1,320 TWD (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"700~780", base:"980~1,120", bull:"1,400~1,600", entry:"690~840", burden:"1,400 이상", metrics:"시총 667.10B TWD, TTM 매출 67.25B(+60.3%), 순이익 11.34B, PE 59.37, Forward PE 29.14, 1년 +435.50%.", verification:"일부 확인: ASIC/server PCB 성장 보도와 실적 급증은 확인. 고객·제품 믹스는 비공개.", upside:"AI 서버 PCB 주문 지속, 고층수 제품 믹스 확대, 마진 방어.", wrong:"ASIC 서버 주문 둔화, 고객 집중 리스크, P/S 축소.", weak:"고성장률이 2027년까지 유지된다는 가정.", method:"PCB pure-play: 높은 P/S를 매출 성장과 마진 개선으로 흡수해야 함.", sources:["goldCircuitRevenue","goldCircuitDigitimes"]},
-      {name:"Unimicron", ticker:"3037.TW", group:"1순위", current:"1,055 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"500~580", base:"790~920", bull:"1,100~1,250", entry:"550~735", burden:"1,150 이상", metrics:"시총 1.68T TWD, TTM 매출 138.60B(+16.4%), 순이익 10.80B, PE 150.49, Forward PE 64.68, 1년 +863.47%.", verification:"일부 확인: ABF/PCB 업사이클 후보. AI GPU/ASIC 고객과 수익성 기여는 추가 확인 필요.", upside:"ABF 수급 타이트, 고성능 기판 ASP 상승, 수율 개선.", wrong:"ABF 가격 인상 실패, CAPA 과잉, 고객 인증 지연.", weak:"ABF 업사이클이 실제 EPS로 빠르게 전환된다는 가정.", method:"ABF/패키지 기판: PER + 업사이클 P/S 비교.", sources:["unimicronRevenue","unimicronValuation","nanYaAbf"]},
-      {name:"Nan Ya PCB", ticker:"8046.TW", group:"1순위", current:"848 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"430~500", base:"740~860", bull:"1,050~1,180", entry:"520~690", burden:"1,080 이상", metrics:"시총 547.95B TWD, TTM 매출 42.89B(+27.5%), 순이익 3.05B, PE 179.78, Forward PE 49.81, 1년 +696.24%.", verification:"일부 확인: ABF 업사이클 보도는 있으나 고객별 AI 매출은 미공개.", upside:"AI GPU/ASIC/networking ABF 수요 확대와 가격 인상.", wrong:"ABF shortage 완화, 수율 비용 증가, 고객 forecast 하향.", weak:"높은 PE가 2027년 이익 개선으로 정당화된다는 가정.", method:"ABF/패키지 기판: Forward PE와 업사이클 P/S 병행.", sources:["nanYaValuation","nanYaAbf"]},
-      {name:"이수페타시스", ticker:"007660.KS", group:"1순위/주의", current:"129,200원 (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"70,000~80,000", base:"105,000~120,000", bull:"145,000~165,000", entry:"73,000~96,000", burden:"145,000원 이상", metrics:"시총 9.48T KRW, TTM 매출 1.18T(+32.2%), 순이익 172.62B, PE 54.65, Forward PE 32.09, 1년 +218.62%.", verification:"일부 확인: 고다층 MLB와 실적 성장 확인. NVIDIA 직접 고객·AI 매출 비중은 검증 필요.", upside:"AI 서버용 고다층 PCB 수주와 증설분 가동률 상승.", wrong:"고객사 확인 부재, 마진 둔화, P/S 리레이팅 축소.", weak:"국내 pure-play 프리미엄이 유지된다는 가정.", method:"PCB pure-play: P/S와 영업이익률 개선 시나리오.", sources:["isuRevenue"]},
-      {name:"Elite Material", ticker:"2383.TW", group:"관찰", current:"5,120 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"2,600~3,100", base:"4,300~5,000", bull:"5,800~6,500", entry:"3,000~4,000", burden:"6,000 이상", metrics:"시총 1.83T TWD, TTM 매출 105.65B(+44.4%), 순이익 16.52B, PE 111.35, Forward PE 47.68, 1년 +610.12%.", verification:"일부 확인: M8/M9 CCL 수요 후보. 등급별 매출과 고객 인증은 미분리.", upside:"저손실 CCL 가격 프리미엄, AI 서버 PCB 소재 믹스 확대.", wrong:"M9/Q-glass 인증 지연, 소재 ASP 하락, 고객사 전환 실패.", weak:"AI CCL 매출 비중을 시장이 과대평가하지 않는다는 가정.", method:"CCL 소재: AI 매출 분리 불가 시 프리미엄 할인.", sources:["eliteValuation","qGlassReport"]},
-      {name:"두산 전자BG/두산", ticker:"000150.KS", group:"관찰/주의", current:"1,972,000원 (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"1,000,000~1,150,000", base:"1,500,000~1,750,000", bull:"2,200,000~2,500,000", entry:"1,050,000~1,400,000", burden:"2,200,000원 이상", metrics:"시총 29.56T KRW, TTM 매출 20.55T(+9.1%), 순이익 69.42B, PE 425.88, Forward PE 68.15, 1년 +320.02%.", verification:"일부 확인: DS-9000 저손실 CCL 공식 확인. 전자BG 매출·AI 고객·SOTP는 미확인.", upside:"M9급 CCL 인증, 롯데 HVLP와 소재 패키지 공급, 전자BG 마진 개선.", wrong:"그룹 프리미엄 축소, 전자BG 실적 분리 부재, CCL 가격 인상 실패.", weak:"그룹 시총에서 전자BG 가치가 충분히 재평가된다는 가정.", method:"그룹사: SOTP 또는 pure-play 할인.", sources:["doosanValuation","doosanDs9000","lotteDoosanMou"]},
-      {name:"롯데에너지머티리얼즈", ticker:"020150.KS", group:"관찰", current:"56,100원 (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"28,000~33,000", base:"48,000~58,000", bull:"70,000~80,000", entry:"34,000~46,000", burden:"72,000원 이상", metrics:"시총 2.94T KRW, TTM 매출 679.40B(-17.0%), 순손실 109.22B, PE n/a, 평균 목표가 66,900원.", verification:"검증 필요: HVLP 제품 공식 확인, 증설 보도는 회사 공시 재확인 필요. EV 동박과 AI 회로박 혼재.", upside:"HVLP 회로박 증설, CCL 공동개발, 전지동박 업황 회복.", wrong:"EV 동박 부진 지속, AI 회로박 매출 비중 미미, 증설 지연.", weak:"HVLP 옵션 가치가 전사 손실을 상쇄한다는 가정.", method:"HVLP 소재: 매출 비중 분리 불가 시 보수적 P/S.", sources:["lotteValuation","lotteHvlp","lotteMarket","lotteDoosanMou"]},
-      {name:"Quanta/QCT", ticker:"2382.TW", group:"관찰", current:"339 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"260~290", base:"350~390", bull:"430~470", entry:"245~312", burden:"440 이상", metrics:"시총 1.31T TWD, TTM 매출 2.45T(+49.5%), 순이익 76.68B, PE 17.65, Forward PE 13.65, 1년 +26.02%.", verification:"일부 확인: QCT Rubin/Vera 서버 솔루션 공개. AI 서버 마진과 고객별 매출은 미분리.", upside:"NVIDIA 랙 서버 출하 확대와 ODM 영업이익률 방어.", wrong:"ODM 마진 압박, 부품 부족 비용 전가 실패, 고객 주문 지연.", weak:"낮은 마진 구조에서도 AI 서버 믹스가 이익률을 올린다는 가정.", method:"ODM: P/S와 영업이익률 중심.", sources:["quantaValuation","qctRubin"]},
-      {name:"Foxconn/Hon Hai", ticker:"2317.TW", group:"관찰", current:"289 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"210~235", base:"295~330", bull:"365~400", entry:"207~264", burden:"365 이상", metrics:"시총 4.05T TWD, TTM 매출 8.58T(+19.5%), 순이익 197.17B, PE 20.73, Forward PE 15.57, 1년 +90.13%.", verification:"일부 확인: AI server demand 보도와 대형 EMS 포지션 확인. AI 서버 영업이익 기여는 미분리.", upside:"AI 서버 조립 물량 확대, 제품 믹스 개선, 안정적 FCF.", wrong:"EMS 마진 희석, 고객 forecast 하향, AI 서버 매출 성장 둔화.", weak:"매출 성장 일부가 주주가치로 충분히 전환된다는 가정.", method:"ODM/EMS: 낮은 마진을 감안한 P/S와 이익률.", sources:["foxconnValuation","foxconnAi"]},
-      {name:"Ibiden", ticker:"4062.T", group:"주의", current:"23,000 JPY (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"10,000~12,000", base:"14,000~16,000", bull:"22,000~26,000", entry:"9,800~12,800", burden:"22,000 이상", metrics:"시총 6.42T JPY, FY2026 매출 416.20B(+12.66%), 순이익 63.71B, PE 107.02, Forward PE 101.91, 1년 +695.16%.", verification:"일부 확인: 고성능 패키지 기판 후보. AI 고객과 증설 수익성은 추가 확인 필요.", upside:"AI 패키지 기판 shortage, 고난도 substrate ASP 상승.", wrong:"ABF/패키지 기판 수급 완화, 비용 증가, 고객 집중 리스크.", weak:"100배 안팎의 멀티플이 장기 성장으로 흡수된다는 가정.", method:"ABF/패키지 기판: PER·P/B·업사이클 P/S.", sources:["ibidenRevenue","ajinomotoAbf","ajinomotoPrice"]},
-      {name:"심텍", ticker:"222800.KQ", group:"데이터 부족", current:"118,100원 (2026-05-29)", zone:"재검증 구간", tone:"p-neg", bear:"60,000~70,000", base:"95,000~110,000", bull:"135,000~150,000", entry:"66,500~88,000", burden:"140,000원 이상", metrics:"시총 4.41T KRW, TTM 매출 1.53T(+23.2%), 순손실 114.06B, Forward PE 24.81, 1년 +515.42%.", verification:"검증 부족: 패키지/모듈 PCB 회복 후보이나 Rubin/Kyber 직접 수혜와 AI 매출 비중은 확인 부족.", upside:"메모리/패키지 기판 회복과 서버향 믹스 개선.", wrong:"순손실 지속, AI 직접 노출 확인 실패, 업황 회복 지연.", weak:"일반 패키지 회복을 AI PCB 수혜로 연결하는 가정.", method:"패키지 기판: 사이클 회복 PER, 직접 AI 프리미엄은 할인.", sources:["simmtechValuation"]},
-      {name:"코리아써키트", ticker:"007810.KS", group:"데이터 부족/주의", current:"119,300원 (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"45,000~55,000", base:"75,000~90,000", bull:"115,000~130,000", entry:"52,500~72,000", burden:"115,000원 이상", metrics:"시총 2.94T KRW, TTM 매출 1.58T(+12.0%), 순이익 64.83B, PE 50.17, Forward PE 27.13, 1년 +1,074%.", verification:"검증 부족: AI 서버 직접 매출과 고객사 확인 부족. 주가 선반영 리스크가 큼.", upside:"고부가 PCB/패키지 기판 전환과 서버향 고객 확보.", wrong:"테마성 수급 이탈, 실적 미달, AI 고객 확인 실패.", weak:"급등한 주가를 신규 실적이 따라간다는 가정.", method:"혼합 PCB: 직접 노출 확인 전까지 낮은 확신도.", sources:["koreaCircuitValuation"]},
-      {name:"Taiwan Union Technology", ticker:"6274.TWO", group:"데이터 부족", current:"1,690 TWD (2026-05-29)", zone:"재검증 구간", tone:"p-neg", bear:"650~760", base:"1,250~1,450", bull:"1,850~2,050", entry:"875~1,160", burden:"1,900 이상", metrics:"시총 488.03B TWD, TTM 매출 34.02B(+36.0%), 순이익 4.00B, PE 125.17, Forward PE 45.84, 1년 +911.98%.", verification:"검증 필요: CCL 후보이나 등급별 매출, M9/Q-glass 인증, 고객사 확인 부족.", upside:"고속 CCL 가격 프리미엄과 서버 PCB 소재 채택.", wrong:"CCL 경쟁 심화, 고객 인증 실패, P/S 축소.", weak:"고성능 CCL 프리미엄이 전사 매출에 충분히 반영된다는 가정.", method:"CCL 소재: AI 매출 분리 불가 시 프리미엄 할인.", sources:["taiwanUnionValuation","qGlassReport"]},
-      {name:"ITEQ", ticker:"6213.TW", group:"데이터 부족", current:"268.50 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"150~170", base:"220~250", bull:"300~330", entry:"154~200", burden:"310 이상", metrics:"시총 97.58B TWD, TTM 매출 34.66B(+12.5%), 순이익 1.49B, PE 65.81, Forward PE 29.36, 1년 +212.21%.", verification:"검증 필요: 저손실 CCL 후보이나 M9/Q-glass 고객 인증과 AI 매출 비중 확인 필요.", upside:"서버/네트워크 PCB용 CCL 믹스 확대와 마진 개선.", wrong:"소재 ASP 하락, 인증 지연, 범용 CCL 경쟁.", weak:"동종 대비 낮은 프리미엄이 재평가된다는 가정.", method:"CCL 소재: Forward PE와 P/S 비교.", sources:["iteqValuation","qGlassReport"]},
-      {name:"Shengyi Technology", ticker:"600183.SS", group:"데이터 부족", current:"140.62 CNY (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"70~80", base:"98~115", bull:"145~160", entry:"69~92", burden:"150 이상", metrics:"시총 341.58B CNY, TTM 매출 30.96B(+43.5%), 순이익 3.93B, PE 87.05, Forward PE 54.42, 1년 +446.31%.", verification:"검증 필요: 중국 CCL 국산화 후보이나 해외 AI 서버 고객·M9 경쟁력 확인 부족.", upside:"중국 AI 서버/통신 장비 국산화와 고성능 CCL 믹스 확대.", wrong:"정책/제재 리스크, 데이터 신뢰도 저하, CCL 가격 경쟁.", weak:"중국 프리미엄과 해외 고객 확장을 동시에 인정하는 가정.", method:"CCL 소재: 중국 프리미엄과 지정학 할인 병행.", sources:["shengyiValuation","qGlassReport"]}
+      {name:"TTM Technologies", ticker:"TTMI", group:"1순위", current:"$173.72 (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"$90~110", base:"$145~165", bull:"$195~220", entry:"$102~125", burden:"$195 이상", metrics:"시총 $18.04B, TTM 매출 $3.10B, 순이익 $195M, PE 94.47, Forward PE 38.89. 공식 1Q26 매출 $846M, 조정 EBITDA margin 15.7%.", verification:"확인됨: Data Center & Networking 36%, book-to-bill 1.41. 특정 AI 고객은 미공개.", upside:"Data Center & Networking 주문 비중 확대와 고다층 PCB ASP 방어.", wrong:"book-to-bill 둔화, AI 주문 공백, PCB ASP 하락.", weak:"Data Center & Networking 매출을 AI 서버로 과대해석하는 위험.", method:"PCB pure-play: P/S + 영업이익률 개선 시나리오.", sources:["ttmQ126","ttmiRevenue"], rankScore:{rank:1,total:88,directBenefit:24,earnings:18,valueAttractiveness:14,verification:14,businessPurity:9,lowRisk:9,easyLine:"공식 AI 데이터센터 PCB 주문 지표가 제일 선명하다.",goodPoint:"Data Center & Networking 36%와 book-to-bill 1.41이 확인된다.",concernPoint:"특정 AI 고객은 미공개라 수요를 과대해석하면 안 된다."}},
+      {name:"Gold Circuit Electronics", ticker:"2368.TW", group:"1순위/주의", current:"1,320 TWD (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"700~780", base:"980~1,120", bull:"1,400~1,600", entry:"690~840", burden:"1,400 이상", metrics:"시총 667.10B TWD, TTM 매출 67.25B(+60.3%), 순이익 11.34B, PE 59.37, Forward PE 29.14, 1년 +435.50%.", verification:"일부 확인: ASIC/server PCB 성장 보도와 실적 급증은 확인. 고객·제품 믹스는 비공개.", upside:"AI 서버 PCB 주문 지속, 고층수 제품 믹스 확대, 마진 방어.", wrong:"ASIC 서버 주문 둔화, 고객 집중 리스크, P/S 축소.", weak:"고성장률이 2027년까지 유지된다는 가정.", method:"PCB pure-play: 높은 P/S를 매출 성장과 마진 개선으로 흡수해야 함.", sources:["goldCircuitRevenue","goldCircuitDigitimes"], rankScore:{rank:4,total:72,directBenefit:22,earnings:17,valueAttractiveness:6,verification:10,businessPurity:9,lowRisk:8,easyLine:"성장은 강하지만 가격은 이미 많이 달렸다.",goodPoint:"매출 성장과 AI 서버 PCB 기대가 가장 빠르게 보이는 축이다.",concernPoint:"1년 급등과 고객 비공개 때문에 신규 진입 가격 부담이 크다."}},
+      {name:"Unimicron", ticker:"3037.TW", group:"1순위", current:"1,055 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"500~580", base:"790~920", bull:"1,100~1,250", entry:"550~735", burden:"1,150 이상", metrics:"시총 1.68T TWD, TTM 매출 138.60B(+16.4%), 순이익 10.80B, PE 150.49, Forward PE 64.68, 1년 +863.47%.", verification:"일부 확인: ABF/PCB 업사이클 후보. AI GPU/ASIC 고객과 수익성 기여는 추가 확인 필요.", upside:"ABF 수급 타이트, 고성능 기판 ASP 상승, 수율 개선.", wrong:"ABF 가격 인상 실패, CAPA 과잉, 고객 인증 지연.", weak:"ABF 업사이클이 실제 EPS로 빠르게 전환된다는 가정.", method:"ABF/패키지 기판: PER + 업사이클 P/S 비교.", sources:["unimicronRevenue","unimicronValuation","nanYaAbf"], rankScore:{rank:9,total:60,directBenefit:20,earnings:11,valueAttractiveness:3,verification:8,businessPurity:9,lowRisk:9,easyLine:"ABF 다리는 중요하지만 주가는 이미 멀리 앞서갔다.",goodPoint:"GPU·ASIC 기판 병목 후보로 사업 위치는 좋다.",concernPoint:"높은 PER과 1년 급등을 2027년 이익이 따라와야 한다."}},
+      {name:"Nan Ya PCB", ticker:"8046.TW", group:"1순위", current:"848 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"430~500", base:"740~860", bull:"1,050~1,180", entry:"520~690", burden:"1,080 이상", metrics:"시총 547.95B TWD, TTM 매출 42.89B(+27.5%), 순이익 3.05B, PE 179.78, Forward PE 49.81, 1년 +696.24%.", verification:"일부 확인: ABF 업사이클 보도는 있으나 고객별 AI 매출은 미공개.", upside:"AI GPU/ASIC/networking ABF 수요 확대와 가격 인상.", wrong:"ABF shortage 완화, 수율 비용 증가, 고객 forecast 하향.", weak:"높은 PE가 2027년 이익 개선으로 정당화된다는 가정.", method:"ABF/패키지 기판: Forward PE와 업사이클 P/S 병행.", sources:["nanYaValuation","nanYaAbf"], rankScore:{rank:8,total:62,directBenefit:20,earnings:12,valueAttractiveness:5,verification:8,businessPurity:8,lowRisk:9,easyLine:"ABF 수혜는 보이지만 신규 매수 가격은 조심스럽다.",goodPoint:"AI GPU·ASIC 기판 수요가 커질 때 직접 후보가 된다.",concernPoint:"고객별 AI 매출이 미공개이고 밸류에이션이 높다."}},
+      {name:"이수페타시스", ticker:"007660.KS", group:"1순위/주의", current:"129,200원 (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"70,000~80,000", base:"105,000~120,000", bull:"145,000~165,000", entry:"73,000~96,000", burden:"145,000원 이상", metrics:"시총 9.48T KRW, TTM 매출 1.18T(+32.2%), 순이익 172.62B, PE 54.65, Forward PE 32.09, 1년 +218.62%.", verification:"일부 확인: 고다층 MLB와 실적 성장 확인. NVIDIA 직접 고객·AI 매출 비중은 검증 필요.", upside:"AI 서버용 고다층 PCB 수주와 증설분 가동률 상승.", wrong:"고객사 확인 부재, 마진 둔화, P/S 리레이팅 축소.", weak:"국내 pure-play 프리미엄이 유지된다는 가정.", method:"PCB pure-play: P/S와 영업이익률 개선 시나리오.", sources:["isuRevenue"], rankScore:{rank:5,total:68,directBenefit:21,earnings:16,valueAttractiveness:8,verification:8,businessPurity:9,lowRisk:6,easyLine:"국내 pure-play 매력과 선반영 부담이 같이 있다.",goodPoint:"고다층 PCB 실적 성장과 AI 서버 기대가 연결된다.",concernPoint:"NVIDIA 직접 고객과 AI 매출 비중은 아직 확인이 약하다."}},
+      {name:"Elite Material", ticker:"2383.TW", group:"관찰", current:"5,120 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"2,600~3,100", base:"4,300~5,000", bull:"5,800~6,500", entry:"3,000~4,000", burden:"6,000 이상", metrics:"시총 1.83T TWD, TTM 매출 105.65B(+44.4%), 순이익 16.52B, PE 111.35, Forward PE 47.68, 1년 +610.12%.", verification:"일부 확인: M8/M9 CCL 수요 후보. 등급별 매출과 고객 인증은 미분리.", upside:"저손실 CCL 가격 프리미엄, AI 서버 PCB 소재 믹스 확대.", wrong:"M9/Q-glass 인증 지연, 소재 ASP 하락, 고객사 전환 실패.", weak:"AI CCL 매출 비중을 시장이 과대평가하지 않는다는 가정.", method:"CCL 소재: AI 매출 분리 불가 시 프리미엄 할인.", sources:["eliteValuation","qGlassReport"], rankScore:{rank:7,total:64,directBenefit:18,earnings:16,valueAttractiveness:5,verification:9,businessPurity:8,lowRisk:8,easyLine:"고속도로 바닥판 수혜는 크지만 가격표가 비싸다.",goodPoint:"M8/M9 CCL 소재 믹스 확대 기대와 실적 성장이 있다.",concernPoint:"AI CCL 매출 비중과 고객 인증이 분리 공개되지 않았다."}},
+      {name:"두산 전자BG/두산", ticker:"000150.KS", group:"관찰/주의", current:"1,972,000원 (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"1,000,000~1,150,000", base:"1,500,000~1,750,000", bull:"2,200,000~2,500,000", entry:"1,050,000~1,400,000", burden:"2,200,000원 이상", metrics:"시총 29.56T KRW, TTM 매출 20.55T(+9.1%), 순이익 69.42B, PE 425.88, Forward PE 68.15, 1년 +320.02%.", verification:"일부 확인: DS-9000 저손실 CCL 공식 확인. 전자BG 매출·AI 고객·SOTP는 미확인.", upside:"M9급 CCL 인증, 롯데 HVLP와 소재 패키지 공급, 전자BG 마진 개선.", wrong:"그룹 프리미엄 축소, 전자BG 실적 분리 부재, CCL 가격 인상 실패.", weak:"그룹 시총에서 전자BG 가치가 충분히 재평가된다는 가정.", method:"그룹사: SOTP 또는 pure-play 할인.", sources:["doosanValuation","doosanDs9000","lotteDoosanMou"], rankScore:{rank:14,total:41,directBenefit:14,earnings:4,valueAttractiveness:1,verification:9,businessPurity:4,lowRisk:9,easyLine:"CCL 기술은 좋지만 그룹 가격표가 너무 섞여 있다.",goodPoint:"DS-9000 저손실 CCL과 소재 협력 근거는 확인된다.",concernPoint:"전자BG만의 AI 매출과 가치가 따로 보이지 않는다."}},
+      {name:"롯데에너지머티리얼즈", ticker:"020150.KS", group:"관찰", current:"56,100원 (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"28,000~33,000", base:"48,000~58,000", bull:"70,000~80,000", entry:"34,000~46,000", burden:"72,000원 이상", metrics:"시총 2.94T KRW, TTM 매출 679.40B(-17.0%), 순손실 109.22B, PE n/a, 평균 목표가 66,900원.", verification:"검증 필요: HVLP 제품 공식 확인, 증설 보도는 회사 공시 재확인 필요. EV 동박과 AI 회로박 혼재.", upside:"HVLP 회로박 증설, CCL 공동개발, 전지동박 업황 회복.", wrong:"EV 동박 부진 지속, AI 회로박 매출 비중 미미, 증설 지연.", weak:"HVLP 옵션 가치가 전사 손실을 상쇄한다는 가정.", method:"HVLP 소재: 매출 비중 분리 불가 시 보수적 P/S.", sources:["lotteValuation","lotteHvlp","lotteMarket","lotteDoosanMou"], rankScore:{rank:13,total:44,directBenefit:13,earnings:3,valueAttractiveness:13,verification:7,businessPurity:4,lowRisk:4,easyLine:"매끈한 구리 도로 옵션은 있지만 본업 손실이 무겁다.",goodPoint:"HVLP 제품과 두산 CCL 협력 방향성은 있다.",concernPoint:"전지동박 부진과 AI 회로박 매출 비중 미확인이 걸린다."}},
+      {name:"Quanta/QCT", ticker:"2382.TW", group:"관찰", current:"339 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"260~290", base:"350~390", bull:"430~470", entry:"245~312", burden:"440 이상", metrics:"시총 1.31T TWD, TTM 매출 2.45T(+49.5%), 순이익 76.68B, PE 17.65, Forward PE 13.65, 1년 +26.02%.", verification:"일부 확인: QCT Rubin/Vera 서버 솔루션 공개. AI 서버 마진과 고객별 매출은 미분리.", upside:"NVIDIA 랙 서버 출하 확대와 ODM 영업이익률 방어.", wrong:"ODM 마진 압박, 부품 부족 비용 전가 실패, 고객 주문 지연.", weak:"낮은 마진 구조에서도 AI 서버 믹스가 이익률을 올린다는 가정.", method:"ODM: P/S와 영업이익률 중심.", sources:["quantaValuation","qctRubin"], rankScore:{rank:2,total:82,directBenefit:22,earnings:18,valueAttractiveness:18,verification:12,businessPurity:5,lowRisk:7,easyLine:"가격 부담은 낮지만 ODM 저마진을 같이 봐야 한다.",goodPoint:"Rubin/Vera 서버 솔루션 공개와 낮은 Forward PE가 강점이다.",concernPoint:"조립 공장 성격이라 AI 매출이 이익률로 얼마나 남는지 봐야 한다."}},
+      {name:"Foxconn/Hon Hai", ticker:"2317.TW", group:"관찰", current:"289 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"210~235", base:"295~330", bull:"365~400", entry:"207~264", burden:"365 이상", metrics:"시총 4.05T TWD, TTM 매출 8.58T(+19.5%), 순이익 197.17B, PE 20.73, Forward PE 15.57, 1년 +90.13%.", verification:"일부 확인: AI server demand 보도와 대형 EMS 포지션 확인. AI 서버 영업이익 기여는 미분리.", upside:"AI 서버 조립 물량 확대, 제품 믹스 개선, 안정적 FCF.", wrong:"EMS 마진 희석, 고객 forecast 하향, AI 서버 매출 성장 둔화.", weak:"매출 성장 일부가 주주가치로 충분히 전환된다는 가정.", method:"ODM/EMS: 낮은 마진을 감안한 P/S와 이익률.", sources:["foxconnValuation","foxconnAi"], rankScore:{rank:3,total:76,directBenefit:21,earnings:17,valueAttractiveness:16,verification:11,businessPurity:4,lowRisk:7,easyLine:"AI 서버 물량은 크지만 주주 이익률 확인이 필요하다.",goodPoint:"대형 EMS 포지션과 AI 서버 수요 보도가 가격 부담을 일부 낮춘다.",concernPoint:"매출 규모가 커도 낮은 마진 구조가 수익률을 누를 수 있다."}},
+      {name:"Ibiden", ticker:"4062.T", group:"주의", current:"23,000 JPY (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"10,000~12,000", base:"14,000~16,000", bull:"22,000~26,000", entry:"9,800~12,800", burden:"22,000 이상", metrics:"시총 6.42T JPY, FY2026 매출 416.20B(+12.66%), 순이익 63.71B, PE 107.02, Forward PE 101.91, 1년 +695.16%.", verification:"일부 확인: 고성능 패키지 기판 후보. AI 고객과 증설 수익성은 추가 확인 필요.", upside:"AI 패키지 기판 shortage, 고난도 substrate ASP 상승.", wrong:"ABF/패키지 기판 수급 완화, 비용 증가, 고객 집중 리스크.", weak:"100배 안팎의 멀티플이 장기 성장으로 흡수된다는 가정.", method:"ABF/패키지 기판: PER·P/B·업사이클 P/S.", sources:["ibidenRevenue","ajinomotoAbf","ajinomotoPrice"], rankScore:{rank:10,total:53,directBenefit:17,earnings:10,valueAttractiveness:1,verification:9,businessPurity:8,lowRisk:8,easyLine:"초미세 연결 다리 수혜는 좋지만 가격은 매우 뜨겁다.",goodPoint:"고성능 패키지 기판 병목 후보로 기술 장벽이 높다.",concernPoint:"100배 안팎 멀티플과 고객 집중 리스크가 크다."}},
+      {name:"심텍", ticker:"222800.KQ", group:"데이터 부족", current:"118,100원 (2026-05-29)", zone:"재검증 구간", tone:"p-neg", bear:"60,000~70,000", base:"95,000~110,000", bull:"135,000~150,000", entry:"66,500~88,000", burden:"140,000원 이상", metrics:"시총 4.41T KRW, TTM 매출 1.53T(+23.2%), 순손실 114.06B, Forward PE 24.81, 1년 +515.42%.", verification:"검증 부족: 패키지/모듈 PCB 회복 후보이나 Rubin/Kyber 직접 수혜와 AI 매출 비중은 확인 부족.", upside:"메모리/패키지 기판 회복과 서버향 믹스 개선.", wrong:"순손실 지속, AI 직접 노출 확인 실패, 업황 회복 지연.", weak:"일반 패키지 회복을 AI PCB 수혜로 연결하는 가정.", method:"패키지 기판: 사이클 회복 PER, 직접 AI 프리미엄은 할인.", sources:["simmtechValuation"], rankScore:{rank:15,total:35,directBenefit:9,earnings:2,valueAttractiveness:8,verification:4,businessPurity:6,lowRisk:6,easyLine:"업황 회복 후보지만 AI 직접 도로인지는 아직 흐릿하다.",goodPoint:"메모리·패키지 기판 회복 때 실적 반등 여지는 있다.",concernPoint:"순손실과 AI 직접 노출 근거 부족이 큰 감점이다."}},
+      {name:"코리아써키트", ticker:"007810.KS", group:"데이터 부족/주의", current:"119,300원 (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"45,000~55,000", base:"75,000~90,000", bull:"115,000~130,000", entry:"52,500~72,000", burden:"115,000원 이상", metrics:"시총 2.94T KRW, TTM 매출 1.58T(+12.0%), 순이익 64.83B, PE 50.17, Forward PE 27.13, 1년 +1,074%.", verification:"검증 부족: AI 서버 직접 매출과 고객사 확인 부족. 주가 선반영 리스크가 큼.", upside:"고부가 PCB/패키지 기판 전환과 서버향 고객 확보.", wrong:"테마성 수급 이탈, 실적 미달, AI 고객 확인 실패.", weak:"급등한 주가를 신규 실적이 따라간다는 가정.", method:"혼합 PCB: 직접 노출 확인 전까지 낮은 확신도.", sources:["koreaCircuitValuation"], rankScore:{rank:16,total:30,directBenefit:8,earnings:5,valueAttractiveness:2,verification:3,businessPurity:5,lowRisk:7,easyLine:"테마 기대는 컸지만 지금 새로 보기엔 근거가 가장 얇다.",goodPoint:"고부가 PCB 전환 가능성은 남아 있다.",concernPoint:"1년 급등과 AI 고객 확인 부족이 동시에 부담이다."}},
+      {name:"Taiwan Union Technology", ticker:"6274.TWO", group:"데이터 부족", current:"1,690 TWD (2026-05-29)", zone:"재검증 구간", tone:"p-neg", bear:"650~760", base:"1,250~1,450", bull:"1,850~2,050", entry:"875~1,160", burden:"1,900 이상", metrics:"시총 488.03B TWD, TTM 매출 34.02B(+36.0%), 순이익 4.00B, PE 125.17, Forward PE 45.84, 1년 +911.98%.", verification:"검증 필요: CCL 후보이나 등급별 매출, M9/Q-glass 인증, 고객사 확인 부족.", upside:"고속 CCL 가격 프리미엄과 서버 PCB 소재 채택.", wrong:"CCL 경쟁 심화, 고객 인증 실패, P/S 축소.", weak:"고성능 CCL 프리미엄이 전사 매출에 충분히 반영된다는 가정.", method:"CCL 소재: AI 매출 분리 불가 시 프리미엄 할인.", sources:["taiwanUnionValuation","qGlassReport"], rankScore:{rank:12,total:47,directBenefit:15,earnings:11,valueAttractiveness:2,verification:5,businessPurity:7,lowRisk:7,easyLine:"CCL 바닥판 후보지만 가격과 검증이 둘 다 부담이다.",goodPoint:"고속통신 CCL 수요 증가에는 연결될 수 있다.",concernPoint:"M9/Q-glass 인증과 고객사 확인이 부족하고 1년 급등이 크다."}},
+      {name:"ITEQ", ticker:"6213.TW", group:"데이터 부족", current:"268.50 TWD (2026-05-29)", zone:"검증 후 관찰", tone:"p-mid", bear:"150~170", base:"220~250", bull:"300~330", entry:"154~200", burden:"310 이상", metrics:"시총 97.58B TWD, TTM 매출 34.66B(+12.5%), 순이익 1.49B, PE 65.81, Forward PE 29.36, 1년 +212.21%.", verification:"검증 필요: 저손실 CCL 후보이나 M9/Q-glass 고객 인증과 AI 매출 비중 확인 필요.", upside:"서버/네트워크 PCB용 CCL 믹스 확대와 마진 개선.", wrong:"소재 ASP 하락, 인증 지연, 범용 CCL 경쟁.", weak:"동종 대비 낮은 프리미엄이 재평가된다는 가정.", method:"CCL 소재: Forward PE와 P/S 비교.", sources:["iteqValuation","qGlassReport"], rankScore:{rank:6,total:66,directBenefit:16,earnings:13,valueAttractiveness:14,verification:8,businessPurity:7,lowRisk:8,easyLine:"소재 검증은 남았지만 가격표가 상대적으로 덜 뜨겁다.",goodPoint:"Forward PE와 1년 상승률 부담이 동종 CCL 후보보다 낮다.",concernPoint:"M9/Q-glass 고객 인증과 AI 매출 비중은 검증 필요다."}},
+      {name:"Shengyi Technology", ticker:"600183.SS", group:"데이터 부족", current:"140.62 CNY (2026-05-29)", zone:"부담 구간", tone:"p-warn", bear:"70~80", base:"98~115", bull:"145~160", entry:"69~92", burden:"150 이상", metrics:"시총 341.58B CNY, TTM 매출 30.96B(+43.5%), 순이익 3.93B, PE 87.05, Forward PE 54.42, 1년 +446.31%.", verification:"검증 필요: 중국 CCL 국산화 후보이나 해외 AI 서버 고객·M9 경쟁력 확인 부족.", upside:"중국 AI 서버/통신 장비 국산화와 고성능 CCL 믹스 확대.", wrong:"정책/제재 리스크, 데이터 신뢰도 저하, CCL 가격 경쟁.", weak:"중국 프리미엄과 해외 고객 확장을 동시에 인정하는 가정.", method:"CCL 소재: 중국 프리미엄과 지정학 할인 병행.", sources:["shengyiValuation","qGlassReport"], rankScore:{rank:11,total:48,directBenefit:15,earnings:12,valueAttractiveness:4,verification:5,businessPurity:6,lowRisk:6,easyLine:"중국 CCL 국산화 후보지만 지정학 할인이 필요하다.",goodPoint:"중국 AI 서버·통신 장비 투자와 CCL 수요가 맞물릴 수 있다.",concernPoint:"해외 AI 고객, M9 경쟁력, 데이터 신뢰도 확인이 약하다."}}
     ],
     summary:[
       "영상의 한 줄 결론은 AI 서버 병목이 GPU/HBM에서 랙 내부 보드·기판·소재로 확장된다는 것이다.",
@@ -1811,7 +1855,103 @@ function tonePill(label, klass){
   return `<span class="pill ${klass || "p-mid"}">${escapeHtml(label)}</span>`;
 }
 
+const scoreFormulaLabels = {
+  directBenefit:"AI 직접 수혜",
+  earnings:"실적 연결",
+  valueAttractiveness:"현재 가격 매력",
+  verification:"검증 신뢰도",
+  businessPurity:"사업 순도",
+  lowRisk:"리스크 낮음"
+};
+
+function rankingCompanyMeta(d, v){
+  return d.companies.find(c => c.name === v.name) || {};
+}
+
+function rankingRiskBadge(v){
+  if(v.zone.includes("부담")) return tonePill("가격 부담", "p-warn");
+  if(v.zone.includes("재검증")) return tonePill("근거 재검증", "p-neg");
+  if(v.verification.includes("검증 필요") || v.verification.includes("검증 부족")) return tonePill("검증 필요", "p-neg");
+  return tonePill("검증 후 관찰", "p-mid");
+}
+
+function rankingLines(v){
+  const s = v.rankScore;
+  return `<div class="rankLine"><b>점수/순위</b>#${s.rank} · ${s.total}점</div>
+    <div class="rankLine"><b>쉬운 한줄</b>${escapeHtml(s.easyLine)}</div>
+    <div class="rankLine"><b>좋은점</b>${escapeHtml(s.goodPoint)}</div>
+    <div class="rankLine"><b>걸리는점</b>${escapeHtml(s.concernPoint)}</div>`;
+}
+
+function rankingDesktopSummary(v){
+  return `<div class="rankDecisionGrid">
+    <div class="rankLine"><b>점수/순위</b>#${v.rankScore.rank} · ${v.rankScore.total}점</div>
+    <div class="rankLine"><b>쉬운 한줄</b>${escapeHtml(v.rankScore.easyLine)}</div>
+    <div class="rankLine"><b>좋은점</b>${escapeHtml(v.rankScore.goodPoint)}</div>
+    <div class="rankLine"><b>걸리는점</b>${escapeHtml(v.rankScore.concernPoint)}</div>
+  </div>`;
+}
+
+function rankingTopCard(v){
+  return `<article class="rankTopCard">
+    <div class="rankTopHead">
+      <h3>${escapeHtml(v.name)}<span class="tk">${escapeHtml(v.ticker)}</span></h3>
+      <span class="rankBadge">${v.rankScore.total}점</span>
+    </div>
+    ${rankingLines(v)}
+    <details class="valuationCardDetail">
+      <summary>근거 보기</summary>
+      <p><b>현재가:</b> ${escapeHtml(v.current)} · ${escapeHtml(v.zone)}</p>
+      <p><b>실적·멀티플:</b> ${escapeHtml(v.metrics)}</p>
+      <p><b>검증:</b> ${escapeHtml(v.verification)}</p>
+      <div class="sourceLine">${badges(v.sources)}</div>
+    </details>
+  </article>`;
+}
+
+function rankingMobileCard(d, v){
+  const company = rankingCompanyMeta(d, v);
+  const segment = [company.country, company.segment].filter(Boolean).join(" · ") || v.group;
+  return `<article class="rankMobileCard">
+    <div class="rankMobileHead">
+      <h3>${escapeHtml(v.name)}<span class="tk">${escapeHtml(v.ticker)} · ${escapeHtml(segment)}</span></h3>
+      ${rankingRiskBadge(v)}
+    </div>
+    ${rankingLines(v)}
+  </article>`;
+}
+
+function renderPcbRanking(d){
+  const ranked = [...d.valuationModels]
+    .filter(v => v.rankScore)
+    .sort((a,b) => a.rankScore.rank - b.rankScore.rank);
+  const topFive = ranked.filter(v => v.rankScore.rank <= 5);
+
+  document.getElementById("pcbScoreFormula").innerHTML = Object.entries(d.scoreFormula).map(([key,max]) => `<div class="scoreFormulaChip">
+    <b>${escapeHtml(scoreFormulaLabels[key] || key)}</b><span>${max}점</span>
+  </div>`).join("");
+
+  document.getElementById("pcbTopFiveCards").innerHTML = topFive.map(rankingTopCard).join("");
+
+  document.querySelector("#pcbRankingTable tbody").innerHTML = ranked.map(v => {
+    const company = rankingCompanyMeta(d, v);
+    const segment = [company.country, company.segment].filter(Boolean).join(" · ") || v.group;
+    return `<tr>
+      <td><b>#${v.rankScore.rank}</b></td>
+      <td class="rankCompanyCell"><b>${escapeHtml(v.name)}</b><span>${escapeHtml(v.ticker)}</span></td>
+      <td>${escapeHtml(segment)}</td>
+      <td><span class="rankBadge">${v.rankScore.total}점</span></td>
+      <td class="leftText rankDecisionCell">${rankingDesktopSummary(v)}</td>
+      <td>${rankingRiskBadge(v)}</td>
+    </tr>`;
+  }).join("");
+
+  document.getElementById("pcbRankingCards").innerHTML = ranked.map(v => rankingMobileCard(d, v)).join("");
+}
+
 function renderPcbOverview(d){
+  renderPcbRanking(d);
+
   document.getElementById("pcbSummaryCards").innerHTML = d.summaryCards.map(card => `<article class="summaryCard">
     <div class="k">${escapeHtml(card.k)}</div>
     <h3>${escapeHtml(card.title)}</h3>
