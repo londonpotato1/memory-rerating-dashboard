@@ -16,6 +16,19 @@
     --blu:#2563eb; --blu-bg:#eff6ff;
     --pur:#7c3aed; --r:14px;
     --shadow:0 1px 3px rgba(0,0,0,.04),0 4px 20px -8px rgba(0,0,0,.08);
+    --ovl:rgba(0,0,0,.025); --warn-txt:#991b1b; --hi-memory:#0369a1;
+  }
+  :root[data-theme="dark"]{
+    --bg:#080a0d; --panel:#11151c; --panel2:#171d26; --panel3:#0f2522;
+    --line:#29313b; --line2:#365064;
+    --txt:#eef3f8; --mut:#a6b1c0; --dim:#7f8b9c;
+    --grn:#35d49b; --grn-bg:rgba(53,212,155,.12);
+    --amb:#f5bf3d; --amb-bg:rgba(245,191,61,.13);
+    --red:#f47b7b; --red-bg:rgba(244,123,123,.13);
+    --blu:#65b9f5; --blu-bg:rgba(101,185,245,.13);
+    --pur:#b49cff;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+    --ovl:rgba(255,255,255,.03); --warn-txt:#f3d9d9; --hi-memory:#75e0ff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;overflow-x:hidden}
@@ -38,8 +51,7 @@
   .eyebrow{color:var(--blu);font-weight:800;font-size:13px;letter-spacing:0;text-transform:uppercase}
   header h1{font-size:31px;margin:8px 0 10px;font-weight:900;overflow-wrap:break-word}
   header h1 .h1-tail:before{content:" — "}
-  .sub{color:var(--mut);font-size:16px;max-width:880px}
-  .sub,.lead,.tldr p,.auditBanner,.decisionCard p,.note,.warnBox,.disc,.panel p{overflow-wrap:anywhere}
+  .lead,.tldr p,.auditBanner,.decisionCard p,.note,.warnBox,.disc,.panel p{overflow-wrap:anywhere}
   .badges{margin-top:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
   .asof{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap;
     background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:12.5px;color:var(--mut);max-width:100%;min-width:0}
@@ -92,8 +104,8 @@
   .sourceBadge.soft{border-color:rgba(101,185,245,.40);color:var(--blu)}
   .sourceBadge.bad{border-color:rgba(244,123,123,.45);color:var(--red)}
 
-  .auditBanner{margin-top:14px;background:linear-gradient(135deg,rgba(244,123,123,.14),rgba(245,191,61,.07));border:1px solid rgba(244,123,123,.34);border-left:3px solid var(--red);border-radius:0 var(--r) var(--r) 0;padding:14px 16px;color:#991b1b;font-size:13.5px}
-  .auditBanner b{color:#991b1b}
+  .auditBanner{margin-top:14px;background:linear-gradient(135deg,rgba(244,123,123,.14),rgba(245,191,61,.07));border:1px solid rgba(244,123,123,.34);border-left:3px solid var(--red);border-radius:0 var(--r) var(--r) 0;padding:14px 16px;color:var(--warn-txt);font-size:13.5px}
+  .auditBanner b{color:var(--warn-txt)}
   .decisionGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
   .decisionCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;min-height:132px}
   .decisionCard .k{font-size:11px;color:var(--dim);font-weight:950;text-transform:uppercase}
@@ -123,7 +135,7 @@
   .memoryDecisionCard p,.memoryScenarioCard p{font-size:13px;color:var(--txt);line-height:1.48}
   .memoryDecisionCard .watchList{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
   .memoryDecisionCard .watchList span{border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:3px 7px;color:var(--txt);font-size:11.5px;font-weight:850}
-  .memoryDecisionCard .memoryRiskLine{border-top:1px solid var(--line);margin-top:10px;padding-top:9px;color:#991b1b}
+  .memoryDecisionCard .memoryRiskLine{border-top:1px solid var(--line);margin-top:10px;padding-top:9px;color:var(--warn-txt)}
   .memoryCompanyGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .memoryStockCard{background:radial-gradient(circle at 86% 0,rgba(53,212,155,.13),transparent 34%),var(--panel);border:1px solid rgba(101,185,245,.34);border-radius:var(--r);padding:14px;display:grid;gap:12px;min-width:0}
   .memoryStockCard:nth-child(2){background:radial-gradient(circle at 86% 0,rgba(101,185,245,.13),transparent 34%),var(--panel)}
@@ -168,9 +180,9 @@
   .bar .lbl{color:var(--mut);text-align:right;font-size:12.5px}.bar .lbl b{display:block;color:var(--txt);font-size:13px}
   .track{background:var(--panel2);border-radius:var(--r);height:30px;position:relative;overflow:hidden}
   .fill{height:100%;border-radius:var(--r);display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-weight:950;font-size:12px;color:#07100d;min-width:44px}
-  .f-cur{background:linear-gradient(90deg,#3d536d,#7d91b2);color:#061018}
-  .f-avg{background:linear-gradient(90deg,#1378b6,#65b9f5);color:#061018}
-  .f-pur{background:linear-gradient(90deg,#7b57e5,#b49cff);color:#061018}
+  .f-cur{background:linear-gradient(90deg,#334155,#475569);color:#fff}
+  .f-avg{background:linear-gradient(90deg,#1e3a8a,#1d4ed8);color:#fff}
+  .f-pur{background:linear-gradient(90deg,#5b21b6,#6d28d9);color:#fff}
   .bar .vs{font-size:12px;color:var(--mut);text-align:left}
 
   .disc3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
@@ -182,7 +194,7 @@
   .note b{color:var(--amb)}
   .note.good{border-left-color:var(--grn)}
   .note.good b{color:var(--grn)}
-  .warnBox{background:var(--red-bg);border:1px solid rgba(244,123,123,.32);border-radius:var(--r);padding:14px 16px;color:#991b1b}
+  .warnBox{background:var(--red-bg);border:1px solid rgba(244,123,123,.32);border-radius:var(--r);padding:14px 16px;color:var(--warn-txt)}
   .warnBox b{color:var(--red)}
 
   .scenarioHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
@@ -208,9 +220,6 @@
 
   .factorTable .vtab{min-width:860px}
   .factorAction{font-size:12.5px;color:var(--txt);text-align:left}
-  .auditList{display:grid;gap:8px;margin-top:10px}
-  .auditItem{display:grid;grid-template-columns:136px 1fr auto;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:8px;font-size:12.5px;color:var(--mut)}
-  .auditItem b{color:var(--txt)}
 
   .statGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
   .stat{background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:15px;text-align:center}
@@ -232,7 +241,7 @@
   .tranche .p{text-align:right;font-size:12.5px;color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap}
   .sig{background:var(--red-bg);border:1px solid rgba(244,123,123,.3);border-radius:var(--r);padding:14px 16px}
   .sig h4{color:var(--red);font-size:13.5px;margin-bottom:8px}
-  .sig ul{list-style:none;font-size:13px}.sig li{padding:4px 0 4px 18px;position:relative;color:#991b1b}
+  .sig ul{list-style:none;font-size:13px}.sig li{padding:4px 0 4px 18px;position:relative;color:var(--warn-txt)}
   .sig li:before{content:"!";position:absolute;left:5px;color:var(--red);font-weight:950}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
   .chips span{font-size:12px;color:var(--mut);background:var(--panel2);border:1px solid var(--line);border-radius:var(--r);padding:5px 10px}
@@ -250,7 +259,7 @@
   .cycleTable .vtab caption{padding:14px 16px;color:var(--mut)}
   .cycleTable .vtab thead th{position:sticky;top:0;z-index:2;background:var(--panel2);color:var(--txt);border-bottom:1px solid var(--line2);text-align:center;padding:14px 12px}
   .cycleTable .vtab thead th:first-child{text-align:left;color:var(--mut)}
-  .cycleTable .vtab tbody tr:nth-child(even){background:rgba(0,0,0,.02)}
+  .cycleTable .vtab tbody tr:nth-child(even){background:var(--ovl)}
   .cycleTable .vtab tbody tr:hover{background:rgba(101,185,245,.06)}
   .cycleTable .vtab th,.cycleTable .vtab td{border-right:1px solid rgba(54,80,100,.38)}
   .cycleTable .vtab th:last-child,.cycleTable .vtab td:last-child{border-right:none}
@@ -259,7 +268,7 @@
   .matrixHead.dotcom{background:rgba(101,185,245,.13);border:1px solid rgba(101,185,245,.52);color:var(--blu)}
   .matrixHead.phone{background:rgba(245,191,61,.14);border:1px solid rgba(245,191,61,.50);color:var(--amb)}
   .matrixHead.ai{background:rgba(53,212,155,.15);border:1px solid rgba(53,212,155,.52);color:var(--grn)}
-  .axisCell{position:sticky;left:0;z-index:1;background:#f5f6f8!important;border-left:3px solid var(--blu);font-size:13.8px!important;line-height:1.45!important;color:var(--txt)!important;vertical-align:top!important;text-align:left!important;width:132px;min-width:132px}
+  .axisCell{position:sticky;left:0;z-index:1;background:var(--panel2)!important;border-left:3px solid var(--blu);font-size:13.8px!important;line-height:1.45!important;color:var(--txt)!important;vertical-align:top!important;text-align:left!important;width:132px;min-width:132px}
   .eraCell{vertical-align:top!important;text-align:left!important;font-variant-numeric:normal!important;color:var(--txt)!important;font-size:13.2px;line-height:1.64;padding:15px 14px!important}
   .eraCell.dotcom{box-shadow:inset 3px 0 0 rgba(101,185,245,.38)}
   .eraCell.phone{box-shadow:inset 3px 0 0 rgba(245,191,61,.38)}
@@ -277,7 +286,7 @@
   .hi-risk{color:var(--red)}
   .hi-money{color:var(--blu)}
   .hi-win{color:var(--pur)}
-  .hi-memory{color:#0369a1}
+  .hi-memory{color:var(--hi-memory)}
   .cycleCards{display:none;margin-top:12px;gap:12px}
   .cycleCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px}
   .cycleCard h3{font-size:14px;margin-bottom:10px;color:var(--txt)}
@@ -399,7 +408,7 @@
   .slideTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
   .slideTop h3{font-size:15px;color:var(--txt);margin-bottom:3px}
   .slideTop .tk{font-size:11px;color:var(--dim);font-weight:900}
-  .priceHero{background:rgba(0,0,0,.025);border:1px solid var(--line);border-radius:7px;padding:11px}
+  .priceHero{background:var(--ovl);border:1px solid var(--line);border-radius:7px;padding:11px}
   .priceHero small{display:block;color:var(--dim);font-size:10.8px;font-weight:900;text-transform:uppercase;margin-bottom:3px}
   .priceHero strong{display:block;color:var(--txt);font-size:17px;line-height:1.35}
   .priceHero span{display:block;color:var(--mut);font-size:12px;margin-top:5px}
@@ -420,7 +429,7 @@
   .priceScale.pos-recheck i{left:70%;box-shadow:0 0 0 1px rgba(255,111,145,.85)}
   .rangeLegend{display:flex;justify-content:space-between;color:var(--dim);font-size:10.5px;font-weight:900;margin-top:-7px}
   .zoneGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-  .zoneTile{background:rgba(0,0,0,.025);border:1px solid var(--line);border-radius:7px;padding:8px;color:var(--txt);font-size:12px;line-height:1.35}
+  .zoneTile{background:var(--ovl);border:1px solid var(--line);border-radius:7px;padding:8px;color:var(--txt);font-size:12px;line-height:1.35}
   .zoneTile b{display:block;color:var(--dim);font-size:10px;text-transform:uppercase;margin-bottom:3px}
   .slideTake{font-size:13px;line-height:1.52;color:var(--txt);border-left:3px solid var(--blu);padding-left:10px}
   .slideSignals{display:grid;gap:7px}
@@ -440,7 +449,7 @@
   .valuationRanges b{display:block;color:var(--dim);font-size:10px;text-transform:uppercase}
   .valuationDetailGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   .valuationMiniGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:8px}
-  .valuationMiniGrid div{background:rgba(0,0,0,.025);border:1px solid var(--line);border-radius:7px;padding:7px;font-size:12px;color:var(--txt);line-height:1.42}
+  .valuationMiniGrid div{background:var(--ovl);border:1px solid var(--line);border-radius:7px;padding:7px;font-size:12px;color:var(--txt);line-height:1.42}
   .valuationMiniGrid b{display:block;color:var(--dim);font-size:10.5px;text-transform:uppercase;margin-bottom:2px}
   .rankGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
   .rankCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px}
@@ -472,9 +481,6 @@
   .disc{margin-top:30px;font-size:12px;color:var(--dim);background:var(--panel);border:1px dashed var(--line);border-radius:var(--r);padding:16px 18px}.disc b{color:var(--mut)}
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:18px}
   footer h4{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:0;margin-bottom:10px}
-  .srcs{display:flex;flex-wrap:wrap;gap:8px}
-  .srcs a{font-size:12px;color:var(--mut);background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:5px 10px;text-decoration:none}
-  .srcs a:hover{color:var(--blu);border-color:var(--blu)}
 
   @media(max-width:900px){
     .g2,.g3,.g4,.epsGrid,.bb,.statGrid,.disc3,.triad,.bubbleGrid,.logicSteps,.decisionGrid,.memorySummaryGrid,.memoryGlossaryGrid,.memoryDecisionGrid,.memoryCompanyGrid,.memoryScenarioGrid,.sourceDetailGrid,.pcbHero,.pcbTopGrid,.summaryCardGrid,.quickGroupGrid,.glossaryGrid,.chainMap,.detailCardGrid,.rankGrid,.scenarioGrid,.bridgeGrid,.conclusionGrid,.valuationSummaryGrid,.checkGrid,.valuationDetailGrid{grid-template-columns:1fr}
@@ -493,7 +499,6 @@
     .mobile-cards{display:grid}
     .cycleDesktop{display:none}
     .cycleCards{display:grid}
-    .auditItem{grid-template-columns:1fr}
     .signal{grid-template-columns:1fr}
     .chainNode{min-height:auto}
     .chainNode:after{content:"↓";right:50%;top:auto;bottom:-16px;transform:translateX(50%)}
@@ -535,10 +540,6 @@
 
   /* --- light theme additions (Wave 0) --- */
   .panel,.tldr,.table-wrap,.detailBox,.terms,.analogy,.note,.warnBox,.decisionCard,.memorySummaryCard,.memoryTerm,.memoryDecisionCard,.memoryScenarioCard,.memoryStockCard,.companyCard,.epsCard,.verdict,.cycleCard,.summaryCard,.quickGroupCard,.glossTerm,.chainNode,.valuationCard,.valuationBoard,.rankCard,.pcbScenario,.bridgeCard,.conclusionCard,.checkCard,.pcbStamp,.pcbInfoCard,details.gloss{box-shadow:var(--shadow)}
-  /* usar warmth utilities (used in later waves) */
-  .hl-y{background:linear-gradient(180deg,transparent 58%,#fef08a 58%);padding:0 2px;border-radius:2px}
-  .hl-r{background:linear-gradient(180deg,transparent 58%,#fecaca 58%);padding:0 2px;border-radius:2px}
-  .hl-g{background:linear-gradient(180deg,transparent 58%,#bbf7d0 58%);padding:0 2px;border-radius:2px}
   .emoji-xl{font-size:clamp(38px,7vw,58px);line-height:1;display:block}
   .closing{background:linear-gradient(135deg,#1e293b,#0f172a);color:#fff;border-radius:var(--r)}
   .closing b{color:#fff}
@@ -567,15 +568,20 @@
   .pcbScenario.ubase h3{color:var(--blu)}
   .pcbScenario.bear{border-left-color:var(--red)}
   .pcbScenario.bear h3{color:var(--red)}
+  /* --- 다크/라이트 토글 --- */
+  .themeToggle{position:fixed;top:14px;right:14px;z-index:200;width:42px;height:42px;border-radius:50%;border:1px solid var(--line2);background:var(--panel);color:var(--txt);font-size:18px;line-height:1;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
+  .themeToggle:hover,.themeToggle:focus-visible{border-color:var(--blu);outline:none}
+  :root[data-theme="dark"] .priceScale span{background:rgba(255,255,255,.16)}
 </style>
+<script>(function(){try{var t=localStorage.getItem('mr-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
 </head>
 <body>
 <div class="wrap">
+<button id="themeToggle" class="themeToggle" type="button" aria-label="다크/라이트 모드 전환" aria-pressed="false" title="테마 전환">🌙</button>
 
 <header>
   <div class="eyebrow">투자 의사결정 점검 · 밸류에이션 + 검증상태</div>
   <h1><span>SK하이닉스·삼성전자</span><span class="h1-tail">지금 가격, 어떤 조건이면 말이 될까?</span></h1>
-  <p class="sub">결론보다 먼저 가정과 검증상태를 분리합니다. 가격·멀티플·EPS·거시 트리거는 기준일이 다르므로, “싸다”는 문장은 항상 조건부로 읽어야 합니다.</p>
   <div class="badges">
     <div class="asof"><span class="dot"></span><span>가격 기준 · 한국/미국주식 <b>2026-05-29 종가</b> · EPS 스냅샷 <b>2026-05-27</b> · 보유기간 가정 <b>~2026년 말</b></span></div>
     <div class="asof" style="border-color:rgba(245,191,61,.45);color:var(--amb)"><span>교육용 정리 · <b>매수·매도 권유가 아닙니다</b></span></div>
@@ -735,14 +741,6 @@
         </thead>
         <tbody></tbody>
       </table>
-    </div>
-    <div class="panel tight" style="margin-top:14px">
-      <div style="font-weight:900;font-size:13.5px;color:var(--blu)">출처 감사 로그</div>
-      <div class="auditList" id="auditList"></div>
-    </div>
-    <div class="panel tight" style="margin-top:14px">
-      <div style="font-weight:900;font-size:13.5px;color:var(--blu)">전체 출처 목록</div>
-      <div class="srcs" id="sourceList"></div>
     </div>
   </section>
       </div>
@@ -1751,12 +1749,6 @@ function renderFactors(){
     <td class="factorAction">${f.action}</td>
     <td>${sourceBadge(f.source,true)}</td>
   </tr>`).join("");
-
-  const audit = ["dashboardSkMix","dashboardSamsungMix","stockMu","stockSndk","fred10y","blsCpi","trendforce","krx","missing"];
-  document.getElementById("auditList").innerHTML = audit.map(id => {
-    const s = DATA.sources[id];
-    return `<div class="auditItem"><b>${s.label}</b><span>${s.note}</span>${sourceBadge(id,true)}</div>`;
-  }).join("");
 }
 
 function renderHeat(){
@@ -2263,13 +2255,6 @@ function renderAiCycle(){
   </article>`).join("");
 }
 
-function renderSources(){
-  document.getElementById("sourceList").innerHTML = Object.entries(DATA.sources)
-    .filter(([id]) => id !== "missing")
-    .map(([id,s]) => `<a href="${s.url}" target="_blank" rel="noopener">${s.label} · ${s.date}</a>`)
-    .join("");
-}
-
 renderMemoryBeginner();
 renderValuation();
 renderPerBars();
@@ -2280,8 +2265,19 @@ renderHeat();
 renderTranches();
 renderAiCycle();
 renderPcbChain();
-renderSources();
 setupTabs();
+
+(function(){
+  const root = document.documentElement, btn = document.getElementById("themeToggle");
+  const sync = () => { const d = root.getAttribute("data-theme") === "dark"; btn.textContent = d ? "☀️" : "🌙"; btn.setAttribute("aria-pressed", d); };
+  sync();
+  btn.addEventListener("click", () => {
+    const dark = root.getAttribute("data-theme") === "dark";
+    if (dark) root.removeAttribute("data-theme"); else root.setAttribute("data-theme", "dark");
+    try { localStorage.setItem("mr-theme", dark ? "light" : "dark"); } catch (e) {}
+    sync();
+  });
+})();
 </script>
 </body>
 </html>
