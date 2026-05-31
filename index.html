@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SK하이닉스·삼성전자 매수 분석 — 목표가 & 진입 전략</title>
+<title>SK하이닉스·삼성전자 조건부 밸류에이션 점검 — 목표가 & 리스크</title>
 <style>
   :root{
     --bg:#080a0d; --panel:#11151c; --panel2:#171d26; --panel3:#0f2522;
@@ -37,9 +37,11 @@
   header h1{font-size:31px;margin:8px 0 10px;font-weight:900;overflow-wrap:break-word}
   header h1 .h1-tail:before{content:" — "}
   .sub{color:var(--mut);font-size:16px;max-width:880px}
+  .sub,.lead,.tldr p,.auditBanner,.decisionCard p,.note,.warnBox,.disc,.panel p{overflow-wrap:anywhere}
   .badges{margin-top:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
   .asof{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap;
-    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:12.5px;color:var(--mut)}
+    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:12.5px;color:var(--mut);max-width:100%;min-width:0}
+  .asof span{min-width:0;overflow-wrap:anywhere}
   .asof b{color:var(--txt)}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--grn);box-shadow:0 0 0 4px var(--grn-bg)}
 
@@ -52,12 +54,14 @@
   .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
   .panel.tight{padding:14px}
 
-  .tldr{display:grid;grid-template-columns:132px 1fr;gap:16px;align-items:center;
+  .tldr{display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:center;
     background:linear-gradient(135deg,rgba(245,191,61,.13),rgba(53,212,155,.06));
     border:1px solid rgba(245,191,61,.38);border-radius:var(--r);padding:18px 20px}
-  .tldr .big{font-size:30px;line-height:1.05;font-weight:950;color:var(--amb);text-align:center}
+  .tldr > *,.panel,.auditBanner,.decisionCard,.companyCard,.mini{min-width:0}
+  .tldr .big{font-size:28px;line-height:1.08;font-weight:950;color:var(--amb);text-align:center;word-break:keep-all;grid-row:1 / span 2}
   .tldr .big small{display:block;font-size:12px;color:var(--mut);font-weight:700;margin-top:8px}
   .tldr p{font-size:15px;color:#e8eef7}.tldr b{color:#fff}
+  .tldr .big ~ p{grid-column:2}
 
   .grid{display:grid;gap:14px}
   .g2{grid-template-columns:1fr 1fr}
@@ -80,6 +84,18 @@
   .sourceBadge.warn{border-color:rgba(245,191,61,.48);color:var(--amb)}
   .sourceBadge.soft{border-color:rgba(101,185,245,.40);color:var(--blu)}
   .sourceBadge.bad{border-color:rgba(244,123,123,.45);color:var(--red)}
+
+  .auditBanner{margin-top:14px;background:linear-gradient(135deg,rgba(244,123,123,.14),rgba(245,191,61,.07));border:1px solid rgba(244,123,123,.34);border-left:3px solid var(--red);border-radius:0 var(--r) var(--r) 0;padding:14px 16px;color:#f2dde0;font-size:13.5px}
+  .auditBanner b{color:#fff}
+  .decisionGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+  .decisionCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;min-height:132px}
+  .decisionCard .k{font-size:11px;color:var(--dim);font-weight:950;text-transform:uppercase}
+  .decisionCard .v{font-size:15px;font-weight:950;margin:5px 0;color:var(--txt)}
+  .decisionCard p{font-size:12.7px;color:#d8e2ef;line-height:1.52}
+  .decisionCard.fact{border-color:rgba(53,212,155,.34)}
+  .decisionCard.est{border-color:rgba(245,191,61,.36)}
+  .decisionCard.view{border-color:rgba(101,185,245,.36)}
+  .decisionCard.act{border-color:rgba(244,123,123,.34)}
 
   .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
   .vtab{width:100%;border-collapse:collapse;font-size:13.3px;min-width:780px}
@@ -262,8 +278,9 @@
   .srcs a:hover{color:var(--blu);border-color:var(--blu)}
 
   @media(max-width:900px){
-    .g2,.g3,.g4,.epsGrid,.bb,.statGrid,.disc3,.triad,.bubbleGrid,.logicSteps{grid-template-columns:1fr}
+    .g2,.g3,.g4,.epsGrid,.bb,.statGrid,.disc3,.triad,.bubbleGrid,.logicSteps,.decisionGrid{grid-template-columns:1fr}
     .tldr{grid-template-columns:1fr;text-align:center}
+    .tldr .big,.tldr .big ~ p{grid-column:auto;grid-row:auto}
     .bar{grid-template-columns:96px 1fr 82px}
     .bar .lbl{text-align:left}
     header h1{font-size:24px}
@@ -293,11 +310,11 @@
 <div class="wrap">
 
 <header>
-  <div class="eyebrow">매수 의사결정 분석 · 밸류에이션 + 검증상태</div>
-  <h1><span>SK하이닉스·삼성전자</span><span class="h1-tail">사도 될까, 목표가는 얼마?</span></h1>
-  <p class="sub">초보자가 핵심을 놓치지 않도록 결론은 짧게, 숫자는 출처·기준일·검증상태와 함께 보여줍니다. 계산은 아래 데이터 객체에서 자동 렌더링됩니다.</p>
+  <div class="eyebrow">투자 의사결정 점검 · 밸류에이션 + 검증상태</div>
+  <h1><span>SK하이닉스·삼성전자</span><span class="h1-tail">지금 가격, 어떤 조건이면 말이 될까?</span></h1>
+  <p class="sub">결론보다 먼저 가정과 검증상태를 분리합니다. 가격·멀티플·EPS·거시 트리거는 기준일이 다르므로, “싸다”는 문장은 항상 조건부로 읽어야 합니다.</p>
   <div class="badges">
-    <div class="asof"><span class="dot"></span><span>기준 · 한국주식 <b>2026-05-27 장마감</b> / 미국주식 <b>2026-05-26 종가</b> · 보유기간 가정 <b>~2026년 말</b></span></div>
+    <div class="asof"><span class="dot"></span><span>가격 기준 · 한국/미국주식 <b>2026-05-29 종가</b> · EPS 스냅샷 <b>2026-05-27</b> · 보유기간 가정 <b>~2026년 말</b></span></div>
     <div class="asof" style="border-color:rgba(245,191,61,.45);color:var(--amb)"><span>교육용 정리 · <b>매수·매도 권유가 아닙니다</b></span></div>
   </div>
 </header>
@@ -306,18 +323,25 @@
   <section>
     <div class="sectit"><span class="num">01</span><h2>한 줄 결론</h2></div>
     <div class="tldr">
-      <div class="big">싸지만<small>지금은 타이밍 게임</small></div>
-      <p><b>밸류에이션은 미국 메모리보다 낮다.</b> 하지만 이 결론은 2026E EPS 컨센서스가 맞아야 성립한다. 보유기간 7개월은 메모리 가격 피크 논쟁과 겹치므로, 핵심은 <b>목표가 하나</b>가 아니라 <b>분할 진입·EPS 추정치 추적·무효화 손절</b>이다.</p>
-      <p style="margin-top:8px;font-size:13.5px;color:var(--mut)"><b style="color:var(--blu)">더 큰 그림(§10·11):</b> AI 기술 자체는 실체가 있고(§10), 메모리주가 싼지는 EPS에 달렸으며, 이 강세장을 끝낼 방아쇠는 기술 실패가 아니라 <b>금리</b>다(§11). <b>지금은 아직 방아쇠 전</b>이다.</p>
+      <div class="big">조건부 저평가<small>EPS가 관문</small></div>
+      <p><b>2026E EPS가 유지된다는 가정에서는 한국 메모리주의 PER이 미국 메모리 기준주보다 낮다.</b> 하지만 가격은 2026-05-29로 갱신됐고 EPS는 2026-05-27 스냅샷이라, 핵심은 <b>목표가 하나</b>가 아니라 <b>동일 기준 재검산·EPS 추정치 추적·무효화 규율</b>이다.</p>
+      <p style="margin-top:8px;font-size:13.5px;color:var(--mut)"><b style="color:var(--blu)">더 큰 그림(§10·11):</b> AI 수요가 진짜여도 메모리주 수익률은 CAPEX 지속성, HBM/DRAM 가격, EPS, 금리에 의해 따로 결정된다. 현재 공개 금리·물가 지표만 보면 <b>금리 트리거는 아직 조건부 감시 구간</b>이다.</p>
+    </div>
+    <div class="auditBanner"><b>먼저 확인할 점:</b> 가격·시총은 2026-05-29 최신 공개 스냅샷으로 갱신했지만, 2026E EPS는 2026-05-27 FnGuide 계열 스냅샷입니다. StockAnalysis의 최신 Forward PE와 대시보드 산식이 완전히 같지 않으므로, 실제 투자 전에는 같은 데이터벤더 기준으로 EPS·PER·PBR을 다시 맞춰야 합니다.</div>
+    <div class="decisionGrid" aria-label="핵심 검증 상태">
+      <article class="decisionCard fact"><div class="k">Fact</div><div class="v">가격은 최신화</div><p>한국·미국 주요 비교 주가는 2026-05-29 종가로 맞췄습니다. 단, 한국 공식 KRX 값은 별도 재확인이 필요합니다.</p></article>
+      <article class="decisionCard est"><div class="k">Estimate</div><div class="v">EPS는 추정치</div><p>저평가 논리는 2026E EPS가 유지될 때만 성립합니다. EPS -20%에서는 역프 대부분이 사라집니다.</p></article>
+      <article class="decisionCard view"><div class="k">View</div><div class="v">AI·금리는 프레임</div><p>AI 사이클과 Gravity Rules는 투자 가설을 스트레스 테스트하는 관점이지 검증된 목표가가 아닙니다.</p></article>
+      <article class="decisionCard act"><div class="k">Action</div><div class="v">분할·무효화</div><p>진입보다 먼저 EPS 하향, DRAM/HBM 가격 반전, 금리 5.3% 추세 돌파 같은 무효화 신호를 추적합니다.</p></article>
     </div>
   </section>
 
   <section>
     <div class="sectit"><span class="num">02</span><h2>5사 밸류에이션 한눈 비교</h2></div>
-    <p class="lead">현재가·PER·PBR 같은 기본 숫자는 표에서 바로 확인하되, 각 행의 배지를 눌러 출처와 기준일을 추적할 수 있게 바꿨습니다.</p>
+    <p class="lead">가격·시총은 최신 종가로 맞추고, 한국주 Forward PER은 2026E EPS 스냅샷으로 다시 계산했습니다. PBR은 짧은 기간 가격 변화를 반영한 근사값이라 공식 데이터 재확인이 필요합니다.</p>
     <div class="desktop-table table-wrap">
       <table class="vtab" id="valuationTable">
-        <caption>한국주는 2026-05-27 장마감, 미국주는 2026-05-26 종가 기준. 컨센서스와 멀티플은 공개 데이터 스냅샷입니다.</caption>
+        <caption>가격은 2026-05-29 종가 기준. 한국주 Forward PER은 2026-05-27 EPS 스냅샷을 2026-05-29 가격에 적용한 대시보드 재계산값입니다.</caption>
         <thead>
           <tr>
             <th scope="col">종목</th><th scope="col">현재가</th><th scope="col">시총</th><th scope="col">Fwd PER</th><th scope="col">Trailing PER</th><th scope="col">PBR</th><th scope="col">52주 저점대비</th><th scope="col">분류</th><th scope="col">출처</th>
@@ -327,7 +351,7 @@
       </table>
     </div>
     <div class="mobile-cards grid" id="valuationCards"></div>
-    <div class="note" style="margin-top:14px"><b>읽는 법:</b> Forward PER은 미래 이익 예상치로 나눈 값이라 투자 판단에 더 직접적입니다. 단, EPS가 추정치라서 “낮은 PER = 확정적으로 싸다”는 뜻은 아닙니다.</div>
+    <div class="note" style="margin-top:14px"><b>읽는 법:</b> Forward PER은 미래 이익 예상치로 나눈 값이라 투자 판단에 더 직접적입니다. 단, 데이터벤더마다 EPS 기준이 달라질 수 있어 “낮은 PER = 확정적으로 싸다”가 아니라 “이 EPS가 맞으면 싸다”로 읽어야 합니다.</div>
   </section>
 
   <section>
@@ -363,7 +387,7 @@
 
   <section>
     <div class="sectit"><span class="num">04</span><h2>STEP 1 — EPS 입력값 검증</h2></div>
-    <p class="lead">이 대시보드의 토대입니다. 2026E EPS는 확인값으로 쓰되, 2027E와 3개월 추정치 변화율은 공개 페이지에서 완전 확인되지 않는 항목으로 분리했습니다.</p>
+    <p class="lead">이 대시보드의 토대입니다. 2026E EPS는 이전 FnGuide 계열 스냅샷을 사용하지만, 최신 가격 사이트의 Forward PE와 기준이 다를 수 있으므로 “검증된 사실”이 아니라 “재확인해야 할 핵심 입력값”으로 둡니다.</p>
     <div class="epsGrid" id="epsCards"></div>
     <div class="table-wrap" style="margin-top:14px">
       <table class="vtab" id="sensitivityTable">
@@ -375,20 +399,20 @@
       </table>
     </div>
     <div class="warnBox" style="margin-top:14px">
-      <b>가장 중요한 경고:</b> 2026E EPS가 사실이 아니라 추정치라는 점은 유지합니다. 특히 2027E와 3개월 revision trend는 원자료가 필요하므로 “확인 불가/추가 검증 필요”로 명시했습니다.
+      <b>가장 중요한 경고:</b> 2026E EPS가 사실이 아니라 추정치라는 점이 이 대시보드의 최대 리스크입니다. 최신 Forward PE와 EPS 스냅샷이 같은 기준으로 맞지 않으면 목표가와 역프 계산도 함께 흔들립니다.
     </div>
   </section>
 
   <section>
     <div class="sectit"><span class="num">05</span><h2>목표가 — 시나리오별 확률가중</h2></div>
-    <p class="lead">프롬프트 요구대로 단일 목표가 대신 bull/base/bear의 조건·PER·확률·기대값을 한 화면에 묶었습니다. 확률은 시장이 준 값이 아니라 분석 가정입니다.</p>
+    <p class="lead">단일 목표가 대신 bull/base/bear의 조건·PER·확률·기대값을 한 화면에 묶었습니다. 확률은 시장이 준 값이 아니라 분석 가정이며, EPS가 바뀌면 기대값도 같이 바뀝니다.</p>
     <div class="grid g2" id="scenarioPanels"></div>
     <div class="note" style="margin-top:14px"><b>핵심:</b> Base는 2026E EPS 달성 + 미국 메모리 수준 일부 인정이 필요합니다. Bull은 “메모리가 사이클을 졸업했다”는 답이고, Bear는 “이번에도 사이클 회귀”라는 답입니다.</div>
   </section>
 
   <section>
-    <div class="sectit"><span class="num">06</span><h2>6개 직교 관점 — 영향과 행동</h2></div>
-    <p class="lead">거시·유동성·지정학·사이클·펀더멘털·수급을 “PER/EPS에 어떤 방향으로 작용하는가”와 “투자자가 무엇을 확인해야 하는가”로 정리했습니다.</p>
+    <div class="sectit"><span class="num">06</span><h2>리스크 6개 — 영향과 행동</h2></div>
+    <p class="lead">거시·유동성·지정학·사이클·펀더멘털·수급을 “PER/EPS를 어떻게 흔드는가”와 “무엇을 확인하면 가설을 유지/폐기할 것인가”로 정리했습니다.</p>
     <div class="table-wrap factorTable">
       <table class="vtab" id="factorTable">
         <caption>정확한 수치가 수시로 변하는 항목은 검증 필요 배지를 붙였습니다.</caption>
@@ -432,8 +456,8 @@
   </section>
 
   <section>
-    <div class="sectit"><span class="num">08</span><h2>매수 실행 플랜</h2></div>
-    <p class="lead">“분할 가능” 조건을 실제 행동표로 바꿨습니다. 가격은 2026-05-27 종가 기준으로 자동 계산됩니다.</p>
+    <div class="sectit"><span class="num">08</span><h2>실행·무효화 플랜</h2></div>
+    <p class="lead">분할 진입 조건과 thesis 폐기 조건을 같은 화면에 둡니다. 가격대는 2026-05-29 종가 기준으로 자동 계산됩니다.</p>
     <div class="grid g2">
       <div class="panel">
         <div style="font-weight:900;font-size:14px;margin-bottom:6px;color:var(--blu)">진입 — 3회 분할</div>
@@ -460,28 +484,28 @@
     <div class="sectit"><span class="num">09</span><h2>정리</h2></div>
     <div class="panel">
       <ol style="margin-left:18px;font-size:14.5px;color:#e1e9f2">
-        <li style="margin:6px 0"><b>밸류는 싸다.</b> 2026E EPS 기준으로 SK·삼성은 마이크론보다 낮은 forward PER에 거래된다.</li>
-        <li style="margin:6px 0"><b>하지만 싸다는 말은 EPS 달성 조건부다.</b> EPS가 20% 낮아지면 역프는 대부분 사라진다.</li>
+        <li style="margin:6px 0"><b>조건부 저평가다.</b> 2026E EPS 스냅샷 기준으로 SK·삼성은 마이크론보다 낮은 forward PER에 거래된다.</li>
+        <li style="margin:6px 0"><b>하지만 이 말은 EPS 달성 조건부다.</b> EPS가 20% 낮아지면 역프는 대부분 사라진다.</li>
         <li style="margin:6px 0"><b>7개월 보유기간은 타이밍 게임이다.</b> 사이클 피크 논쟁이 보유기간 안에 들어온다.</li>
         <li style="margin:6px 0"><b>실행은 분할 + 무효화 규율이다.</b> 목표가보다 EPS 추정치와 가격 신호를 먼저 추적한다.</li>
       </ol>
     </div>
     <div class="note" style="margin-top:14px">
-      <b>여기까지는 ‘개별주가 싼가’(미시):</b> 아래 <b>§10</b>은 한 발 물러나 ‘이 AI·메모리 사이클 자체가 버블인가’, <b>§11</b>은 ‘무엇이 이 강세장을 끝내는가 — 금리’를 봅니다. 매수 결론은 이 거시 그림까지 함께 봐야 완성됩니다.
+      <b>여기까지가 개별주 밸류에이션 점검입니다.</b> 아래 <b>§10</b>과 <b>§11</b>은 본론의 결론을 새로 만드는 구간이 아니라, “AI CAPEX와 금리가 이 결론을 깨뜨릴 수 있는가”를 확인하는 거시 스트레스 테스트입니다.
     </div>
   </section>
 
   <section>
-    <div class="sectit"><span class="num">10</span><h2>AI 사이클은 버블인가</h2></div>
-    <p class="lead">AI의 기술 채택, 인프라 CAPEX, 주식 밸류에이션을 분리해 봅니다. 결론부터 말하면 기술은 이미 실체가 있지만, CAPEX ROI와 메모리 EPS 지속성은 아직 증명 중입니다.</p>
+    <div class="sectit"><span class="num">10</span><h2>거시 스트레스 테스트 — AI 사이클은 버블인가</h2></div>
+    <p class="lead">AI의 기술 채택, 인프라 CAPEX, 주식 밸류에이션을 분리합니다. 이 섹션의 역할은 “AI가 진짜인가”보다 “AI가 진짜여도 메모리주 EPS가 버틸 수 있는가”를 점검하는 것입니다.</p>
     <div class="triad" id="aiVerdicts"></div>
     <div class="note good" style="margin-top:14px">
-      <b>5단계 판정:</b> 현재 AI 사이클은 2. 생산성 검증을 통과하는 중이며, 동시에 3. 인프라 과잉투자 위험을 키우는 구간입니다. 아직 4. 수익성 검증 실패나 5. 버블 붕괴/정상화로 단정할 근거는 부족합니다.
+      <b>5단계 판정:</b> 현재 AI 사이클은 생산성 검증을 통과하는 중이지만, 동시에 인프라 과잉투자 위험을 키우는 구간입니다. 아직 수익성 검증 실패나 버블 붕괴로 단정할 근거는 부족하지만, 메모리주는 CAPEX 둔화가 EPS로 빠르게 전달될 수 있습니다.
     </div>
 
     <div class="table-wrap cycleTable cycleDesktop" style="margin-top:14px">
       <table class="vtab cycleMatrix" id="cycleCompareTable">
-        <caption>닷컴버블, 스마트폰 초기, AI 사이클 비교. 역사 수치는 안정 자료, 2026 이후 수치는 최신 웹 확인값입니다.</caption>
+        <caption>닷컴버블, 스마트폰 초기, AI 사이클 비교. 역사 수치는 안정 자료, 2026 이후 수치는 링크된 공개 스냅샷 기준입니다.</caption>
         <thead>
           <tr>
             <th scope="col">비교 항목</th>
@@ -542,12 +566,12 @@
   </section>
 
   <section>
-    <div class="sectit"><span class="num">11</span><h2>금리가 버블을 끝낸다 — Gravity Rules</h2></div>
-    <p class="lead">KB증권 이은택·김민규 위원의 하반기 전략 <b>“Gravity Rules”</b>(2026-05-29) 관점입니다. 핵심은 <b>버블은 기술이 가짜라서가 아니라 ‘금리’가 방아쇠를 당길 때 무너진다</b>는 것. 한 기관 애널리스트의 견해이며, 우리 대시보드의 검증된 사실이 아니라 추적용 프레임으로 싣습니다. <a class="sourceBadge warn" href="https://m.blog.naver.com/onejejuwave/224300807261" target="_blank" rel="noopener">KB ‘Gravity Rules’ · 2026-05-29</a></p>
+    <div class="sectit"><span class="num">11</span><h2>금리 트리거 — Gravity Rules</h2></div>
+    <p class="lead">KB증권 이은택·김민규 위원의 하반기 전략 <b>“Gravity Rules”</b>(2026-05-29)를 추적용 프레임으로 사용합니다. 핵심은 <b>기술 실패가 아니라 금리·물가가 유동성의 방아쇠가 될 수 있다</b>는 관점입니다. 이는 한 기관 애널리스트의 해석이며, 대시보드의 검증된 사실이 아닙니다. <a class="sourceBadge warn" href="https://m.blog.naver.com/onejejuwave/224300807261" target="_blank" rel="noopener">KB ‘Gravity Rules’ · 2026-05-29</a></p>
 
     <div class="analogy">
       <div class="tag">한 줄 결론</div>
-      <p>강세장은 유지. 단, 미 10년물 금리가 ‘역사적 고점’을 추세적으로 돌파하고, 인플레가 ‘이제 되돌릴 수 없다’는 절망으로 바뀌는 순간이 버블의 끝입니다. <b>현재는 아직 방아쇠 전</b>이며, 이은택 위원은 그 시점을 “빨라도 올가을 이후”로 봅니다.<br><span style="font-size:12.5px;color:var(--dim)">§10의 ‘5단계 판정’·‘Bull/Base/Bear’와 본 절의 ‘방아쇠 전/후’는 모두 <b>‘아직 붕괴 전’</b>이라는 같은 결론을 세 각도에서 본 것입니다.</span></p>
+      <p>KB 프레임에서는 미 10년물 금리가 익숙한 박스권을 넘어 추세적으로 새 고점에 진입하고, 근원물가가 되돌리기 어려운 긴축 신호로 바뀔 때 위험이 커집니다. <b>현재 공개 지표만 보면 아직 트리거 전으로 해석됩니다.</b><br><span style="font-size:12.5px;color:var(--dim)">이 판단은 매수 신호가 아니라, §10의 AI CAPEX 리스크와 함께 봐야 할 거시 감시 조건입니다.</span></p>
     </div>
 
     <div class="table-wrap" style="margin-top:14px">
@@ -579,8 +603,8 @@
       <h3 style="font-size:15px;margin-bottom:10px;color:var(--grn)">현재 진단 — 방아쇠는 당겨졌나?</h3>
       <div class="grid g3">
         <div class="panel tight" style="text-align:center">
-          <div class="mono" style="font-size:26px;font-weight:900;color:var(--grn)">4.44%</div>
-          <div style="font-size:12px;color:var(--mut)">미 10년물 (2026-05-29)</div>
+          <div class="mono" style="font-size:26px;font-weight:900;color:var(--grn)">4.45%</div>
+          <div style="font-size:12px;color:var(--mut)">미 10년물 (FRED 2026-05-28)</div>
           <div style="font-size:11.5px;color:var(--dim);margin-top:4px">트리거 5.0~5.3% 한참 아래</div>
           <div style="margin-top:6px"><a class="sourceBadge good" href="https://fred.stlouisfed.org/series/DGS10" target="_blank" rel="noopener">FRED DGS10</a></div>
         </div>
@@ -591,14 +615,14 @@
           <div style="margin-top:6px"><a class="sourceBadge good" href="https://www.bls.gov/news.release/cpi.nr0.htm" target="_blank" rel="noopener">BLS CPI</a></div>
         </div>
         <div class="panel tight" style="text-align:center">
-          <div class="mono" style="font-size:26px;font-weight:900;color:var(--amb)">3.0%</div>
+          <div class="mono" style="font-size:26px;font-weight:900;color:var(--amb)">3.04%</div>
           <div style="font-size:12px;color:var(--mut)">근원 sticky CPI 12개월 (2026-04)</div>
           <div style="font-size:11.5px;color:var(--dim);margin-top:4px">트리거 3.4% 아래</div>
           <div style="margin-top:6px"><a class="sourceBadge good" href="https://fred.stlouisfed.org/series/CORESTICKM159SFRBATL" target="_blank" rel="noopener">Atlanta Fed(FRED)</a></div>
         </div>
       </div>
       <div class="note good" style="margin-top:14px">
-        금리·근원물가 모두 임계 아래 → 이은택 위원은 향후 1~2분기 랠리 지속, 코스피 10,000pt 가능성까지 제시합니다(현 약 8,476pt). <b>정직한 단서: 5.0%는 이미 2023년 10월(장중 ~5.02%)에 터치한 ‘2007년 이후 최고’ 수준이라, 진짜 미경험 영역은 추세적 5.3% 돌파입니다.</b> <a class="sourceBadge soft" href="https://www.cnbc.com/2023/10/20/what-the-10-year-treasury-yield-crossing-5percent-means-for-you.html" target="_blank" rel="noopener">2023 피크 ~5.02%</a> <a class="sourceBadge warn" href="https://tradingeconomics.com/south-korea/stock-market" target="_blank" rel="noopener">코스피 · 2026-05-29</a>
+        금리·근원물가가 KB 프레임의 핵심 임계값 아래에 있다는 해석은 유지됩니다. 다만 <b>5.0%는 이미 2023년 10월 장중 약 5.02%로 터치된 적이 있어, 더 엄격한 위험선은 5.3%의 추세적 돌파로 보는 편이 정직합니다.</b> 코스피 8,476pt와 1~2분기 랠리 전망은 2차 출처 기반 관점이므로 검증된 사실과 분리합니다. <a class="sourceBadge soft" href="https://www.cnbc.com/2023/10/20/what-the-10-year-treasury-yield-crossing-5percent-means-for-you.html" target="_blank" rel="noopener">2023 피크 ~5.02%</a> <a class="sourceBadge warn" href="https://tradingeconomics.com/south-korea/stock-market" target="_blank" rel="noopener">코스피 · 2026-05-29</a>
       </div>
     </div>
 
@@ -610,10 +634,10 @@
   <section>
     <div class="sectit"><span class="num">12</span><h2>통합 결론</h2></div>
     <div class="tldr" style="grid-template-columns:1fr">
-      <p style="font-size:15px;color:#e8eef7">기술은 진짜다 <b>≠</b> 지금 이 가격이 옳다. SK·삼성은 <b>2026E EPS가 버티면</b> 미국 메모리보다 싸고(§1~9), 이 강세장을 끝낼 방아쇠는 기술 실패가 아니라 <b>금리</b> — 미 10년물 <b>5.3% 추세 돌파</b>(2007년 이후 미경험) + 근원물가 3% 상회 — 다(§10·11). <b>현재는 아직 방아쇠 전</b>. 그래서 결론은 목표가 하나가 아니라 <b>분할 진입 · EPS 추적 · 금리 감시 · 무효화 손절</b>이다.</p>
+      <p style="font-size:15px;color:#e8eef7">기술은 진짜다 <b>≠</b> 지금 이 가격이 옳다. SK·삼성은 <b>2026E EPS가 유지될 때</b> 미국 메모리보다 낮은 PER에 거래되지만, 그 EPS는 추정치이고 데이터벤더 기준도 맞춰야 합니다. AI CAPEX 둔화와 미 10년물 <b>5.3% 추세 돌파</b> 같은 금리 트리거가 동시에 오면 EPS와 멀티플이 함께 눌릴 수 있습니다. 그래서 결론은 목표가 하나가 아니라 <b>동일 기준 재검산 · 분할 진입 · EPS 추적 · 금리 감시 · 무효화 손절</b>입니다.</p>
     </div>
     <div class="disc">
-      <b>면책</b> · 공개 데이터로 정리한 교육용 분석이며, 매수·매도 권유가 아닙니다. 모든 수치는 기준 시점 스냅샷으로 실시간 변동합니다. EPS·목표가·컨센서스는 추정치이며, 2027E EPS와 3개월 revision trend처럼 공개 페이지에서 완전 확인되지 않은 값은 확인 필요로 분리했습니다. 투자 결정 전 최신 공시·리포트·데이터벤더 값을 직접 확인하세요.
+      <b>면책</b> · 공개 데이터로 정리한 교육용 분석이며, 매수·매도 권유가 아닙니다. 모든 수치는 기준 시점 스냅샷으로 실시간 변동합니다. EPS·목표가·컨센서스는 추정치이며, 가격·PER·PBR은 데이터벤더마다 기준이 달라질 수 있습니다. 투자 결정 전 최신 공시·리포트·데이터벤더 값을 같은 기준으로 직접 재확인하세요.
     </div>
   </section>
 
@@ -653,11 +677,15 @@
 <script>
 const DATA = {
   sources: {
-    naverSk: {label:"네이버·FnGuide SK", date:"2026-05-27", url:"https://m.stock.naver.com/domestic/stock/000660/total", status:"good", note:"가격·PER·PBR·52주 저점"},
-    naverSamsung: {label:"네이버·FnGuide 삼성", date:"2026-05-27", url:"https://m.stock.naver.com/domestic/stock/005930/total", status:"good", note:"가격·PER·PBR·52주 저점"},
-    stockMu: {label:"StockAnalysis MU", date:"2026-05-26", url:"https://stockanalysis.com/stocks/mu/", status:"good", note:"미국주 가격·시총·멀티플"},
-    stockSndk: {label:"StockAnalysis SNDK", date:"2026-05-26", url:"https://stockanalysis.com/stocks/sndk/", status:"soft", note:"미국주 가격·시총·멀티플"},
-    stockNvda: {label:"StockAnalysis NVDA", date:"2026-05-26", url:"https://stockanalysis.com/stocks/nvda/", status:"soft", note:"AI 플랫폼 peer"},
+    dashboardSkMix: {label:"혼합 검증 SK", short:"SK 혼합", date:"2026-05-29/05-27", url:"https://stockanalysis.com/quote/krx/000660/", status:"warn", note:"가격·시총·TTM PE는 2026-05-29 StockAnalysis, EPS/PBR은 2026-05-27 FnGuide 계열 스냅샷을 반영한 대시보드 재계산값"},
+    dashboardSamsungMix: {label:"혼합 검증 삼성", short:"삼성 혼합", date:"2026-05-29/05-27", url:"https://stockanalysis.com/quote/krx/005930/", status:"warn", note:"가격·시총·TTM PE는 2026-05-29 StockAnalysis, EPS/PBR은 2026-05-27 FnGuide 계열 스냅샷을 반영한 대시보드 재계산값"},
+    stockKrSk: {label:"StockAnalysis KRX SK", short:"SK 가격", date:"2026-05-29", url:"https://stockanalysis.com/quote/krx/000660/", status:"soft", note:"SK하이닉스 가격 2,333,000원, 시총 1,652.46조, TTM PE 22.09, 52주 범위 203,000~2,379,000원"},
+    stockKrSamsung: {label:"StockAnalysis KRX 삼성", short:"삼성 가격", date:"2026-05-29", url:"https://stockanalysis.com/quote/krx/005930/", status:"soft", note:"삼성전자 가격 317,000원, 시총 2,015.75조, TTM PE 25.44, 52주 범위 55,600~323,000원"},
+    naverSk: {label:"네이버·FnGuide SK EPS", short:"SK EPS", date:"2026-05-27", url:"https://m.stock.naver.com/domestic/stock/000660/total", status:"warn", note:"2026E EPS와 PBR 스냅샷. 최신 가격/멀티플과 동일 기준 재확인 필요"},
+    naverSamsung: {label:"네이버·FnGuide 삼성 EPS", short:"삼성 EPS", date:"2026-05-27", url:"https://m.stock.naver.com/domestic/stock/005930/total", status:"warn", note:"2026E EPS와 PBR 스냅샷. 최신 가격/멀티플과 동일 기준 재확인 필요"},
+    stockMu: {label:"StockAnalysis MU", short:"MU", date:"2026-05-29", url:"https://stockanalysis.com/stocks/mu/", status:"good", note:"미국주 가격 $971.00, 시총 $1.10T, Forward PE 10.27, TTM PE 45.68"},
+    stockSndk: {label:"StockAnalysis SNDK", short:"SNDK", date:"2026-05-29", url:"https://stockanalysis.com/stocks/sndk/", status:"soft", note:"미국주 가격 $1,694.98, 시총 $251.01B, Forward PE 10.46, TTM PE 57.06. 분사/상장 이력 때문에 52주 저점 대비 수익률은 표기 제외"},
+    stockNvda: {label:"StockAnalysis NVDA", short:"NVDA", date:"2026-05-29", url:"https://stockanalysis.com/stocks/nvda/", status:"soft", note:"AI 플랫폼 peer. 가격 $211.14, 시총 $5.11T, Forward PE 21.24"},
     trendforce: {label:"TrendForce", date:"수시", url:"https://www.trendforce.com/", status:"warn", note:"DRAM/HBM 가격 추세는 원문 확인 필요"},
     trendforceQ126: {label:"TrendForce 1Q26 가격", date:"2026-01-05", url:"https://www.trendforce.com/presscenter/news/20260105-12860.html", status:"good", note:"1Q26 DRAM/NAND 계약가 및 AI 서버 수요"},
     trendforceQ226: {label:"TrendForce 2Q26 가격", date:"2026-03-31", url:"https://www.trendforce.com/presscenter/news/20260331-12995.html", status:"good", note:"2Q26 메모리 계약가와 HBM/서버 우선 배정"},
@@ -676,9 +704,9 @@ const DATA = {
     macro: {label:"거시 데이터", date:"2026-05", url:"https://www.federalreserve.gov/monetarypolicy.htm", status:"warn", note:"금리·인플레·국채금리는 리프레시 필요"},
     krx: {label:"KRX 수급", date:"수시", url:"https://data.krx.co.kr/", status:"warn", note:"외국인 순매수/순매도는 일자별 재확인 필요"},
     userPrompt: {label:"세션 검증값", date:"2026-05-27", url:"https://github.com/londonpotato1/memory-rerating-dashboard", status:"soft", note:"사용자 제공 프롬프트와 이전 세션 검증값"},
-    fred10y: {label:"FRED 미 10년물(DGS10)", date:"2026-05-29", url:"https://fred.stlouisfed.org/series/DGS10", status:"good", note:"미 10년물 국채금리 약 4.44% (2026-05-29). 5.0~5.3% 트리거 한참 아래"},
+    fred10y: {label:"FRED 미 10년물(DGS10)", short:"FRED 10Y", date:"2026-05-28", url:"https://fred.stlouisfed.org/series/DGS10", status:"good", note:"미 10년물 국채금리 4.45% (2026-05-28, FRED 최신 관측). 5.0~5.3% 트리거 아래"},
     blsCpi: {label:"BLS 미 CPI(2026-04)", date:"2026-05-12", url:"https://www.bls.gov/news.release/cpi.nr0.htm", status:"good", note:"근원 CPI 2.8% YoY, 헤드라인 3.8% (2026년 4월분)"},
-    atlantaSticky: {label:"Atlanta Fed sticky CPI(FRED)", date:"2026-04", url:"https://fred.stlouisfed.org/series/CORESTICKM159SFRBATL", status:"good", note:"근원 sticky-price CPI 12개월 3.0% (2026-04)"},
+    atlantaSticky: {label:"Atlanta Fed sticky CPI(FRED)", short:"Sticky CPI", date:"2026-04", url:"https://fred.stlouisfed.org/series/CORESTICKM159SFRBATL", status:"good", note:"근원 sticky-price CPI 12개월 3.03893% (2026-04)"},
     ust2023peak: {label:"미 10년물 2023 피크", date:"2023-10-23", url:"https://www.cnbc.com/2023/10/20/what-the-10-year-treasury-yield-crossing-5percent-means-for-you.html", status:"soft", note:"2023-10 장중 약 5.02%(2007년 이후 최고). '5.0%=미경험' 주장의 반례"},
     kospiLevel: {label:"코스피 지수", date:"2026-05-29", url:"https://tradingeconomics.com/south-korea/stock-market", status:"warn", note:"코스피 약 8,476pt 사상최고권 (2026-05-29), 급등 지속"},
     kbGravity: {label:"KB 이은택·김민규 'Gravity Rules'", date:"2026-05-29", url:"https://m.blog.naver.com/onejejuwave/224300807261", status:"warn", note:"KB증권 하반기 전략 리포트(80p)의 블로그 요약 경유 2차 출처"},
@@ -688,19 +716,19 @@ const DATA = {
     missing: {label:"확인 필요", date:"N/A", url:"#", status:"bad", note:"공개 페이지에서 완전 확인 불가"}
   },
   peers: [
-    {id:"sk", name:"SK하이닉스", ticker:"000660", type:"한국 메모리", price:2243000, priceText:"2,243,000원", marketCap:"1,598조", fwdPE:7.56, trailingPE:21.67, pbr:9.43, low52:201500, source:"naverSk", chip:"p-cheap"},
-    {id:"samsung", name:"삼성전자", ticker:"005930", type:"한국 메모리", price:307000, priceText:"307,000원", marketCap:"1,795조", fwdPE:7.14, trailingPE:24.81, pbr:4.27, low52:54200, source:"naverSamsung", chip:"p-cheap"},
-    {id:"mu", name:"마이크론", ticker:"MU", type:"미국 메모리", price:895.88, priceText:"$895.88", marketCap:"$1.01T", fwdPE:9.56, trailingPE:42.14, pbr:null, lowGain:872, source:"stockMu", chip:"p-mid"},
-    {id:"sndk", name:"샌디스크", ticker:"SNDK", type:"미국 NAND", price:1589.55, priceText:"$1,589.55", marketCap:"$235B", fwdPE:9.8, trailingPE:53.5, pbr:null, lowGain:null, source:"stockSndk", chip:"p-mid"},
-    {id:"nvda", name:"엔비디아", ticker:"NVDA", type:"AI 플랫폼", price:215, priceText:"약 $215", marketCap:"$5.2T", fwdPE:22, trailingPE:null, pbr:null, lowGain:null, source:"stockNvda", chip:"p-rich"}
+    {id:"sk", name:"SK하이닉스", ticker:"000660", type:"한국 메모리", price:2333000, priceText:"2,333,000원", marketCap:"1,652조", fwdPE:7.87, trailingPE:22.09, pbr:9.8, pbrApprox:true, low52:203000, source:"dashboardSkMix", chip:"p-cheap"},
+    {id:"samsung", name:"삼성전자", ticker:"005930", type:"한국 메모리", price:317000, priceText:"317,000원", marketCap:"2,016조", fwdPE:7.37, trailingPE:25.44, pbr:4.4, pbrApprox:true, low52:55600, source:"dashboardSamsungMix", chip:"p-cheap"},
+    {id:"mu", name:"마이크론", ticker:"MU", type:"미국 메모리", price:971, priceText:"$971.00", marketCap:"$1.10T", fwdPE:10.27, trailingPE:45.68, pbr:null, low52:92.22, source:"stockMu", chip:"p-mid"},
+    {id:"sndk", name:"샌디스크", ticker:"SNDK", type:"미국 NAND", price:1694.98, priceText:"$1,694.98", marketCap:"$251B", fwdPE:10.46, trailingPE:57.06, pbr:null, low52:null, source:"stockSndk", chip:"p-mid"},
+    {id:"nvda", name:"엔비디아", ticker:"NVDA", type:"AI 플랫폼", price:211.14, priceText:"$211.14", marketCap:"$5.11T", fwdPE:21.24, trailingPE:32.34, pbr:null, low52:132.92, source:"stockNvda", chip:"p-rich"}
   ],
   eps: {
-    sk: {label:"SK하이닉스", eps2025:58955, eps2026:296550, eps2027:null, revision:"정량 확인 필요", source:"naverSk", caveat:"2026E EPS 점값은 확인. 3개월 상향률과 2027E는 별도 데이터벤더/리포트 필요."},
-    samsung: {label:"삼성전자", eps2025:6564, eps2026:43004, eps2027:null, revision:"정량 확인 필요", source:"naverSamsung", caveat:"2026E EPS 점값은 확인. 3개월 상향률과 2027E는 별도 데이터벤더/리포트 필요."}
+    sk: {label:"SK하이닉스", eps2025:58955, eps2026:296550, eps2027:null, revision:"정량 확인 필요", source:"naverSk", caveat:"2026E EPS는 2026-05-27 스냅샷입니다. 최신 가격 사이트의 Forward PE와 같은 기준인지 재검산이 필요합니다."},
+    samsung: {label:"삼성전자", eps2025:6564, eps2026:43004, eps2027:null, revision:"정량 확인 필요", source:"naverSamsung", caveat:"2026E EPS는 2026-05-27 스냅샷입니다. 최신 가격 사이트의 Forward PE와 같은 기준인지 재검산이 필요합니다."}
   },
   scenarios: {
     sk: {
-      label:"SK하이닉스", current:2243000, source:"naverSk",
+      label:"SK하이닉스", current:2333000, source:"dashboardSkMix",
       cases:[
         {name:"Bull", klass:"ubull", prob:25, range:[3500000,4000000], per:"11.8~13.5", condition:"재평가 지속 + 사이클 2027 연장", color:"u-bull"},
         {name:"Base", klass:"ubase", prob:45, range:[2600000,2900000], per:"8.5~10", condition:"EPS 달성 + 수급 소진 + MU 수준 일부 인정", color:"u-base"},
@@ -708,7 +736,7 @@ const DATA = {
       ]
     },
     samsung: {
-      label:"삼성전자", current:307000, source:"naverSamsung",
+      label:"삼성전자", current:317000, source:"dashboardSamsungMix",
       cases:[
         {name:"Bull", klass:"ubull", prob:25, range:[560000,590000], per:"13~14", condition:"메모리 재평가 + 파운드리 흑자전환 가시화", color:"u-bull"},
         {name:"Base", klass:"ubase", prob:45, range:[400000,470000], per:"9~11", condition:"EPS 달성 + 파운드리 적자 축소", color:"u-base"},
@@ -721,12 +749,12 @@ const DATA = {
     {name:"유동성", read:"신용스프레드와 위험선호가 우호적이면 멀티플 하방을 완충.", effect:"+ 중", pill:"p-pos", action:"VIX·스프레드 급등 시 분할매수 속도 낮춤", source:"macro"},
     {name:"지정학·전쟁", read:"미중 반도체 통제·대만/한반도 리스크는 요구수익률을 높임.", effect:"− 꼬리", pill:"p-warn", action:"정책 이벤트 직전에는 전량 진입 회피", source:"macro"},
     {name:"반도체·AI 사이클", read:"HBM 수요는 강하지만 DRAM 가격 피크 시점이 EPS 지속성을 좌우.", effect:"+ EPS / − 타이밍", pill:"p-warn", action:"TrendForce 가격·재고·capex를 월간 확인", source:"trendforce"},
-    {name:"기업 펀더멘털", read:"2026E 기준 낮은 PER이 핵심 장점. 단 PBR과 ROE 정상화가 필요.", effect:"+ 조건부", pill:"p-pos", action:"EPS 하향 전환 전까지 thesis 유지", source:"naverSk"},
+    {name:"기업 펀더멘털", read:"2026E 기준 낮은 PER이 핵심 장점. 단 PBR과 ROE 정상화가 필요.", effect:"+ 조건부", pill:"p-pos", action:"EPS 하향 전환 전까지 thesis 유지", source:"dashboardSkMix"},
     {name:"수급·이벤트", read:"외국인 수급과 SK ADR 일정은 단기 가격 변동성을 키움.", effect:"− 단기 / + 촉매", pill:"p-warn", action:"순매도 둔화·ADR 세부조건 확인 후 추가 진입", source:"krx"}
   ],
   heat: [
-    {v:"+1,013%", l:"SK 52주 저점→종가", source:"naverSk"},
-    {v:"+466%", l:"삼성 52주 저점→종가", source:"naverSamsung"},
+    {v:"+1,049%", l:"SK 52주 저점→종가", source:"stockKrSk"},
+    {v:"+470%", l:"삼성 52주 저점→종가", source:"stockKrSamsung"},
     {v:"3~4Q26", l:"가격 피크 논쟁 구간", source:"trendforce"},
     {v:"EPS -20%", l:"역프 대부분 소멸", source:"userPrompt"}
   ],
@@ -770,7 +798,7 @@ const DATA = {
     {metric:"전력/데이터센터 병목", good:"용량 확보", bad:"지연·규제·전력비 급등", source:"oracleQ326"},
     {metric:"AI 앱 유료 전환율", good:"좌석·사용량 증가", bad:"무료 사용만 증가", source:"msftQ326"},
     {metric:"기업용 AI ROI", good:"비용 절감/매출 증가 사례", bad:"파일럿 후 확산 실패", source:"alphabetQ126"},
-    {metric:"미 10년물 금리 (KB 트리거)", good:"4~5% 박스권 유지 (현 4.44%)", bad:"5.0~5.3% 추세적 돌파 — 특히 5.3%는 2007년 이후 미경험", source:"fred10y"},
+    {metric:"미 10년물 금리 (KB 트리거)", good:"4~5% 박스권 유지 (FRED 최신 4.45%)", bad:"5.0~5.3% 추세적 돌파 — 특히 5.3%는 2007년 이후 미경험", source:"fred10y"},
     {metric:"근원물가 core CPI (KB 트리거)", good:"3% 미만 유지 (현 2.8%)", bad:"core 3.0%·sticky 3.4% 상회 = '되돌릴 수 없는' 긴축", source:"blsCpi"},
     {metric:"금리 상승의 성격 (KB 프레임·견해)", good:"되돌릴 수 있는 일시 상승 (유가·이벤트發)", bad:"인플레發 '되돌릴 수 없는' 긴축 (No way back)", source:"kbGravity"}
   ],
@@ -799,7 +827,8 @@ const fmt = {
 function sourceBadge(id, compact=false){
   const s = DATA.sources[id] || DATA.sources.missing;
   if(id === "missing") return `<span class="sourceBadge bad">확인 필요</span>`;
-  return `<a class="sourceBadge ${s.status}" href="${s.url}" target="_blank" rel="noopener">${compact ? s.label.split(" ")[0] : s.label} · ${s.date}</a>`;
+  const label = compact ? (s.short || s.label.split(" ")[0]) : s.label;
+  return `<a class="sourceBadge ${s.status}" href="${s.url}" target="_blank" rel="noopener">${label} · ${s.date}</a>`;
 }
 
 function lowGain(peer){
@@ -813,18 +842,26 @@ function discountToMu(peer){
   return (peer.fwdPE / mu - 1) * 100;
 }
 
+function gainColor(gain){
+  if(gain == null) return "var(--dim)";
+  if(gain >= 800) return "var(--red)";
+  if(gain >= 300) return "var(--amb)";
+  return "var(--grn)";
+}
+
 function renderValuation(){
   const tbody = document.querySelector("#valuationTable tbody");
   tbody.innerHTML = DATA.peers.map(p => {
     const gain = lowGain(p);
+    const pbrText = p.pbrApprox ? `≈${fmt.pe(p.pbr)}` : fmt.pe(p.pbr);
     return `<tr>
       <td>${p.name}<span class="tk">${p.ticker}</span></td>
       <td>${p.priceText}</td>
       <td>${p.marketCap}</td>
       <td><b style="color:${p.fwdPE < 9 ? "var(--grn)" : p.fwdPE < 15 ? "var(--blu)" : "var(--pur)"}">${fmt.pe(p.fwdPE)}</b></td>
       <td>${fmt.pe(p.trailingPE)}</td>
-      <td>${fmt.pe(p.pbr)}</td>
-      <td style="color:${gain == null ? "var(--dim)" : "var(--grn)"}">${gain == null ? "—" : fmt.pct(gain)}</td>
+      <td>${pbrText}</td>
+      <td style="color:${gainColor(gain)}">${gain == null ? "—" : fmt.pct(gain)}</td>
       <td><span class="pill ${p.chip}">${p.type}</span></td>
       <td>${sourceBadge(p.source,true)}</td>
     </tr>`;
@@ -935,7 +972,7 @@ function renderFactors(){
     <td>${sourceBadge(f.source,true)}</td>
   </tr>`).join("");
 
-  const audit = ["naverSk","naverSamsung","stockMu","trendforce","macro","krx","missing"];
+  const audit = ["dashboardSkMix","dashboardSamsungMix","stockMu","stockSndk","fred10y","blsCpi","trendforce","krx","missing"];
   document.getElementById("auditList").innerHTML = audit.map(id => {
     const s = DATA.sources[id];
     return `<div class="auditItem"><b>${s.label}</b><span>${s.note}</span>${sourceBadge(id,true)}</div>`;
