@@ -121,6 +121,27 @@ test("memory valuation tables and sources are moved into accessible details", ()
 	);
 });
 
+test("memory company section renders as stock-style scenario cards", () => {
+	const memory = memoryMarkup();
+	assert.match(
+		memory,
+		/id="memoryCompanyCards"/,
+		"memory company card container should remain present",
+	);
+	assert.match(
+		html,
+		/memoryStockCard/,
+		"SK Hynix and Samsung should render with stock-card styling",
+	);
+	for (const label of ["Bear", "Base", "Bull", "조건부 관찰"]) {
+		assert.match(
+			html,
+			new RegExp(label),
+			`${label} should be visible on cards`,
+		);
+	}
+});
+
 test("hash tabs and pcb chain surface remain wired", () => {
 	assert.match(
 		html,

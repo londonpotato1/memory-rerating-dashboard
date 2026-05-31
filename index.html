@@ -124,14 +124,15 @@
   .memoryDecisionCard .watchList span{border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:3px 7px;color:#dce5ef;font-size:11.5px;font-weight:850}
   .memoryDecisionCard .memoryRiskLine{border-top:1px solid var(--line);margin-top:10px;padding-top:9px;color:#f0dddd}
   .memoryCompanyGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .memoryCompanyCard{background:linear-gradient(180deg,rgba(53,212,155,.07),rgba(17,21,28,.98));border:1px solid var(--line);border-radius:var(--r);padding:15px;min-width:0}
-  .memoryCompanyCard h3{font-size:16px;margin-bottom:8px;color:#f5f9ff}
-  .companyJudgement{font-size:13.5px;color:#edf5fb;line-height:1.48;margin-bottom:10px}
-  .companyFactGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-  .companyFact{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:8px;min-width:0}
-  .companyFact b{display:block;color:var(--dim);font-size:10.5px;text-transform:uppercase;margin-bottom:3px}
-  .companyFact span{font-size:12.5px;color:#e2ebf5;line-height:1.35;overflow-wrap:anywhere}
-  .companyInterpretation{border-left:3px solid var(--blu);padding-left:10px;margin-top:10px;color:#edf5fb;font-size:13px}
+  .memoryStockCard{background:radial-gradient(circle at 86% 0,rgba(53,212,155,.13),transparent 34%),var(--panel);border:1px solid rgba(101,185,245,.34);border-radius:var(--r);padding:14px;display:grid;gap:12px;min-width:0}
+  .memoryStockCard:nth-child(2){background:radial-gradient(circle at 86% 0,rgba(101,185,245,.13),transparent 34%),var(--panel)}
+  .memoryStockCard .slideTop h3{font-size:16px}
+  .memoryStockCard .priceHero strong{font-size:20px}
+  .memoryStockCard .scenarioChip{min-height:64px}
+  .memoryStockCard .slideSignals{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .memoryKeyLine{font-size:12.5px;color:#dce5ef;line-height:1.45}
+  .memoryKeyLine b{color:var(--dim);font-size:10.5px;text-transform:uppercase;display:block;margin-bottom:3px}
+  .memoryStockNote{font-size:11.5px;color:var(--dim);border-top:1px solid var(--line);padding-top:8px}
   .scenarioLine{display:grid;gap:6px;margin-top:8px}
   .scenarioLine div{font-size:12.8px;color:#dce5ef;line-height:1.45}
   .scenarioLine b{display:block;color:var(--dim);font-size:10.5px;text-transform:uppercase}
@@ -1529,18 +1530,48 @@ function renderMemoryBeginner(){
 
   document.getElementById("memoryCompanyCards").innerHTML = DATA.companyCards.map(card => {
     const peer = DATA.peers.find(item => item.id === card.id);
-    return `<article class="memoryCompanyCard">
-      <h3>${escapeHtml(peer.name)} <span class="tk">${escapeHtml(peer.ticker)}</span></h3>
-      <p class="companyJudgement">${escapeHtml(card.judgement)}</p>
-      <div class="companyFactGrid">
-        <div class="companyFact"><b>현재가</b><span>${escapeHtml(peer.priceText)}</span></div>
-        <div class="companyFact"><b>Base 적정가 범위</b><span>${escapeHtml(card.base)}</span></div>
-        <div class="companyFact"><b>Bull 가능 조건</b><span>${escapeHtml(card.bull)}</span></div>
-        <div class="companyFact"><b>Bear 위험 조건</b><span>${escapeHtml(card.bear)}</span></div>
-        <div class="companyFact"><b>가장 중요한 확인 지표</b><span>${escapeHtml(card.metric)}</span></div>
-        <div class="companyFact"><b>현재 핵심 판단</b><span>${fmt.pe(peer.fwdPE)} · 조건부</span></div>
+    const scenario = DATA.scenarios[card.id];
+    const bear = scenario.cases.find(item => item.name === "Bear");
+    const base = scenario.cases.find(item => item.name === "Base");
+    const bull = scenario.cases.find(item => item.name === "Bull");
+    const position = peer.price >= bull.range[0]
+      ? {klass:"pos-bull", label:"Bull 기대를 상당 부분 반영한 구간"}
+      : peer.price >= base.range[0]
+        ? {klass:"pos-base", label:"Base 확인을 기다리는 구간"}
+        : {klass:"pos-entry", label:"Base 아래지만 EPS 확인이 먼저인 구간"};
+    return `<article class="memoryStockCard">
+      <div class="slideTop">
+        <div>
+          <h3>${escapeHtml(peer.name)}</h3>
+          <div class="tk">${escapeHtml(peer.ticker)} · 한국 메모리</div>
+        </div>
+        <span class="pill p-mid">조건부 관찰</span>
       </div>
-      <p class="companyInterpretation">${escapeHtml(card.take)}</p>
+      <div class="priceHero">
+        <small>현재가</small>
+        <strong>${escapeHtml(peer.priceText)}</strong>
+        <span>${escapeHtml(position.label)}</span>
+      </div>
+      <div class="scenarioStrip" aria-label="${escapeHtml(peer.name)} 시나리오별 가격 범위">
+        <div class="scenarioChip"><b>Bear</b><span>${rangeText(bear.range)}</span></div>
+        <div class="scenarioChip base"><b>Base</b><span>${rangeText(base.range)}</span></div>
+        <div class="scenarioChip bull"><b>Bull</b><span>${rangeText(bull.range)}</span></div>
+      </div>
+      <div>
+        <div class="priceScale ${position.klass}" aria-hidden="true"><span></span><span></span><i></i></div>
+        <div class="rangeLegend"><span>보수</span><span>Base</span><span>공격</span></div>
+      </div>
+      <p class="slideTake">${escapeHtml(card.judgement)}</p>
+      <div class="zoneGrid">
+        <div class="zoneTile"><b>확인 지표</b>${escapeHtml(card.metric)}</div>
+        <div class="zoneTile"><b>현재 판단</b>${fmt.pe(peer.fwdPE)} · 조건부</div>
+      </div>
+      <div class="slideSignals">
+        <div><b>Bull 조건</b>${escapeHtml(card.bull)}</div>
+        <div><b>Bear 신호</b>${escapeHtml(card.bear)}</div>
+        <div><b>한 줄 해석</b>${escapeHtml(card.take)}</div>
+      </div>
+      <p class="memoryStockNote">상세 EPS·PER·출처는 아래 3분 검증 영역에서 펼쳐서 확인합니다.</p>
     </article>`;
   }).join("");
 
