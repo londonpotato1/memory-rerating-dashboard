@@ -543,6 +543,18 @@
   .closing{background:linear-gradient(135deg,#1e293b,#0f172a);color:#fff;border-radius:var(--r)}
   .closing b{color:#fff}
   .closing .pill-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:800}
+  /* --- Wave 2: usar warmth (memory top §01~05) --- */
+  .sectit h2 .secIcon{margin-right:8px;font-size:1.05em;vertical-align:-1px}
+  .memorySummaryCard h3 .cardIcon{margin-right:6px;font-size:1.15em;vertical-align:-1px}
+  .memoryScenarioCard{border-left:3px solid var(--line2)}
+  .memoryScenarioCard.sc-bull{border-left-color:var(--grn)}
+  .memoryScenarioCard.sc-bull h3{color:var(--grn)}
+  .memoryScenarioCard.sc-base{border-left-color:var(--blu)}
+  .memoryScenarioCard.sc-base h3{color:var(--blu)}
+  .memoryScenarioCard.sc-bear{border-left-color:var(--red)}
+  .memoryScenarioCard.sc-bear h3{color:var(--red)}
+  .slideSignals b.sig-good{color:var(--grn)}
+  .slideSignals b.sig-bad{color:var(--red)}
 </style>
 </head>
 <body>
@@ -565,7 +577,7 @@
 
 <main id="memoryTab" class="tabPanel" role="tabpanel" aria-labelledby="tab-memory">
   <section>
-    <div class="sectit"><span class="num">01</span><h2>3초 결론</h2></div>
+    <div class="sectit"><span class="num">01</span><h2><span class="secIcon" aria-hidden="true">🎯</span>3초 결론</h2></div>
     <div class="memorySummaryGrid" id="memoryBeginnerSummary" aria-label="메모리 리레이팅 3초 결론">
       <article class="memorySummaryCard"><h3>지금 무슨 이야기?</h3><p>AI 서버가 많이 필요해지면서 HBM과 DRAM 같은 메모리 회사의 이익이 커질 수 있다는 이야기다.</p></article>
       <article class="memorySummaryCard"><h3>왜 주가가 올랐나?</h3><p>AI 투자, HBM 수요, 메모리 가격 상승 기대가 주가에 먼저 반영됐다.</p></article>
@@ -576,7 +588,7 @@
   </section>
 
   <section>
-    <div class="sectit"><span class="num">02</span><h2>30초 이해 — 어려운 말 풀기</h2></div>
+    <div class="sectit"><span class="num">02</span><h2><span class="secIcon" aria-hidden="true">📖</span>30초 이해 — 어려운 말 풀기</h2></div>
     <p class="lead">먼저 단어 뜻만 잡으면 숫자표를 보지 않아도 핵심 흐름을 따라갈 수 있습니다.</p>
     <div class="memoryGlossaryGrid" id="memoryGlossary">
       <article class="memoryTerm"><h3>HBM</h3><p>AI 반도체 옆에서 데이터를 빠르게 주고받는 고급 메모리</p></article>
@@ -591,24 +603,24 @@
   </section>
 
   <section>
-    <div class="sectit"><span class="num">03</span><h2>한눈에 판단 카드</h2></div>
+    <div class="sectit"><span class="num">03</span><h2><span class="secIcon" aria-hidden="true">🧭</span>한눈에 판단 카드</h2></div>
     <p class="lead">좋은 산업이어도 좋은 투자 성과가 되는지는 가격, 이익, 기대치가 따로 맞아야 합니다.</p>
     <div class="memoryDecisionGrid" id="memoryDecisionCards"></div>
   </section>
 
   <section>
-    <div class="sectit"><span class="num">04</span><h2>SK하이닉스·삼성전자 먼저 보기</h2></div>
+    <div class="sectit"><span class="num">04</span><h2><span class="secIcon" aria-hidden="true">🏢</span>SK하이닉스·삼성전자 먼저 보기</h2></div>
     <p class="lead">큰 표보다 회사별 핵심 판단을 먼저 봅니다. 상세 숫자는 아래 접힌 계산 영역에 남겼습니다.</p>
     <div class="memoryCompanyGrid" id="memoryCompanyCards"></div>
   </section>
 
   <section>
-    <div class="sectit"><span class="num">05</span><h2>Bull / Base / Bear를 쉬운 말로</h2></div>
+    <div class="sectit"><span class="num">05</span><h2><span class="secIcon" aria-hidden="true">🎭</span>Bull / Base / Bear를 쉬운 말로</h2></div>
     <div class="memoryScenarioGrid" id="memoryScenarioCards"></div>
   </section>
 
   <section>
-    <div class="sectit"><span class="num">06</span><h2>3분 검증 — 숫자와 출처는 펼쳐서 보기</h2></div>
+    <div class="sectit"><span class="num">06</span><h2><span class="secIcon" aria-hidden="true">🔍</span>3분 검증 — 숫자와 출처는 펼쳐서 보기</h2></div>
     <p class="lead">처음부터 표를 많이 보지 않도록 계산식, EPS 가정, 출처를 접었습니다. 필요한 때만 펼쳐서 확인하세요.</p>
     <details class="detailBox">
       <summary>상세 밸류에이션 계산 펼치기</summary>
@@ -1523,8 +1535,8 @@ function gainColor(gain){
 }
 
 function renderMemoryBeginner(){
-  document.getElementById("memoryBeginnerSummary").innerHTML = DATA.beginnerSummary.map(card => `<article class="memorySummaryCard">
-    <h3>${escapeHtml(card.title)}</h3>
+  document.getElementById("memoryBeginnerSummary").innerHTML = DATA.beginnerSummary.map((card,i) => `<article class="memorySummaryCard">
+    <h3><span class="cardIcon" aria-hidden="true">${["💬","📈","🤔","🔎"][i]||""}</span>${escapeHtml(card.title)}</h3>
     <p>${escapeHtml(card.body)}</p>
   </article>`).join("");
 
@@ -1579,16 +1591,16 @@ function renderMemoryBeginner(){
         <div class="zoneTile"><b>현재 판단</b>${fmt.pe(peer.fwdPE)} · 조건부</div>
       </div>
       <div class="slideSignals">
-        <div><b>Bull 조건</b>${escapeHtml(card.bull)}</div>
-        <div><b>Bear 신호</b>${escapeHtml(card.bear)}</div>
+        <div><b class="sig-good">Bull 조건</b>${escapeHtml(card.bull)}</div>
+        <div><b class="sig-bad">Bear 신호</b>${escapeHtml(card.bear)}</div>
         <div><b>한 줄 해석</b>${escapeHtml(card.take)}</div>
       </div>
       <p class="memoryStockNote">상세 EPS·PER·출처는 아래 3분 검증 영역에서 펼쳐서 확인합니다.</p>
     </article>`;
   }).join("");
 
-  document.getElementById("memoryScenarioCards").innerHTML = DATA.scenarioGuide.map(s => `<article class="memoryScenarioCard">
-    <h3>${escapeHtml(s.name)}</h3>
+  document.getElementById("memoryScenarioCards").innerHTML = DATA.scenarioGuide.map(s => `<article class="memoryScenarioCard sc-${s.name.toLowerCase()}">
+    <h3><span aria-hidden="true">${({Bull:"🐂",Base:"⚖️",Bear:"🐻"})[s.name]||""}</span> ${escapeHtml(s.name)}</h3>
     <p>${escapeHtml(s.summary)}</p>
     <div class="scenarioLine">
       <div><b>필요한 조건</b>${escapeHtml(s.condition)}</div>
