@@ -339,6 +339,61 @@
   .valuationCard.watch{border-color:rgba(101,185,245,.35)}
   .valuationCard.entry{border-color:rgba(53,212,155,.35)}
   .valuationCard.recheck{border-color:rgba(255,111,145,.35)}
+  .valuationBoard{margin-top:14px;background:linear-gradient(180deg,rgba(17,21,28,.94),rgba(11,14,19,.98));border:1px solid var(--line);border-radius:var(--r);padding:14px;overflow:hidden}
+  .valuationBoardHead{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
+  .valuationBoardHead h3{font-size:15px;color:var(--txt);margin-bottom:4px}
+  .valuationBoardHead p{font-size:12.7px;color:var(--mut);line-height:1.48}
+  .sliderActions{display:flex;align-items:center;gap:7px;flex:0 0 auto}
+  .sliderBtn{width:34px;height:34px;border-radius:999px;border:1px solid var(--line2);background:var(--panel2);color:var(--txt);font-size:18px;font-weight:950;cursor:pointer}
+  .sliderBtn:hover,.sliderBtn:focus-visible{border-color:var(--blu);color:var(--blu);outline:none}
+  .sliderBtn:disabled{opacity:.35;cursor:not-allowed}
+  .slideCount{font-size:11px;color:var(--mut);font-weight:900;min-width:44px;text-align:center}
+  .valuationFilters{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+  .filterBtn{border:1px solid var(--line);background:var(--panel2);color:var(--mut);border-radius:999px;padding:6px 10px;font-size:11.5px;font-weight:900;cursor:pointer}
+  .filterBtn:hover,.filterBtn:focus-visible{border-color:var(--blu);color:var(--blu);outline:none}
+  .filterBtn[aria-pressed="true"]{border-color:rgba(53,212,155,.55);background:var(--grn-bg);color:var(--grn)}
+  .valuationRail{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:2px;padding:2px 2px 8px}
+  .valuationRail:focus-visible{outline:2px solid var(--blu);outline-offset:3px;border-radius:var(--r)}
+  .valuationRail::-webkit-scrollbar{height:8px}
+  .valuationRail::-webkit-scrollbar-thumb{background:var(--line2);border-radius:999px}
+  .valuationSlide{flex:0 0 348px;scroll-snap-align:start;background:radial-gradient(circle at 86% 0,rgba(101,185,245,.12),transparent 32%),var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:12px;min-width:0;min-height:470px}
+  .valuationSlide.burdenTone{border-color:rgba(245,191,61,.42)}
+  .valuationSlide.watchTone{border-color:rgba(101,185,245,.34)}
+  .valuationSlide.recheckTone{border-color:rgba(255,111,145,.34)}
+  .slideTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+  .slideTop h3{font-size:15px;color:#f3f7fc;margin-bottom:3px}
+  .slideTop .tk{font-size:11px;color:var(--dim);font-weight:900}
+  .priceHero{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:7px;padding:11px}
+  .priceHero small{display:block;color:var(--dim);font-size:10.8px;font-weight:900;text-transform:uppercase;margin-bottom:3px}
+  .priceHero strong{display:block;color:#f8fbff;font-size:17px;line-height:1.35}
+  .priceHero span{display:block;color:var(--mut);font-size:12px;margin-top:5px}
+  .scenarioStrip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  .scenarioChip{border:1px solid var(--line);background:var(--panel2);border-radius:7px;padding:8px;min-width:0}
+  .scenarioChip b{display:block;font-size:10px;color:var(--dim);text-transform:uppercase;margin-bottom:3px}
+  .scenarioChip span{display:block;color:#dce5ef;font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+  .scenarioChip.base{border-color:rgba(101,185,245,.35)}
+  .scenarioChip.bull{border-color:rgba(245,191,61,.34)}
+  .priceScale{position:relative;height:34px;border-radius:999px;background:linear-gradient(90deg,rgba(255,111,145,.2),rgba(101,185,245,.22),rgba(245,191,61,.22));border:1px solid var(--line);overflow:hidden}
+  .priceScale span{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.18)}
+  .priceScale span:nth-child(1){left:33%}
+  .priceScale span:nth-child(2){left:66%}
+  .priceScale i{position:absolute;top:5px;width:22px;height:22px;border-radius:50%;background:#eef6ff;border:3px solid var(--panel);box-shadow:0 0 0 1px rgba(101,185,245,.8);transform:translateX(-50%)}
+  .priceScale.pos-entry i{left:24%;box-shadow:0 0 0 1px rgba(53,212,155,.85)}
+  .priceScale.pos-base i{left:56%}
+  .priceScale.pos-bull i{left:82%;box-shadow:0 0 0 1px rgba(245,191,61,.9)}
+  .priceScale.pos-recheck i{left:70%;box-shadow:0 0 0 1px rgba(255,111,145,.85)}
+  .rangeLegend{display:flex;justify-content:space-between;color:var(--dim);font-size:10.5px;font-weight:900;margin-top:-7px}
+  .zoneGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .zoneTile{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:7px;padding:8px;color:#dce5ef;font-size:12px;line-height:1.35}
+  .zoneTile b{display:block;color:var(--dim);font-size:10px;text-transform:uppercase;margin-bottom:3px}
+  .slideTake{font-size:13px;line-height:1.52;color:#edf4fb;border-left:3px solid var(--blu);padding-left:10px}
+  .slideSignals{display:grid;gap:7px}
+  .slideSignals div{font-size:12px;color:#dce5ef;line-height:1.45}
+  .slideSignals b{display:block;color:var(--dim);font-size:10.5px;text-transform:uppercase}
+  .valuationCardDetail{border-top:1px solid var(--line);padding-top:8px}
+  .valuationCardDetail summary{cursor:pointer;list-style:none;color:var(--blu);font-size:12px;font-weight:950}
+  .valuationCardDetail summary::-webkit-details-marker{display:none}
+  .valuationCardDetail p{font-size:12px;color:var(--mut);line-height:1.5;margin-top:7px}
   .checkGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
   .checkCard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px}
   .checkCard h3{font-size:13.5px;margin-bottom:6px;color:var(--txt)}
@@ -422,6 +477,12 @@
     .quickHeader{padding:10px 12px}
     .quickGroupCard{padding:10px}
     .valuationMiniGrid{grid-template-columns:1fr}
+    .valuationBoard{padding:12px}
+    .valuationBoardHead{display:grid;grid-template-columns:1fr}
+    .sliderActions{justify-content:space-between}
+    .valuationRail{gap:10px;padding-bottom:10px}
+    .valuationSlide{flex-basis:88%;min-height:auto}
+    .zoneGrid{grid-template-columns:1fr}
     .detailBox summary{align-items:flex-start}
     .tranche{grid-template-columns:32px 1fr}
     .tranche .p{grid-column:2;text-align:left;white-space:normal}
@@ -898,9 +959,24 @@
     <div class="sectit"><span class="num">F</span><h2>진입가 평가 요약</h2></div>
     <p class="lead">적정가는 공개자료 기반 시나리오 범위입니다. 현재가가 Base 대비 20~30% 낮으면 관심 진입 구간, Base 근처는 검증 후 관찰, Bull까지 반영하면 부담 구간으로 표시했습니다.</p>
     <div class="valuationSummaryGrid" id="pcbValuationSummary"></div>
+    <div class="valuationBoard" aria-label="종목별 적정가 카드 슬라이더">
+      <div class="valuationBoardHead">
+        <div>
+          <h3>종목 카드로 보기</h3>
+          <p>표 대신 한 장씩 넘기며 현재가, Bear/Base/Bull, 관찰 구간, 틀리는 신호만 먼저 봅니다.</p>
+        </div>
+        <div class="sliderActions" aria-label="종목 카드 이동">
+          <button class="sliderBtn" id="pcbValPrev" type="button" aria-label="이전 종목 보기">‹</button>
+          <span class="slideCount" id="pcbValuationCount">0/0</span>
+          <button class="sliderBtn" id="pcbValNext" type="button" aria-label="다음 종목 보기">›</button>
+        </div>
+      </div>
+      <div class="valuationFilters" id="pcbValuationFilters" aria-label="종목 그룹 필터"></div>
+      <div class="valuationRail" id="pcbValuationRail" tabindex="0" aria-live="polite"></div>
+    </div>
     <div class="checkGrid" id="pcbCriticalChecks"></div>
     <details class="detailBox">
-      <summary>후보군별 적정가 범위 펼치기</summary>
+      <summary>원본 상세표 펼치기</summary>
       <div class="detailInner">
         <div class="table-wrap valuationTable pcbDesktopOnly">
           <table class="vtab" id="pcbValuationTable">
@@ -1607,6 +1683,136 @@ function renderPcbCompanies(d){
   </article>`).join("");
 }
 
+const pcbValuationFilters = [
+  {id:"all", label:"전체"},
+  {id:"primary", label:"1순위"},
+  {id:"watch", label:"관찰"},
+  {id:"caution", label:"주의"},
+  {id:"missing", label:"데이터 부족"},
+  {id:"burden", label:"부담 구간만"}
+];
+
+function valuationFilterMatch(v, filter){
+  if(filter === "primary") return v.group.includes("1순위");
+  if(filter === "watch") return v.group.includes("관찰");
+  if(filter === "caution") return v.group.includes("주의") || v.zone.includes("부담");
+  if(filter === "missing") return v.group.includes("데이터 부족") || v.zone.includes("재검증");
+  if(filter === "burden") return v.zone.includes("부담");
+  return true;
+}
+
+function valuationToneClass(v){
+  if(v.zone.includes("부담")) return "burdenTone";
+  if(v.zone.includes("재검증")) return "recheckTone";
+  return "watchTone";
+}
+
+function valuationPosition(v){
+  if(v.zone.includes("부담")) return {klass:"pos-bull", label:"현재가가 Bull 기대를 상당 부분 반영한 구간"};
+  if(v.zone.includes("재검증")) return {klass:"pos-recheck", label:"가격보다 AI 직접 근거 재검증이 먼저인 구간"};
+  if(v.zone.includes("관심")) return {klass:"pos-entry", label:"Base 대비 안전마진을 일부 확보한 구간"};
+  return {klass:"pos-base", label:"Base 근처라 검증 후 관찰할 구간"};
+}
+
+function valuationShortTake(v){
+  if(v.zone.includes("부담")) return "좋은 수혜 후보일 수 있지만, 현재가는 실적 확인보다 기대가 먼저 달린 구간입니다.";
+  if(v.zone.includes("재검증")) return "가격 판단보다 AI 서버 직접 매출과 고객 근거를 먼저 확인해야 하는 후보입니다.";
+  return "Base 근처에서 고객사, 수주, 마진 개선이 확인되는지 관찰할 후보입니다.";
+}
+
+function valuationSlideCard(v){
+  const pos = valuationPosition(v);
+  return `<article class="valuationSlide ${valuationToneClass(v)}" data-company="${escapeHtml(v.name)}">
+    <div class="slideTop">
+      <div>
+        <h3>${escapeHtml(v.name)}</h3>
+        <div class="tk">${escapeHtml(v.ticker)} · ${escapeHtml(v.group)}</div>
+      </div>
+      ${tonePill(v.zone, v.tone)}
+    </div>
+    <div class="priceHero">
+      <small>현재가</small>
+      <strong>${escapeHtml(v.current)}</strong>
+      <span>${escapeHtml(pos.label)}</span>
+    </div>
+    <div class="scenarioStrip" aria-label="시나리오별 적정가 범위">
+      <div class="scenarioChip"><b>Bear</b><span>${escapeHtml(v.bear)}</span></div>
+      <div class="scenarioChip base"><b>Base</b><span>${escapeHtml(v.base)}</span></div>
+      <div class="scenarioChip bull"><b>Bull</b><span>${escapeHtml(v.bull)}</span></div>
+    </div>
+    <div>
+      <div class="priceScale ${pos.klass}" aria-hidden="true"><span></span><span></span><i></i></div>
+      <div class="rangeLegend"><span>보수</span><span>Base</span><span>공격</span></div>
+    </div>
+    <div class="zoneGrid">
+      <div class="zoneTile"><b>관찰 진입</b>${escapeHtml(v.entry)}</div>
+      <div class="zoneTile"><b>부담 구간</b>${escapeHtml(v.burden)}</div>
+    </div>
+    <p class="slideTake">${escapeHtml(valuationShortTake(v))}</p>
+    <div class="slideSignals">
+      <div><b>좋아지는 조건</b>${escapeHtml(v.upside)}</div>
+      <div><b>틀리는 신호</b>${escapeHtml(v.wrong)}</div>
+      <div><b>취약한 가정</b>${escapeHtml(v.weak)}</div>
+    </div>
+    <details class="valuationCardDetail">
+      <summary>계산 근거와 출처 보기</summary>
+      <p><b>방식:</b> ${escapeHtml(v.method)}</p>
+      <p><b>실적·멀티플:</b> ${escapeHtml(v.metrics)}</p>
+      <p><b>AI 수혜 검증:</b> ${escapeHtml(v.verification)}</p>
+      <div class="sourceLine">${badges(v.sources)}</div>
+    </details>
+  </article>`;
+}
+
+function renderPcbValuationCarousel(models){
+  const rail = document.getElementById("pcbValuationRail");
+  const filters = document.getElementById("pcbValuationFilters");
+  const count = document.getElementById("pcbValuationCount");
+  const prev = document.getElementById("pcbValPrev");
+  const next = document.getElementById("pcbValNext");
+  let active = "all";
+
+  const visibleModels = () => models.filter(v => valuationFilterMatch(v, active));
+  const updateCount = list => {
+    count.textContent = `${list.length ? 1 : 0}/${list.length}`;
+    prev.disabled = list.length <= 1;
+    next.disabled = list.length <= 1;
+  };
+  const renderSlides = () => {
+    const list = visibleModels();
+    rail.innerHTML = list.map(valuationSlideCard).join("");
+    rail.scrollLeft = 0;
+    updateCount(list);
+  };
+
+  filters.innerHTML = pcbValuationFilters.map(f => `<button class="filterBtn" type="button" data-filter="${f.id}" aria-pressed="${f.id === active}">${escapeHtml(f.label)}</button>`).join("");
+  filters.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      active = btn.dataset.filter;
+      filters.querySelectorAll("button").forEach(item => item.setAttribute("aria-pressed", String(item === btn)));
+      renderSlides();
+    });
+  });
+
+  const move = direction => {
+    const card = rail.querySelector(".valuationSlide");
+    if(!card) return;
+    rail.scrollBy({left: direction * (card.getBoundingClientRect().width + 12), behavior:"smooth"});
+  };
+  prev.onclick = () => move(-1);
+  next.onclick = () => move(1);
+  rail.addEventListener("scroll", () => {
+    const card = rail.querySelector(".valuationSlide");
+    const total = visibleModels().length;
+    if(!card || !total) return;
+    const width = card.getBoundingClientRect().width + 12;
+    const index = Math.min(total, Math.max(1, Math.round(rail.scrollLeft / width) + 1));
+    count.textContent = `${index}/${total}`;
+  }, {passive:true});
+
+  renderSlides();
+}
+
 function renderPcbValuation(d){
   document.getElementById("pcbValuationSummary").innerHTML = d.valuationSummary.map(card => `<article class="valuationCard ${escapeHtml(card.tone)}">
     <h3>${escapeHtml(card.title)}</h3>
@@ -1619,6 +1825,8 @@ function renderPcbValuation(d){
     <p>${escapeHtml(item.body)}</p>
     <div class="sourceLine">${badges(item.sources)}</div>
   </article>`).join("");
+
+  renderPcbValuationCarousel(d.valuationModels);
 
   const rangeBlock = v => `<div class="valuationRanges">
     <span><b>Bear</b>${escapeHtml(v.bear)}</span>
