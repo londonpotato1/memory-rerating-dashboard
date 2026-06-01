@@ -74,6 +74,11 @@
   .sectit .num{color:var(--dim);font-weight:900;font-size:14px;font-variant-numeric:tabular-nums}
   .sectit h2{font-size:21px;font-weight:900}
   .lead{color:var(--mut);font-size:15px;margin-bottom:16px;max-width:900px}
+  .storyHero{background:var(--blu-bg);border:1px solid rgba(47,128,237,.18);border-radius:var(--r);padding:22px 22px;margin-bottom:16px}
+  .storyHero p{font-size:16.5px;line-height:1.72;color:var(--txt);margin:0 0 9px;overflow-wrap:anywhere}
+  .storyHero p:last-child{margin-bottom:0}
+  .storyHero .storyPunch{font-size:16.5px;font-weight:900;color:var(--blu);margin-top:14px}
+  details.storyMore{margin-bottom:14px}
   .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
   .panel.tight{padding:14px}
 
@@ -618,6 +623,15 @@
 </nav>
 
 <main id="memoryTab" class="tabPanel" role="tabpanel" aria-labelledby="tab-memory">
+  <section class="storyHero" aria-label="메모리 한눈 요약">
+    <p>요즘 AI 때문에 좋은 메모리가 많이 필요해졌어요. 그래서 만드는 회사(SK하이닉스·삼성전자) 주가가 먼저 뛰었죠.</p>
+    <p>싸 보이지만, 2026년에 진짜 그만큼 벌어야 맞는 값이에요. 금리가 확 오르거나 AI 투자가 식으면 같이 흔들려요.</p>
+    <p class="storyPunch">👉 결론: 좋아 보여도 '이익이 진짜 나오는지' 확인이 먼저예요.</p>
+  </section>
+
+  <details class="detailBox storyMore">
+    <summary>30초 요약 — 핵심만 카드로</summary>
+    <div class="detailInner">
   <section>
     <div class="sectit"><span class="num">01</span><h2><span class="secIcon" aria-hidden="true"></span>3초 결론</h2></div>
     <div class="memorySummaryGrid" id="memoryBeginnerSummary" aria-label="메모리 리레이팅 3초 결론">
@@ -660,9 +674,11 @@
     <div class="sectit"><span class="num">05</span><h2><span class="secIcon" aria-hidden="true"></span>Bull / Base / Bear를 쉬운 말로</h2></div>
     <div class="memoryScenarioGrid" id="memoryScenarioCards"></div>
   </section>
+    </div>
+  </details>
 
   <section>
-    <div class="sectit"><span class="num">06</span><h2><span class="secIcon" aria-hidden="true"></span>3분 검증 — 숫자와 출처는 펼쳐서 보기</h2></div>
+    <div class="sectit"><h2><span class="secIcon" aria-hidden="true"></span>3분 검증 — 숫자와 출처는 펼쳐서 보기</h2></div>
     <p class="lead">처음부터 표가 잔뜩 안 보이게, 계산·가정·출처는 접어 뒀어요. 궁금할 때만 펼쳐보면 돼요.</p>
     <details class="detailBox">
       <summary>상세 밸류에이션 계산 펼치기</summary>
@@ -1025,6 +1041,15 @@
 </main>
 
 <main id="pcbTab" class="tabPanel" role="tabpanel" aria-labelledby="tab-pcb" hidden>
+  <section class="storyHero" aria-label="AI PCB 한눈 요약">
+    <p>AI 서버가 많아지면서, 그 안에 들어가는 보드·소재·기판 만드는 회사들이 주목받고 있어요.</p>
+    <p>공개 자료로 16곳을 100점으로 줄 세워 보니, 지금 기준으로는 TTM·Quanta 같은 곳이 순위가 높아요. 다만 이미 많이 오른 곳은 조심해야 해요.</p>
+    <p class="storyPunch">👉 결론: '좋은 회사'와 '지금 사기 좋은 가격'은 달라요. (매수·매도 권유가 아니에요)</p>
+  </section>
+
+  <details class="detailBox storyMore">
+    <summary>순위 16개 보기 — 누가 더 매력적인가</summary>
+    <div class="detailInner">
   <section id="pcbDecisionHero" class="pcbDecisionHero">
     <div class="sectit"><span class="num">A</span><h2><span class="secIcon" aria-hidden="true"></span>AI PCB 16개 기업, 지금 새로 산다면 어디가 더 매력적인가?</h2></div>
     <p class="lead">좋은 회사인 것과, 지금 새로 보기 좋은 가격인 것은 달라요. 아래 순위는 예전에 조사한 내용을 100점 기준으로 다시 매긴, 지금 공개된 자료 기준 관심도/매력도 순위예요. 사야 한다거나 팔라는 권유가 아니에요.</p>
@@ -1060,7 +1085,12 @@
       </div>
     </details>
   </section>
+    </div>
+  </details>
 
+  <details class="detailBox storyMore">
+    <summary>구조·검증·후보·진입가·시나리오·결론 모두 보기</summary>
+    <div class="detailInner">
   <section>
     <div class="sectit"><span class="num">B</span><h2><span class="secIcon" aria-hidden="true"></span>초보자용 용어</h2></div>
     <div class="glossaryGrid" id="pcbGlossary"></div>
@@ -1195,6 +1225,8 @@
       <b>면책</b> · 이 탭은 유튜브 영상 주제를 출발점으로 삼아, 공개된 자료를 모아 정리한 거예요. 사라거나 팔라는 권유가 아니에요. 주제가 좋아도 주주가 버는 돈은 다를 수 있어요. 특히 이미 많이 오른 종목은 고객이 정말 주문했는지, 공장을 늘렸는지, 이익률, 그리고 지금 값이 비싼지(밸류에이션)를 같은 기준으로 다시 확인해야 해요.
     </div>
   </section>
+    </div>
+  </details>
 </main>
 
 </div>

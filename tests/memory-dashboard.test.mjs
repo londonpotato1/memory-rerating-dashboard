@@ -450,32 +450,28 @@ test("T-TOSS-002 header tabs and theme controls follow Toss-like accessibility",
 	assert.match(css, /\.themeToggle\{[^}]*(?:height|min-height):44px/s, "theme toggle needs a 44px touch target height");
 });
 
-test("T-TOSS-003 memory first read is concise and beginner-safe", () => {
+test("T-TOSS-003 memory first read is a concise story hero", () => {
 	const firstRead = memoryFirstReadMarkup();
-	assert.equal(
-		(firstRead.match(/class="memorySummaryCard"/g) || []).length,
-		4,
-		"memory first read should expose four summary cards",
-	);
-	assert.doesNotMatch(firstRead, /<table\b/, "memory first read should not show tables");
+	assert.match(firstRead, /class="storyHero"/, "memory should open with a one-glance story hero");
+	assert.match(firstRead, /결론/, "story hero should end with a one-line conclusion");
+	assert.doesNotMatch(firstRead, /<table\b/, "story hero should not show tables");
 	assert.doesNotMatch(
 		stripTags(firstRead),
 		/Forward PER|Trailing PER|PBR|CAPEX|FCF|Revision|thesis|trigger/,
-		"memory first read should avoid hard finance terms",
+		"story hero should avoid hard finance terms",
 	);
-	const bodies = [...firstRead.matchAll(/<article class="memorySummaryCard">[\s\S]*?<p>(.*?)<\/p>/g)].map(match =>
-		stripTags(match[1]),
+	const heroText = stripTags(firstRead);
+	assert.ok(heroText.length <= 260, `story hero should stay short for a glance: ${heroText.length}`);
+	assert.equal(
+		(memoryMarkup().match(/class="memorySummaryCard"/g) || []).length,
+		4,
+		"four summary cards remain available inside details",
 	);
-	assert.equal(bodies.length, 4, "four summary card bodies should be parsed");
-	for (const body of bodies) {
-		assert.ok(body.length <= 95, `summary body should stay under 95 characters: ${body}`);
-		assert.ok((body.match(/[.!?。]|다$/g) || []).length <= 1, `summary body should be one sentence: ${body}`);
-	}
 	const memorySource = sectionBetween(dataObjectSlice(), "beginnerSummary:", "scenarios: {");
 	assert.doesNotMatch(
 		memorySource,
 		/PER\/PBR|CAPEX|FCF|EPS revision|hyperscaler|Forward PER|book-to-bill|pure-play|SOTP|ASP|CAPA|thesis|trigger/,
-		"rendered memory first-read data should avoid hard terms",
+		"memory summary data should avoid hard terms",
 	);
 });
 
