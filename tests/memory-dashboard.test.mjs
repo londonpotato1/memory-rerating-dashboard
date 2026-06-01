@@ -24,6 +24,40 @@ function pcbMarkup() {
 	return sectionBetween(html, '<main id="pcbTab"', "</main>");
 }
 
+function styleMarkup() {
+	return sectionBetween(html, "<style>", "</style>");
+}
+
+function stripTags(markup) {
+	return markup.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function sectionUntilDetails(markup) {
+	const detailsIndex = markup.indexOf("<details");
+	assert.notEqual(detailsIndex, -1, "section should contain a details boundary");
+	return markup.slice(0, detailsIndex);
+}
+
+function memoryFirstReadMarkup() {
+	return sectionUntilDetails(memoryMarkup());
+}
+
+function pcbFirstReadMarkup() {
+	return sectionUntilDetails(pcbMarkup());
+}
+
+function dataObjectSlice() {
+	return sectionBetween(html, "const DATA = {", "\nconst fmt = {");
+}
+
+function renderedFirstReadSource() {
+	const data = dataObjectSlice();
+	const memoryData = sectionBetween(data, "beginnerSummary:", "scenarios: {");
+	const pcbData = sectionBetween(data, "pcbChain: {", "summary:[");
+	const renderers = sectionBetween(html, "function renderMemoryBeginner()", "function renderPcbGlossary");
+	return `${memoryFirstReadMarkup()} ${pcbFirstReadMarkup()} ${memoryData} ${pcbData} ${renderers}`;
+}
+
 test("memory beginner summary exposes four 3-second conclusion cards", () => {
 	const memory = memoryMarkup();
 	assert.match(
@@ -330,4 +364,208 @@ test("T-PCB-006 pcb beginner analogies replace hard terms in the ranking surface
 	]) {
 		assert.match(html, new RegExp(analogy), `${analogy} analogy should be present`);
 	}
+});
+
+test("T-TOSS-000 baseline preserves current tab surfaces before Toss refactor", () => {
+	const memory = memoryMarkup();
+	const pcb = pcbMarkup();
+	for (const id of [
+		"themeToggle",
+		"tab-memory",
+		"tab-pcb",
+		"memoryBeginnerSummary",
+		"memoryGlossary",
+		"memoryDecisionCards",
+		"memoryCompanyCards",
+		"pcbDecisionHero",
+		"pcbTopFiveCards",
+		"pcbScoreFormula",
+		"pcbRankingTable",
+		"pcbRankingCards",
+	]) {
+		assert.match(html, new RegExp(`id="${id}"`), `${id} should remain present`);
+	}
+	assert.match(memory, /3초 결론/, "memory first section should remain visible");
+	assert.match(pcb, /AI PCB 16개 기업/, "PCB decision hero should remain visible");
+	assert.match(
+		html,
+		/hashFor = \{memory:"#memory", pcb:"#pcb-chain"\}/,
+		"hash mapping should remain exact",
+	);
+});
+
+test("T-TOSS-001 toss-like token layer uses restrained fintech surfaces", () => {
+	const css = styleMarkup();
+	for (const token of [
+		"--color-bg",
+		"--color-surface",
+		"--color-text",
+		"--color-muted",
+		"--color-accent",
+	]) {
+		assert.match(css, new RegExp(`${token}:`), `${token} should exist`);
+	}
+	assert.match(css, /--radius-card:8px/, "card radius should be 8px");
+	assert.match(css, /body\{[^}]*background:var\(--color-bg\)/s, "body should use a quiet solid app background");
+	assert.doesNotMatch(css, /body\{[^}]*background-image:/s, "body should not use decorative gradients");
+	for (const forbidden of ["@toss/tds-colors", "Toss Product Sans", "Tossface", "--tds-"]) {
+		assert.doesNotMatch(html, new RegExp(forbidden), `${forbidden} should not be copied into the app`);
+	}
+});
+
+test("T-PCB-008 pcb ranking-first regression survives Toss refactor", () => {
+	const pcb = pcbMarkup();
+	assert.ok(
+		pcb.trim().startsWith('<main id="pcbTab"'),
+		"PCB markup should start at the PCB tab panel",
+	);
+	assert.ok(
+		pcb.indexOf('id="pcbDecisionHero"') < pcb.indexOf("<section", pcb.indexOf('id="pcbDecisionHero"') + 1),
+		"decision hero should be the first PCB section",
+	);
+	assert.ok(
+		pcb.indexOf("pcbTopFiveCards") < pcb.indexOf("pcbRankingEvidence"),
+		"Top 5 should stay before ranking evidence",
+	);
+	assert.doesNotMatch(
+		pcb,
+		/<details class="detailBox" id="pcbRankingEvidence" open>/,
+		"ranking evidence should be collapsed by default",
+	);
+	assert.equal(html.match(/rankScore:\s*\{/g)?.length, 16, "rank score data should remain exactly 16");
+	assert.match(html, /rankingDesktopSummary\(v\)/, "desktop four-line summary should remain wired");
+	assert.match(html, /renderPcbRanking\(d\);/, "PCB overview should render ranking first");
+});
+
+test("T-TOSS-002 header tabs and theme controls follow Toss-like accessibility", () => {
+	const css = styleMarkup();
+	assert.doesNotMatch(
+		html,
+		/<button id="themeToggle"[^>]*>[^<]*[\u{1F300}-\u{1FAFF}]/u,
+		"theme toggle should not use emoji as its visible control",
+	);
+	assert.doesNotMatch(html, /class="secIcon"[^>]*>[^<]+</, "section icon spans should not render emoji text");
+	assert.doesNotMatch(html, /class="cardIcon"[^>]*>/, "card icon spans should not be rendered");
+	assert.match(css, /\.themeToggle\{[^}]*(?:width|min-width):44px/s, "theme toggle needs a 44px touch target width");
+	assert.match(css, /\.themeToggle\{[^}]*(?:height|min-height):44px/s, "theme toggle needs a 44px touch target height");
+});
+
+test("T-TOSS-003 memory first read is concise and beginner-safe", () => {
+	const firstRead = memoryFirstReadMarkup();
+	assert.equal(
+		(firstRead.match(/class="memorySummaryCard"/g) || []).length,
+		4,
+		"memory first read should expose four summary cards",
+	);
+	assert.doesNotMatch(firstRead, /<table\b/, "memory first read should not show tables");
+	assert.doesNotMatch(
+		stripTags(firstRead),
+		/Forward PER|Trailing PER|PBR|CAPEX|FCF|Revision|thesis|trigger/,
+		"memory first read should avoid hard finance terms",
+	);
+	const bodies = [...firstRead.matchAll(/<article class="memorySummaryCard">[\s\S]*?<p>(.*?)<\/p>/g)].map(match =>
+		stripTags(match[1]),
+	);
+	assert.equal(bodies.length, 4, "four summary card bodies should be parsed");
+	for (const body of bodies) {
+		assert.ok(body.length <= 95, `summary body should stay under 95 characters: ${body}`);
+		assert.ok((body.match(/[.!?。]|다$/g) || []).length <= 1, `summary body should be one sentence: ${body}`);
+	}
+	const memorySource = sectionBetween(dataObjectSlice(), "beginnerSummary:", "scenarios: {");
+	assert.doesNotMatch(
+		memorySource,
+		/PER\/PBR|CAPEX|FCF|EPS revision|hyperscaler|Forward PER|book-to-bill|pure-play|SOTP|ASP|CAPA|thesis|trigger/,
+		"rendered memory first-read data should avoid hard terms",
+	);
+});
+
+test("T-TOSS-004 long evidence stays below concise first-read sections", () => {
+	const memory = memoryMarkup();
+	const pcb = pcbMarkup();
+	assert.ok(
+		memory.indexOf("<details") < memory.indexOf("<table"),
+		"memory tables should stay below first detail disclosure",
+	);
+	for (const tableId of ["pcbClaimsTable", "pcbCompaniesTable", "pcbValuationTable"]) {
+		assert.ok(
+			pcb.indexOf("pcbRankingEvidence") < pcb.indexOf(tableId),
+			`${tableId} should stay below ranking evidence`,
+		);
+	}
+	const summaries = [...html.matchAll(/<summary>([\s\S]*?)<\/summary>/g)].map(match => stripTags(match[1]));
+	assert.ok(summaries.length > 8, "detail summaries should be present");
+	for (const summary of summaries) {
+		assert.ok(summary.length <= 32, `detail summary should be concise: ${summary}`);
+	}
+});
+
+test("T-TOSS-005 pcb ranking remains first while adopting Toss-like finance cards", () => {
+	const css = styleMarkup();
+	const rankRule = css.match(/\.rankTopCard,\s*\.rankMobileCard\{[^}]*\}/s)?.[0] || "";
+	assert.doesNotMatch(rankRule, /radial-gradient/, "ranking cards should not use decorative radial gradients");
+	assert.match(rankRule, /border-radius:var\(--radius-card\)|border-radius:8px/, "ranking cards should use Toss-like card radius");
+	const pcb = pcbMarkup();
+	for (const marker of ["초보자용 용어", "pcbRankingEvidence", "pcbClaimsTable", "pcbValuationTable"]) {
+		assert.ok(
+			pcb.indexOf("pcbDecisionHero") < pcb.indexOf(marker),
+			`PCB decision hero should stay before ${marker}`,
+		);
+	}
+});
+
+test("T-TOSS-006 visible copy replaces hard terms with concise Korean", () => {
+	const visible = stripTags(renderedFirstReadSource());
+	assert.doesNotMatch(
+		visible,
+		/hyperscaler|pure-play|book-to-bill|SOTP|ASP|CAPA|thesis|trigger/,
+		"visible first-read copy should not expose unexplained specialist English terms",
+	);
+	assert.doesNotMatch(
+		stripTags(html),
+		/기준R|기준와|기준가|합산는/,
+		"Korean copy should not contain broken mechanical replacement phrases",
+	);
+	for (const term of ["CAPEX", "FCF", "Forward", "Trailing"]) {
+		const index = visible.indexOf(term);
+		if (index === -1) continue;
+		const context = visible.slice(Math.max(0, index - 40), index + 40);
+		assert.match(
+			context,
+			/설비투자|남은 현금|예상|과거|쉽게|뜻/,
+			`${term} should be paired with simple Korean context`,
+		);
+	}
+});
+
+test("T-TOSS-007 mobile cards fit without horizontal overflow", () => {
+	const css = styleMarkup();
+	const mobile = css.match(/@media\(max-width:900px\)\{[\s\S]*?\n  \}/)?.[0] || "";
+	for (const selector of [
+		"memorySummaryGrid",
+		"memoryDecisionGrid",
+		"memoryCompanyGrid",
+		"topFiveGrid",
+		"scoreFormulaGrid",
+		"rankDecisionGrid",
+	]) {
+		assert.match(mobile, new RegExp(`\\.${selector}`), `${selector} should be handled in the mobile query`);
+	}
+	for (const selector of ["rankTopCard", "rankMobileCard", "scoreFormulaChip", "rankLine"]) {
+		const rule = css.match(new RegExp(`\\.${selector}\\{[^}]*\\}`, "s"))?.[0] || css.match(new RegExp(`[^}]*\\.${selector}[^}]*\\{[^}]*\\}`, "s"))?.[0] || "";
+		assert.match(rule, /min-width:0|overflow-wrap:anywhere/, `${selector} should have overflow protection`);
+	}
+});
+
+test("T-TOSS-008 hash theme tabs and carousel remain wired", () => {
+	assert.match(
+		html,
+		/hashFor = \{memory:"#memory", pcb:"#pcb-chain"\}/,
+		"hash mapping should remain exact",
+	);
+	assert.match(html, /localStorage\.setItem\("mr-theme"/, "theme persistence should remain wired");
+	for (const id of ["pcbValPrev", "pcbValNext", "pcbValuationFilters", "pcbValuationRail"]) {
+		assert.match(html, new RegExp(`id="${id}"`), `${id} should remain present`);
+	}
+	assert.match(html, /addEventListener\("hashchange"/, "hashchange listener should remain present");
+	assert.match(html, /rail\.addEventListener\("scroll"/, "valuation carousel scroll listener should remain present");
 });
