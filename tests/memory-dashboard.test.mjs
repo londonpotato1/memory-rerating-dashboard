@@ -309,7 +309,7 @@ test("T-PCB-005 pcb company ranking cards use four beginner decision lines and c
 	}
 	assert.match(
 		html,
-		/공식 AI 데이터센터 PCB 주문 지표가 제일 선명하다\./,
+		/공식 AI 데이터센터 PCB 주문 지표가 제일 또렷해요\./,
 		"TTM Top 5 copy should be beginner-friendly",
 	);
 	const pcb = pcbMarkup();
@@ -343,12 +343,12 @@ test("T-PCB-007 pcb desktop ranking table renders all four decision lines for ev
 	}
 	assert.match(
 		html,
-		/공식 AI 데이터센터 PCB 주문 지표가 제일 선명하다\./,
+		/공식 AI 데이터센터 PCB 주문 지표가 제일 또렷해요\./,
 		"first ranked company summary should remain visible",
 	);
 	assert.match(
 		html,
-		/1년 급등과 AI 고객 확인 부족이 동시에 부담이다\./,
+		/1년 급등과 AI 고객 확인 부족이 한꺼번에 부담이에요\./,
 		"last ranked company concern should remain available in ranking data",
 	);
 });
